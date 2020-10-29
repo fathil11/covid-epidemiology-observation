@@ -15,12 +15,11 @@ class CreateEpidemiologyTravelTable extends Migration
     {
         Schema::create('epidemiology_travel', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->foreignId('country_id')->nullable()->constrained('countries');
-            $table->foreignId('province_id')->constrained('provinces');
-            $table->foreignId('regency_id')->constrained('regencies');
-            $table->foreignId('district_id')->constrained('districts');
-            $table->foreignId('village_id')->constrained('villages');
+            $table->foreignId('test_id')->constrained('tests');
+            $table->string('type'); // International/Domestic/Living
+            $table->string('country')->default('Indonesia');
+            $table->string('province')->nullable();
+            $table->string('regency')->nullable();
             $table->date('departure_at');
             $table->date('arrive_at');
             $table->timestamps();

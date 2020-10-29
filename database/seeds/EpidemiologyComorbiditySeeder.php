@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EpidemiologyAdditionSeeder extends Seeder
+class EpidemiologyComorbiditySeeder extends Seeder
 {
     /**
      * Run the database seeds.

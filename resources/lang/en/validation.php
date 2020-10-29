@@ -96,7 +96,7 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => ':attribute harus diisi.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -146,6 +146,31 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        "nik" => "NIK",
+        "name" => "Nama",
+        "phone" => "Nomor HP",
+        "gender" => "Jenis kelamin",
+        "id_card_file" => "Foto KTP",
+        "birth_regency" => "Tempat lahir",
+        "birth_at" => "Tanggal lahir",
+        "parent_name" => "Nama orang tua",
+        "work" => "Pekerjaan",
+        "work_instance" => "Instansi pekerjaan",
+        "card_province" => "Provinsi KTP",
+        "card_regency" => "Kota/Kabupaten KTP",
+        "card_district" => "Kecamatan KTP",
+        "card_village" => "Desa KTP",
+        "card_street" => "Jalan KTP",
+        "card_rt" => "RT KTP",
+        "card_rw" => "RW KTP",
+        "living_province" => "Provinsi tinggal",
+        "living_regency" => "Kota/Kabupaten tinggal",
+        "living_district" => "Kecamatan tinggal",
+        "living_village" => "Desa tinggal",
+        "living_street" => "Jalan tinggal",
+        "living_rt" => "RT tinggal",
+        "living_rw" => "RW tinggal",
+    ],
 
 ];

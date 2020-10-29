@@ -16,13 +16,12 @@ class CreateEpidemiologyHospitalsTable extends Migration
         Schema::create('epidemiology_hospitals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
+            $table->date('start_at');
             $table->string('name');
             $table->boolean('icu')->default(false);
             $table->boolean('intubation')->default(false);
             $table->boolean('emco')->default(false);
             $table->string('status');
-            $table->date('start_at');
-            $table->date('end_at');
             $table->string('name_histories')->nullable();
             $table->timestamps();
             $table->softDeletes();

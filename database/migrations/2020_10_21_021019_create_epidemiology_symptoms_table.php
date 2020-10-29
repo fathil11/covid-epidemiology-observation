@@ -16,9 +16,9 @@ class CreateEpidemiologySymptomsTable extends Migration
         Schema::create('epidemiology_symptoms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
-            $table->string('type');
             $table->string('value');
-            $table->string('sub-value')->nullable();
+            $table->string('sub_value')->nullable();
+            $table->date('symptom_at');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\EpidemiologyAddition;
+use App\EpidemiologyAdditional;
 use Faker\Generator as Faker;
 
-$factory->define(EpidemiologyAddition::class, function (Faker $faker) {
+$factory->define(EpidemiologyAdditional::class, function (Faker $faker) {
     return [
         //
     ];

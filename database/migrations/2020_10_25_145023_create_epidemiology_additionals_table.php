@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEpidemiologyAdditionsTable extends Migration
+class CreateEpidemiologyAdditionalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEpidemiologyAdditionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('epidemiology_additions', function (Blueprint $table) {
+        Schema::create('epidemiology_additionals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
             $table->boolean('ispa');
@@ -32,6 +32,6 @@ class CreateEpidemiologyAdditionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('epidemiology_additions');
+        Schema::dropIfExists('epidemiology_additionals');
     }
 }

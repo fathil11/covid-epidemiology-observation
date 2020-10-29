@@ -24,6 +24,8 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    private $disable_register = false;
+
     /**
      * Where to redirect users after registration.
      *
@@ -38,6 +40,10 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        if($this->disable_register){
+            return abort(404);
+        }
+
         $this->middleware('guest');
     }
 

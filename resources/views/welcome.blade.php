@@ -1,100 +1,58 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+    {{-- Meta --}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Laravel</title>
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    {{-- Scripts --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    {{-- Fonts --}}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-            .full-height {
-                height: 100vh;
-            }
+    {{-- Styles --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    {{-- Favico --}}
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
+    <title>E-SWAB</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" href="#">
+                <img src="{{ asset('img/favicon.png') }}" width="40" height="40" class="d-inline-block align-center" alt="" loading="lazy">
+                E-SWAB Melawi
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-            .position-ref {
-                position: relative;
-            }
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                <li class="nav-item {{ Request::is('pendaftaran') ? 'active' : '' }}">
+                  <a class="nav-link" href="/">Pendaftaran</a>
+                </li>
 
-            .content {
-                text-align: center;
-            }
+                <li class="nav-item {{ Request::is('qrcode') }}">
+                    <a class="nav-link" href="/">Lupa QRCode ?</a>
+                </li>
 
-            .title {
-                font-size: 84px;
-            }
+                <li class="nav-item {{ Request::is('hubungi-kami') }}">
+                    <a class="nav-link" href="/">Hubungi Kami</a>
+                </li>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+            </ul>
             </div>
+
         </div>
-    </body>
+      </nav>
+      @include('sweetalert::alert')
+</body>
 </html>

@@ -1,5 +1,4 @@
 @extends('layouts.registration')
-@section('title', 'Pendaftaran')
 @section('content')
 <div class="container">
     <h1 class="text-primary text-center mt-5">Pendaftaran Orang Baru <br class="d-block d-md-none">E-SWAB</h1>

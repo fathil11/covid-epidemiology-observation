@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //! TEMPORARY, DELETED SOON
+    public function getInstancePlaceAttribute()
+    {
+        return "Sokan";
+    }
+
+    //! TEMPORARY, DELETED SOON
+    public function getPhoneAttribute()
+    {
+        return "082225210125";
+    }
 }

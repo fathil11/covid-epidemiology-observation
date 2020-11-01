@@ -90,7 +90,6 @@ class RegistrationController extends Controller
         $request->validated();
         $person = Person::where('nik', $nik)->firstOrFail();
 
-
         //*Test Model
         $test = new Test();
         //-----Code UUID
@@ -105,6 +104,13 @@ class RegistrationController extends Controller
 
         //-----Person ID
         $test->person_id = $person->id;
+
+        //-----Test & Type
+        $test->test = "swab";
+        $test->type = "nasofaring";
+
+        //-----Criteria
+        $test->criteria = implode(", ", $request->criteria);
 
         //-----Person Location
         $test->living_province = $request->living_province;
@@ -326,7 +332,7 @@ class RegistrationController extends Controller
 
         $epidemiology_additionals->save();
 
-        dd('Berhasil');
+        return redirect()->route('pe.view', ['code' => $test->code]);
     }
 
     public function redirectNikToCreatePe(Request $request)

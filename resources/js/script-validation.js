@@ -244,6 +244,9 @@ function createPeValidationInit() {
         lang: 'id',
         debug: false,
         rules: {
+            "criteria[]": {
+                required: true
+            },
             living_province: {
                 required: true
             },

@@ -1,5 +1,4 @@
 @extends('layouts.registration')
-@section('title', 'Pendaftaran')
 @section('content')
 <div class="container">
     <h1 class="text-primary text-center mt-5">Pendaftaran PE Lanjutan <br class="d-block d-md-none">E-SWAB</h1>
@@ -27,6 +26,40 @@
                         <input type="text" class="form-control rounded-pill" value="{{ $person->name }}" disabled>
                     </div>
                 </div>
+
+                @include('components.form-section-end')
+                @include('components.form-header', ['title' => 'Kriteria'])
+
+                <div class="col-md-3 col-sm-12 mt-3">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="suspek"
+                            id="suspek">
+                        <label class="custom-control-label" for="suspek">Suspek</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 mt-3">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="probabel" id="probabel">
+                        <label class="custom-control-label" for="probabel">Kasus Probabel</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 mt-3">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="konfirmasi" id="konfirmasi">
+                        <label class="custom-control-label" for="konfirmasi">Kasus Konfirmasi</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 mt-3">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="kontak erat" id="kontak_erat">
+                        <label class="custom-control-label" for="kontak_erat">Kontak Erat</label>
+                    </div>
+                </div>
+
+                <label class="col-md-12" for="criteria[]" class="mt-2"></label>
 
                 @include('components.form-section-end')
                 @include('components.form-header', ['title' => 'Alamat Tinggal'])

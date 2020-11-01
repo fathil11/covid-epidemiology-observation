@@ -17,6 +17,10 @@ class CreateTestsTable extends Migration
             $table->id();
             $table->uuid('code');
             $table->foreignId('user_id')->constrained('users'); // PE User
+            $table->foreignId('person_id')->constrained('people');
+            $table->string('test')->default('swab');
+            $table->string('type')->default('nasofaring-orofaring');
+            $table->string('criteria')->nullable();
 
             // Living Address
             $table->string('living_province');
@@ -27,11 +31,12 @@ class CreateTestsTable extends Migration
             $table->string('living_rt')->nullable();
             $table->string('living_rw')->nullable();
 
-            $table->foreignId('person_id')->constrained('people');
             $table->string('location')->default('internal');
-            $table->string('type')->default('nasofaring-orofaring');
-            $table->string('tube_code');
+            $table->string('tube_code')->nullable();
             $table->string('group_code')->nullable();
+
+            $table->string('pe_path')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

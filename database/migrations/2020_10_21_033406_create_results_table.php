@@ -17,7 +17,7 @@ class CreateResultsTable extends Migration
             $table->id();
             $table->foreignId('test_id')->constrained('tests');
             $table->string('value'); // Positive, Negative, Reactice, Non-Reactive
-            $table->string('doctor');
+            $table->string('doctor')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

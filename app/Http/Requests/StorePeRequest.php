@@ -24,6 +24,7 @@ class StorePeRequest extends FormRequest
     public function rules()
     {
         return [
+            "criteria" => "required",
             "living_province" => "required",
             "living_regency" => "required",
             "living_district" => "required",

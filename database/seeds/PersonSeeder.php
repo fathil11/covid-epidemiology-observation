@@ -26,10 +26,10 @@ class PersonSeeder extends Seeder
         $person->birth_regency = "Sintang";
         $person->birth_at = Carbon::create('04/03/2000');
         $person->birth_at = Carbon::create('04/03/2000');
-        $person->card_province = "Jawa Tengah";
-        $person->card_regency = "Semarang";
-        $person->card_district = "Semarang Tengah";
-        $person->card_village = "Bangunharjo";
+        $person->card_province = "JAWA TENGAH";
+        $person->card_regency = "SEMARANG";
+        $person->card_district = "SEMARANG TENGAH";
+        $person->card_village = "BANGUNHARJO";
         $person->card_street = "Jl. Kauman Johar no.15";
         $person->card_rt = "01";
         $person->card_rw = "02";

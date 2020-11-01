@@ -39,12 +39,12 @@
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Nama</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-                                    <td><p class="h5"><b>Harianto Gerut</b></p></td>
+                                    <td><p class="h5"><b>Fathil Arham</b></p></td>
                                 </tr>
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Umur</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-                                    <td><p class="h5"><b>5 tahun</b></p></td>
+                                    <td><p class="h5"><b>20 tahun</b></p></td>
                                 </tr>
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Hasil SWAB</p></td>
@@ -54,7 +54,7 @@
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Penanggung Jawab</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-                                    <td><p class="h5"><b>Agus Nawan</b></p></td>
+                                    <td><p class="h5"><b>dr. Ahmad Jawahir</b></p></td>
                                 </tr>
                             </table>
                         </div>

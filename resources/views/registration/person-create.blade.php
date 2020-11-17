@@ -63,10 +63,7 @@
                 <div class="col-md-6 mt-3">
                     <div class="form-group">
                         <label for="birth_regency">Tempat Lahir (Kota / Kabupaten)</label>
-                        <input type="text" name="birth_regency" class="form-control rounded-pill" placeholder="Masukan nomor hp WA pasien" value="{{ old('phone') }}">
-                        {{-- <select name="birth_regency" class="form-control" title="Pilih tempat kelahiran pasien"
-                            id="birth_regencies" data-style="bg-white rounded-pill" data-live-search="true" value="{{ old('birth_regency') }}">
-                        </select> --}}
+                        <input type="text" name="birth_regency" class="form-control rounded-pill" placeholder="Masukan tempat lahir pasien" value="{{ old('birth_regency') }}">
                     </div>
                 </div>
 

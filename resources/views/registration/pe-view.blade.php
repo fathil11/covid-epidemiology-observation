@@ -152,7 +152,7 @@
                                             <p class="h5"> : </p>
                                         </td>
                                         <td>
-                                            <p class="h5">{{ $pe->person->work }} ({{ $pe->person->work_instance }})</p>
+                                            <p class="h5">{{ $pe->person->work_instance }} ({{ $pe->person->work }})</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -607,7 +607,7 @@
                                             <p class="h5"> : </p>
                                         </td>
                                         <td>
-                                            <p class="h5">{{ $pe->domestic_travels->first()->arrive_at->isoFormat('DD MMMM Y') }}</p>
+                                            <p class="h5">{{ $pe->living_travels->first()->arrive_at->isoFormat('DD MMMM Y') }}</p>
                                         </td>
                                     </tr>
                                 </table>

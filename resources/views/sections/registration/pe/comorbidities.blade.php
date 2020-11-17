@@ -31,7 +31,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="penyakit_jantung"
+                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="penyakit jantung"
                     id="penyakit_jantung">
                 <label class="custom-control-label" for="penyakit_jantung">Penyakit Jantung</label>
             </div>
@@ -55,14 +55,14 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="gangguan_imunologi" id="gangguan_imunologi">
+                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="gangguan imunologi" id="gangguan_imunologi">
                 <label class="custom-control-label" for="gangguan_imunologi">Gangguan Imonologi</label>
             </div>
         </div>
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="gagal_ginjal"
+                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="gagal ginjal"
                     id="gagal_ginjal">
                 <label class="custom-control-label" for="gagal_ginjal">Gagal Ginjal</label>
             </div>
@@ -70,7 +70,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="gagal_hati"
+                <input type="checkbox" name="comorbidities[]" class="custom-control-input" value="gagal hati"
                     id="gagal_hati">
                 <label class="custom-control-label" for="gagal_hati">Gagal Hati</label>
             </div>

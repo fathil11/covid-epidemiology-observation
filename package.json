@@ -25,6 +25,10 @@
     "dependencies": {
         "bootstrap-select": "^1.13.18",
         "bootstrap-validate": "^2.2.0",
+        "datatables.net": "^1.10.22",
+        "datatables.net-bs": "^1.10.22",
+        "datatables.net-bs4": "^1.10.22",
+        "datatables.net-buttons-bs4": "^1.6.5",
         "jquery-validation": "^1.19.2",
         "pluralize": "^8.0.0",
         "qrcode": "^1.4.4",

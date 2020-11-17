@@ -222,7 +222,7 @@
                                             <p class="h5"> : </p>
                                         </td>
                                         <td>
-                                            <p class="h5">{{ $pe->person->card_rt }}/{{ $pe->person->card_rw }}</p>
+                                            <p class="h5">{{ $pe->person->card_rt != null && $pe->person->card_rw != null ? "{$pe->person->card_rt}/{$pe->person->card_rw}" : "" }}</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -875,6 +875,10 @@
                                     @endif
                                 </table>
                             </div>
+
+                            <div class="col-md-12 mt-3">
+                                <a class="btn btn-outline-success btn-block rounded-pill" href="{{ route('pe.download', ['code'=> $pe->code])  }}">Download Lembar PE</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -882,65 +886,5 @@
         </div>
     </div>
 </div>
-{{-- <tr>
-        <td class="pr-md-4 pr-1"><p class="h5"><b>Provinsi</b></p></td>
-        <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-        <td><p class="h5">{{ $pe->living_province }}</p>
-</td>
-</tr>
-<tr>
-    <td class="pr-md-4 pr-1">
-        <p class="h5"><b>Kota / Kabupaten</b></p>
-    </td>
-    <td class="pr-md-3 pr-2">
-        <p class="h5"> : </p>
-    </td>
-    <td>
-        <p class="h5">{{ $pe->living_regency }}</p>
-    </td>
-</tr>
-<tr>
-    <td class="pr-md-4 pr-1">
-        <p class="h5"><b>Kecamatan</b></p>
-    </td>
-    <td class="pr-md-3 pr-2">
-        <p class="h5"> : </p>
-    </td>
-    <td>
-        <p class="h5">{{ $pe->living_district }}</p>
-    </td>
-</tr>
-<tr>
-    <td class="pr-md-4 pr-1">
-        <p class="h5"><b>Desa</b></p>
-    </td>
-    <td class="pr-md-3 pr-2">
-        <p class="h5"> : </p>
-    </td>
-    <td>
-        <p class="h5">{{ $pe->living_village }}</p>
-    </td>
-</tr>
-<tr>
-    <td class="pr-md-4 pr-1">
-        <p class="h5"><b>Jalan</b></p>
-    </td>
-    <td class="pr-md-3 pr-2">
-        <p class="h5"> : </p>
-    </td>
-    <td>
-        <p class="h5">{{ $pe->living_street }}</p>
-    </td>
-</tr>
-<tr>
-    <td class="pr-md-4 pr-1">
-        <p class="h5"><b>RT/RW</b></p>
-    </td>
-    <td class="pr-md-3 pr-2">
-        <p class="h5"> : </p>
-    </td>
-    <td>
-        <p class="h5">{{ $pe->living_rt }}/{{ $pe->living_rw }}</p>
-    </td>
-</tr> --}}
+
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class LabMiddleware
 {
@@ -15,6 +16,30 @@ class LabMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
+
+        switch (Auth::user()->role) {
+            case '1':
+                return redirect();
+            break;
+
+            case '2':
+                return $next($request);
+                break;
+
+            case '3':
+                return redirect();
+                break;
+
+            case '4':
+                return redirect();
+                break;
+
+            default:
+                return abort(501);
+                break;
+        }
     }
 }

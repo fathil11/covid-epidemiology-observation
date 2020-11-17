@@ -4,7 +4,7 @@
     <h1 class="text-primary text-center mt-5">Pendaftaran PE Lanjutan <br class="d-block d-md-none">E-SWAB</h1>
     <h5 class="text-primary text-center">Powered by Melawi Software Dev</h5>
 
-    <form action="{{ route('registration.pe.store', ['nik'=>$person->nik]) }}" method="POST"
+    <form action="{{ route('registration.pe.store', ['id'=>$person->id]) }}" method="POST"
         autocomplete="off" id="pe_create">
 
         @csrf
@@ -28,38 +28,68 @@
                 </div>
 
                 @include('components.form-section-end')
-                @include('components.form-header', ['title' => 'Kriteria'])
-
-                <div class="col-md-3 col-sm-12 mt-3">
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="suspek"
-                            id="suspek">
-                        <label class="custom-control-label" for="suspek">Suspek</label>
+                @include('components.form-header', ['title' => 'Informasi SWAB'])
+                <div class="col-md-6 mt-3 text-center">
+                    <div class="form-group">
+                        <label for="swab_type">Jenis SWAB</label>
+                        <select name="swab_type" class="form-control" data-style="bg-white rounded-pill"
+                            title="Pilih jenis SWAB" id="swab_types" data-live-search="true">
+                        </select>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-12 mt-3">
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="probabel" id="probabel">
-                        <label class="custom-control-label" for="probabel">Kasus Probabel</label>
+                <div class="col-md-6 mt-3 text-center">
+                    <div class="form-group">
+                        <label for="swab_location">Lokasi Lab SWAB</label>
+                        <select name="swab_location" class="form-control" data-style="bg-white rounded-pill"
+                            title="Pilih loaksi lab SWAB" id="swab_locations" data-live-search="true">
+                        </select>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-12 mt-3">
-                    <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="konfirmasi" id="konfirmasi">
-                        <label class="custom-control-label" for="konfirmasi">Kasus Konfirmasi</label>
+                <div class="col-md-12 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="note">Catatan</label>
+                        <textarea type="text" name="note" class="form-control rounded-pill"
+                            placeholder="Masukan catatan (dapat dikosongkan)"></textarea>
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-12 mt-3">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="criteria[]" class="custom-control-input" value="kontak erat" id="kontak_erat">
-                        <label class="custom-control-label" for="kontak_erat">Kontak Erat</label>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="row">
+                        <div class="col-md-12">Kriteria</div>
+                        <div class="col-md-3 col-sm-12 mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" name="criteria[]" class="custom-control-input" value="suspek"
+                                    id="suspek">
+                                <label class="custom-control-label" for="suspek">Suspek</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-12 mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" name="criteria[]" class="custom-control-input" value="probabel" id="probabel">
+                                <label class="custom-control-label" for="probabel">Kasus Probabel</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-12 mt-3">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox" name="criteria[]" class="custom-control-input" value="konfirmasi" id="konfirmasi">
+                                <label class="custom-control-label" for="konfirmasi">Kasus Konfirmasi</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-12 mt-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="criteria[]" class="custom-control-input" value="kontak erat" id="kontak_erat">
+                                <label class="custom-control-label" for="kontak_erat">Kontak Erat</label>
+                            </div>
+                        </div>
+
+                        <label class="col-md-12" for="criteria[]" class="mt-2"></label>
                     </div>
                 </div>
-
-                <label class="col-md-12" for="criteria[]" class="mt-2"></label>
 
                 @include('components.form-section-end')
                 @include('components.form-header', ['title' => 'Alamat Tinggal'])
@@ -191,7 +221,7 @@
                 <div class="col-md-6 col-sm-12 mt-3">
                     <div class="form-group">
                         <label for="tube_code">Nomor Tabung</label>
-                        <input type="text" name="tube_code" placeholder="Masukan nomor tabung" class="form-control rounded-pill">
+                        <input type="text" name="tube_code" placeholder="Masukan nomor tabung" class="form-control rounded-pill" id="tube_code">
                     </div>
                 </div>
 

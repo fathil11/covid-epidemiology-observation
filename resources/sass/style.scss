@@ -40,6 +40,15 @@
     animation: effect1 1s linear infinite;
 }
 
+#pe_wrapper {
+    padding: 10px !important;
+}
+
+#pe_wrapper .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 @keyframes effect1 {
     0% {
         color: white;
@@ -74,5 +83,49 @@
 
     100% {
         stroke: red;
+    }
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th.dtr-control:before {
+    background-color: #42B168 !important;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th.dtr-control:before {
+    background-color: #495057 !important;
+}
+
+@media (min-width: 480px) {
+    #people-table_length {
+        display: inline-block;
+    }
+
+    #people-table_filter {
+        float: right;
+        display: flex;
+    }
+}
+
+.dt-buttons {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+    .dt-buttons {
+        float: none;
+        width: 100%;
+    }
+}
+
+@media (min-width: 480px) {
+    #test-table_length {
+        display: inline-block;
+        margin-left: 2rem;
+    }
+
+    #test-table_filter {
+        float: right;
+        display: flex;
     }
 }

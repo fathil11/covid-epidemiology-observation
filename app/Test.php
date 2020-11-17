@@ -6,9 +6,13 @@ use Carbon\Carbon;
 use EpidemiologyDiagnoseSeeder;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Test extends Model
 {
+    use SoftDeletes;
+
+    protected $guarded = [];
 
     public function person()
     {
@@ -60,6 +64,11 @@ class Test extends Model
         return $this->hasMany(EpidemiologyProtector::class);
     }
 
+    public function result()
+    {
+        return $this->hasOne(Result::class);
+    }
+
     public function getInternationalTravelsAttribute()
     {
         return $this->travels->where('type', 'international');
@@ -90,7 +99,9 @@ class Test extends Model
         $list = '';
 
         foreach ($this->symptoms as $key => $value) {
-            $list .= $value->value;
+            if($value->value != 'else'){
+                $list .= Str::title($value->value);
+            }
 
             if($value->sub_value != null){
                 $list .= ' ('. $value->sub_value . ')';
@@ -109,7 +120,9 @@ class Test extends Model
         $list = '';
 
         foreach ($this->comorbidities as $key => $value) {
-            $list .= $value->value;
+            if($value->value != 'else'){
+                $list .= Str::title($value->value);
+            }
 
             if($value->sub_value != null){
                 $list .= ' ('. $value->sub_value . ')';
@@ -128,7 +141,9 @@ class Test extends Model
         $list = '';
 
         foreach ($this->diagnoses as $key => $value) {
-            $list .= Str::title($value->value);
+            if($value->value != 'else'){
+                $list .= Str::title($value->value);
+            }
 
             if($value->sub_value != null){
                 $list .= ' ('. $value->sub_value . ')';

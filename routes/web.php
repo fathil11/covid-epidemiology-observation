@@ -13,25 +13,44 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('trigger', 'TriggerController@storePeopleData');
+Route::get('trigger2', 'TriggerController@storeTestData');
+Route::get('trigger3', 'TriggerController@storeSecondTestData');
+Route::get('trigger4', 'TriggerController@showStat');
+
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'pendaftaran'], function () {
-        Route::get('orang-baru', 'RegistrationController@showCreatePerson')->name('registration.person.create');
-        Route::post('orang-baru', 'RegistrationController@storePerson')->name('registration.person.store');
-
-        Route::get('pe-lanjutan', 'RegistrationController@showNikCheck')->name('registration.pe.nik-check');
-        Route::post('pe-lanjutan', 'RegistrationController@redirectNikToCreatePe')->name('registration.pe.redirect-nik');
-        Route::get('pe-lanjutan/{nik}', 'RegistrationController@showCreatePe')->name('registration.pe.create');
-        Route::post('pe-lanjutan/{nik}', 'RegistrationController@storePe')->name('registration.pe.store');
-    });
-
-    Route::get('pe/{code}', 'PeController@show')->name('pe.view');
-    Route::get('pe/{code}/download', 'PeController@download')->name('pe.view');
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+    Route::get('pe', 'AdminController@showPe')->name('admin.pe.index');
 });
+
+Route::group(['middleware' => 'lab', 'prefix' => 'lab'], function () {
+    Route::get('pe', 'LabController@showPe')->name('lab.pe');
+    Route::get('pe/all', 'LabController@showAllPe')->name('lab.pe.all');
+    Route::get('pe/{code}/aksi/positif', 'LabController@positive')->name('lab.pe.action.positive');
+    Route::get('pe/{code}/aksi/negatif', 'LabController@negative')->name('lab.pe.action.negative');
+    Route::get('pe/{code}/aksi/tarik', 'LabController@retire')->name('lab.pe.action.retire');
+});
+
+Route::group(['middleware' => 'pe'], function () {
+    Route::get('pasien', 'RegistrationController@showPeopleSearch')->name('registration.pe.people-search');
+    Route::get('pasien/buat', 'RegistrationController@showCreatePerson')->name('registration.person.create');
+    Route::post('pasien/buat', 'RegistrationController@storePerson')->name('registration.person.store');
+    Route::get('pasien/edit/{id}', 'RegistrationController@showEditPerson')->name('registration.person.edit');
+    Route::post('pasien/edit/{id}', 'RegistrationController@updatePerson')->name('registration.person.update');
+
+    Route::get('pe', 'PeController@index')->name('pe.index');
+    Route::get('pe/{code}', 'PeController@show')->name('pe.view');
+    Route::get('pe/{code}/download', 'PeController@download')->name('pe.download');
+    Route::get('pe/lanjutan/check/{id}', 'RegistrationController@checkCreatePe')->name('registration.pe.create.check');
+    Route::get('pe/buat/{id}', 'RegistrationController@showCreatePe')->name('registration.pe.create');
+    Route::post('pe/buat/{id}', 'RegistrationController@storePe')->name('registration.pe.store');
+
+});
+
 
 
 Route::get('hasil/{code}', 'PublicController@showResult');

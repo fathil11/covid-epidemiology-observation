@@ -2,6 +2,7 @@ import * as ListFun from './script-select';
 import * as DateFun from './script-date';
 import * as ValidateFun from './script-validation';
 import * as PeFun from './script-pe';
+import 'datatables.net-bs4';
 
 
 const works = require('../data/work-list.json');
@@ -16,16 +17,19 @@ $(function () {
     ListFun.listInit(works, '#works');
     ListFun.fullLocationListInit('card')
     ValidateFun.createPersonValidationInit()
+    ValidateFun.updatePersonValidationInit()
 
     //*PE Script
     //--PE Validation
     ValidateFun.createPeValidationInit()
+    ListFun.listInit(['Nasofaring', 'Orofaring', 'Nasofaring-Orofaring'], '#swab_types');
+    ListFun.listInit(['Sintang', 'Pontianak'], '#swab_locations');
 
     //--Full Location Living Init
     ListFun.fullLocationListInit('living')
 
     //--NIK Check
-    PeFun.nikCheck()
+    // PeFun.nikCheck()
 
     //--Symptoms
     PeFun.radioShowHideToggle("symptoms")
@@ -94,5 +98,14 @@ $(function () {
         }, 2300)
 
     })
+
+    //*Datatable
+    $('#pe').DataTable({
+        responsive: true,
+        language: {
+            search: "Cari :",
+            lengthMenu: "Tampilkan_MENU_entri",
+        },
+    });
 
 })

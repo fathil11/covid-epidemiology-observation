@@ -71,7 +71,7 @@
 
                     <div class="col-md-6 col-sm-12 mt-3">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" name="protectors[]" class="custom-control-input" value="masker_medis"
+                            <input type="checkbox" name="protectors[]" class="custom-control-input" value="masker medis"
                                 id="masker_medis">
                             <label class="custom-control-label" for="masker_medis">Masker Medis</label>
                         </div>
@@ -80,14 +80,14 @@
                     <div class="col-md-6 col-sm-12 mt-3">
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" name="protectors[]" class="custom-control-input"
-                                value="sarung_tangan" id="sarung_tangan">
+                                value="sarung tangan" id="sarung_tangan">
                             <label class="custom-control-label" for="sarung_tangan">Sarung Tangan</label>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-sm-12 mt-3">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" name="protectors[]" class="custom-control-input" value="masker_niosh"
+                            <input type="checkbox" name="protectors[]" class="custom-control-input" value="masker niosh"
                                 id="masker_niosh">
                             <label class="custom-control-label" for="masker_niosh">Masker NIOSH N-95</label>
                         </div>
@@ -104,14 +104,14 @@
                     <div class="col-md-6 col-sm-12 mt-3">
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" name="protectors[]" class="custom-control-input"
-                                value="kaca_mata_google" id="kaca_mata_google">
+                                value="kaca mata google" id="kaca_mata_google">
                             <label class="custom-control-label" for="kaca_mata_google">Kaca Mata Google</label>
                         </div>
                     </div>
 
                     <div class="col-md-12 col-sm-12 mt-3">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" name="protectors[]" class="custom-control-input" value="tidak_ada"
+                            <input type="checkbox" name="protectors[]" class="custom-control-input" value="tidak ada"
                                 id="tidak_ada">
                             <label class="custom-control-label" for="tidak_ada">Tidak memakai APD</label>
                         </div>

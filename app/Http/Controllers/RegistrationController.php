@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\EpidemiologyAdditional;
 use App\Test;
 use App\Person;
 use App\Province;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 use App\EpidemiologyTravel;
+use Illuminate\Support\Str;
+use App\EpidemiologyContact;
 use App\EpidemiologySymptom;
 use Illuminate\Http\Request;
 use App\EpidemiologyDiagnose;
 use App\EpidemiologyHospital;
-use App\EpidemiologyComorbidity;
-use App\EpidemiologyContact;
 use App\EpidemiologyProtector;
+use App\EpidemiologyAdditional;
+use App\EpidemiologyComorbidity;
+use Yajra\DataTables\DataTables;
+use App\DataTables\PeopleDataTable;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePeRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StorePersonRequest;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\UpdatePersonRequest;
 
 class RegistrationController extends Controller
 {
@@ -28,15 +33,45 @@ class RegistrationController extends Controller
         return view('registration.person-create');
     }
 
-    public function showNikCheck()
+    public function showEditPerson($id)
     {
-        return view('registration.nik-check');
+        $person = Person::findOrFail($id);
+        return view('registration.person-update', compact('person'));
     }
 
-    public function showCreatePe($nik)
+    public function showPeopleSearch(PeopleDataTable $dataTable)
     {
-        $person = Person::where('nik', $nik)->firstOrFail();
+        return $dataTable->render('registration.people-search');
+    }
+
+    public function showCreatePe($id)
+    {
+        $person = Person::findOrFail($id);
         return view('registration.pe-create', compact('person'));
+    }
+
+    public function checkCreatePe($id)
+    {
+        $person = Person::find($id);
+        if(
+            $person->nik == null ||
+            $person->phone == null ||
+            $person->parent_name == null ||
+            $person->card_path == null ||
+            $person->work == null ||
+            $person->birth_regency == null ||
+            $person->birth_at == null ||
+            $person->card_province == null ||
+            $person->card_regency == null ||
+            $person->card_district == null ||
+            $person->card_village == null
+        ){
+            Alert::html('Ups !', 'Data pasien masih belum lengkap. Cek kembali <b>NIK, Nama, Nomor HP, Nama orang tua, Foto identitas, Pekerjaan, Tempat lahir, Tanggal lahir, Alamat Provinsi, Kabupaten/Kota, Kecamatan, dan Desa</b>', 'error');
+            return redirect()->route('registration.person.edit', ['id'=>$id]);
+        }
+
+        Alert::success('Yeay :)', 'Data pasien sudah lengkap, silahkan lanjutkan pengisian form PE.');
+        return redirect()->route('registration.pe.create', ['id' => $id]);
     }
 
     public function storePerson(StorePersonRequest $request)
@@ -48,7 +83,7 @@ class RegistrationController extends Controller
         $person->user_id = Auth::user()->id;
 
         $person->nik = $request->nik;
-        $person->name = $request->name;
+        $person->name = Str::title($request->name);
         $person->phone = $request->phone;
         $person->gender = $request->gender;
 
@@ -58,40 +93,76 @@ class RegistrationController extends Controller
         // Store Person ID Card File Path
         $person->card_path = $path;
 
-        $person->birth_regency = $request->birth_regency;
+        $person->birth_regency = Str::upper($request->birth_regency);
         $person->birth_at = Carbon::make($request->birth_at);
-        $person->parent_name = $request->parent_name;
-        $person->work = $request->work;
-        $person->work_instance = $request->work_instance;
-        $person->card_province = $request->card_province;
-        $person->card_regency = $request->card_regency;
-        $person->card_district = $request->card_district;
-        $person->card_village = $request->card_village;
-        $person->card_street = $request->card_street;
+        $person->parent_name = Str::upper($request->parent_name);
+        $person->work = Str::upper($request->work);
+        $person->work_instance = Str::upper($request->work_instance);
+        $person->card_province = Str::upper($request->card_province);
+        $person->card_regency = Str::upper($request->card_regency);
+        $person->card_district = Str::upper($request->card_district);
+        $person->card_village = Str::upper($request->card_village);
+        $person->card_street = Str::upper($request->card_street);
         $person->card_rt = $request->card_rt;
         $person->card_rw = $request->card_rw;
-        $person->living_province = $request->living_province;
-        $person->living_regency = $request->living_regency;
-        $person->living_district = $request->living_district;
-        $person->living_village = $request->living_village;
-        $person->living_street = $request->living_street;
-        $person->living_rt = $request->living_rt;
-        $person->living_rw = $request->living_rw;
 
         if($person->save()){
-            return redirect()->route('registration.pe.create', ['nik'=>$person->nik]);
+            return redirect()->route('registration.pe.create', ['id'=>$person->id]);
         }
 
         return abort(501);
     }
 
-    public function storePe(StorePeRequest $request, $nik){
+    public function updatePerson(UpdatePersonRequest $request, $id)
+    {
+        $request->validated();
+
+        $person = Person::findOrFail($id);
+
+        $person->user_id = Auth::user()->id;
+
+        $person->nik = $request->nik;
+        $person->name = Str::title($request->name);
+        $person->phone = $request->phone;
+        $person->gender = $request->gender;
+
+        // Store Person ID Card File
+        if($request->file('id_card_file') != null){
+            $path = $request->file('id_card_file')->store('public/id_cards');
+
+            // Store Person ID Card File Path
+            $person->card_path = $path;
+        }
+
+
+        $person->birth_regency = Str::upper($request->birth_regency);
+        $person->birth_at = Carbon::make($request->birth_at);
+        $person->parent_name = Str::upper($request->parent_name);
+        $person->work = Str::upper($request->work);
+        $person->work_instance = Str::upper($request->work_instance);
+        $person->card_province = Str::upper($request->card_province);
+        $person->card_regency = Str::upper($request->card_regency);
+        $person->card_district = Str::upper($request->card_district);
+        $person->card_village = Str::upper($request->card_village);
+        $person->card_street = Str::upper($request->card_street);
+        $person->card_rt = $request->card_rt;
+        $person->card_rw = $request->card_rw;
+
+        if($person->save()){
+            return redirect()->route('registration.pe.create.check', ['id'=>$person->id]);
+        }
+
+        return abort(501);
+    }
+
+    public function storePe(StorePeRequest $request, $id){
 
         $request->validated();
-        $person = Person::where('nik', $nik)->firstOrFail();
+        $person = Person::findOrFail($id);
 
         //*Test Model
         $test = new Test();
+
         //-----Code UUID
         $uuid = Uuid::uuid4();
         while(Test::where('code', $uuid)->get()->count() != 0){
@@ -107,25 +178,22 @@ class RegistrationController extends Controller
 
         //-----Test & Type
         $test->test = "swab";
-        $test->type = "nasofaring";
+        $test->location = $request->swab_location;
+        $test->type = $request->swab_type;
 
         //-----Criteria
         $test->criteria = implode(", ", $request->criteria);
 
         //-----Person Location
-        $test->living_province = $request->living_province;
-        $test->living_regency = $request->living_regency;
-        $test->living_district = $request->living_district;
-        $test->living_village = $request->living_village;
-        $test->living_street = $request->living_street;
+        $test->living_province = Str::upper($request->living_province);
+        $test->living_regency = Str::upper($request->living_regency);
+        $test->living_district = Str::upper($request->living_district);
+        $test->living_village = Str::upper($request->living_village);
+        $test->living_street = Str::upper($request->living_street);
         $test->living_rt = $request->living_rt;
         $test->living_rw = $request->living_rw;
 
         //-----Test Location
-        $test->location = "internal";
-
-        //-----Test Type
-        $test->type = "nasofaring-orofaring";
 
         //-----Tube Code
         $test->tube_code = $request->tube_code;
@@ -332,11 +400,8 @@ class RegistrationController extends Controller
 
         $epidemiology_additionals->save();
 
+        Alert::success('Hore :)', 'Berhasil mendaftarkan PE, silahkan download lembar PE melalui tombol yang tersedia dibawah halaman.');
         return redirect()->route('pe.view', ['code' => $test->code]);
     }
 
-    public function redirectNikToCreatePe(Request $request)
-    {
-        return redirect()->route('registration.pe.create', ['nik' => $request->nik_check]);
-    }
 }

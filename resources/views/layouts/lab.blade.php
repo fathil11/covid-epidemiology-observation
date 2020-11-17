@@ -11,13 +11,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- Scripts --}}
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
         rel="stylesheet">
-
-    <script src="{{ asset('js/app.js') }}"></script>
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -43,16 +41,12 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
-                    <li class="nav-item {{ Request::url() == route('registration.person.create') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('registration.person.create') }}">Pendaftaran Pasien Baru</a>
+                    <li class="nav-item {{ Request::url() == route('lab.pe') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('lab.pe') }}">Daftar PE (Hasil Yang Belum Keluar)</a>
                     </li>
 
-                    <li class="nav-item {{ Request::url() == route('registration.pe.people-search') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('registration.pe.people-search') }}">Daftar Pasien</a>
-                    </li>
-
-                    <li class="nav-item {{ Request::url() == route('pe.index') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('pe.index') }}">Daftar PE</a>
+                    <li class="nav-item {{ Request::url() == route('lab.pe.all') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('lab.pe.all') }}">Daftar Seluruh PE</a>
                     </li>
 
                     <li class="nav-item {{ Request::is('hubungi-kami') }}">
@@ -73,5 +67,4 @@
 @include('sweetalert::alert')
 @yield('content')
 
-@stack('scripts')
 </html>

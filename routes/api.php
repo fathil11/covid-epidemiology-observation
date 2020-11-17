@@ -21,3 +21,5 @@ Route::get('/location/{regency}/districts', 'ApiController@districts');
 Route::get('/location/{district}/villages', 'ApiController@villages');
 
 Route::get('/person/nik/is-exists/{nik}', 'ApiController@nikIsExists');
+Route::get('/person/id-card/is-exists/{name}', 'ApiController@idCardIsExists');
+Route::get('/pe/tube-code/is-exists/{code}', 'ApiController@tubeCodeIsExists');

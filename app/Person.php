@@ -8,10 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
+
     protected $dates = [
         'birth_at',
     ];
 
+    protected $guarded = [];
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+
+    public function latestTest()
+    {
+        return $this->hasOne(Test::class)->latest();
+    }
 
     public function getAgeAttribute()
     {

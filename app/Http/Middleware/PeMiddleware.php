@@ -22,7 +22,7 @@ class PeMiddleware
 
         switch (Auth::user()->role) {
             case '1':
-                return redirect();
+                return $next($request);
             break;
 
             case '2':

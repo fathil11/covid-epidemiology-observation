@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePersonRequest extends FormRequest
+class UpdatePeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,6 @@ class StorePersonRequest extends FormRequest
             "name" => "required",
             "phone" => "required",
             "gender" => "required",
-            "id_card_file" => "required|mimes:jpeg,bmp,png,jpg",
             "birth_regency" => "required",
             "birth_at" => "required",
             "parent_name" => "required",

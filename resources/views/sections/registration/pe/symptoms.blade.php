@@ -53,7 +53,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="sakit_tenggorakan"
+                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="sakit tenggorakan"
                     id="sakit_tenggorakan">
                 <label class="custom-control-label" for="sakit_tenggorakan">Sakit Tenggorokan</label>
             </div>
@@ -61,7 +61,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="sesak_napas"
+                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="sesak napas"
                     id="sesak_napas">
                 <label class="custom-control-label" for="sesak_napas">Sesak Napas</label>
             </div>
@@ -69,7 +69,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="sakit_kepala"
+                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="sakit kepala"
                     id="sakit_kepala">
                 <label class="custom-control-label" for="sakit_kepala">Sakit Kepala</label>
             </div>
@@ -84,7 +84,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="nyeri_otot"
+                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="nyeri otot"
                     id="nyeri_otot">
                 <label class="custom-control-label" for="nyeri_otot">Nyeri Otot</label>
             </div>
@@ -92,7 +92,7 @@
 
         <div class="col-md-6 col-sm-12 mt-3">
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="mual_muntah"
+                <input type="checkbox" name="symptoms[]" class="custom-control-input" value="mual muntah"
                     id="mual_muntah">
                 <label class="custom-control-label" for="mual_muntah">Mual/Muntah</label>
             </div>

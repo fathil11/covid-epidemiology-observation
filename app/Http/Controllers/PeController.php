@@ -222,7 +222,7 @@ class PeController extends Controller
             $document->setValue('lvg_province', $pe->living_travels->first()->province);
             $document->setValue('lvg_regency', $pe->living_travels->first()->regency);
             $document->setValue('lvg_start_at', $pe->living_travels->first()->departure_at->isoFormat('DD MMMM Y'));
-            $document->setValue('lvg_end_at', $pe->domestic_travels->first()->arrive_at->isoFormat('DD MMMM Y'));
+            $document->setValue('lvg_end_at', $pe->living_travels->first()->arrive_at->isoFormat('DD MMMM Y'));
         }else{
             $document->setValue('lvg_province', '');
             $document->setValue('lvg_regency', '');

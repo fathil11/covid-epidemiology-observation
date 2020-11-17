@@ -272,7 +272,7 @@ class PeController extends Controller
             $document->setValue('aerosol', '');
         }
 
-        $document->saveAs("temp/{$pe->person->name}({$pe->tube_code}).docx");
-        return response()->download("temp/{$pe->person->name}({$pe->tube_code}).docx")->deleteFileAfterSend(true);
+        $document->saveAs("/temp/{$pe->person->name}({$pe->tube_code}).docx");
+        return response()->download("/temp/{$pe->person->name}({$pe->tube_code}).docx")->deleteFileAfterSend(true);
     }
 }

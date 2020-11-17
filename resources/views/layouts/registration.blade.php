@@ -10,9 +10,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    {{-- Scripts --}}
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
-
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
         rel="stylesheet">

@@ -107,6 +107,7 @@ class RegistrationController extends Controller
         $person->card_rw = $request->card_rw;
 
         if($person->save()){
+            Alert::success('Hore :)', 'Berhasil mendaftarkan pasien, silahkan lanjutkan pengisian lembar PE.');
             return redirect()->route('registration.pe.create', ['id'=>$person->id]);
         }
 

@@ -159,7 +159,6 @@ class PeController extends Controller
                 break;
             }
         }else{
-            dd('tes');
             $test = $person_tests->first();
             switch ($test->type) {
                 case 'Nasofaring':

@@ -89,10 +89,11 @@ class RegistrationController extends Controller
 
         // Store Person ID Card File
         $path = $request->file('id_card_file')->store('storage/id_cards');
-        dd($path);
+        $path_proc = explode('/',$path);
+        $file_path = end($path_proc);
 
         // Store Person ID Card File Path
-        $person->card_path = $path;
+        $person->card_path = $file_path;
 
         $person->birth_regency = Str::upper($request->birth_regency);
         $person->birth_at = Carbon::make($request->birth_at);
@@ -130,10 +131,13 @@ class RegistrationController extends Controller
 
         // Store Person ID Card File
         if($request->file('id_card_file') != null){
-            $path = $request->file('id_card_file')->store(asset('storage/id_cards'));
+            $path = $request->file('id_card_file')->store('storage/id_cards');
+
+            $path_proc = explode('/',$path);
+            $file_path = end($path_proc);
 
             // Store Person ID Card File Path
-            $person->card_path = $path;
+            $person->card_path = $file_path;
         }
 
 

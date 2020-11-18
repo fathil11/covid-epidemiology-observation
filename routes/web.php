@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('trigger', 'TriggerController@storePeopleData');
 Route::get('trigger2', 'TriggerController@storeTestData');
 Route::get('trigger3', 'TriggerController@storeSecondTestData');
-Route::get('trigger4', 'TriggerController@showStat');
+Route::get('trigger4', 'TriggerController@storeThirthTestData');
+Route::get('trigger5', 'TriggerController@showStat');
 
 
 Route::get('/', function () {

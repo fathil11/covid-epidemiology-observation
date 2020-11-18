@@ -30,7 +30,6 @@ class PeopleDataTable extends DataTable
                 $edit_btn = '<a href="' . route('registration.pe.create.check', ['id'=>$person->id]) . '" class="btn btn-success">Lanjutkan</a>';
                 return $next_btn . $edit_btn;
             })
-            ->rawColumns(['action'])
             ->addColumn('latestTest', function($person){
                 if($person->latestTest != null){
                     return $person->latestTest->created_at->isoFormat('D MMMM Y');
@@ -38,11 +37,12 @@ class PeopleDataTable extends DataTable
                 return '';
             })
             ->editColumn('name', function(Person $person){
-                return Str::title($person->name);
+                return '<b>' . Str::title($person->name) . "</b><br>{$person->nik}";
             })
             ->editColumn('gender', function ($person) {
                 return $person->gender == 'm' ? "Laki-laki" : "Perempuan";
-            });
+            })
+            ->rawColumns(['action', 'name']);
         }
 
     /**
@@ -97,6 +97,7 @@ class PeopleDataTable extends DataTable
                 ->responsivePriority(2),
             Column::make('nik')
                 ->title('NIK')
+                ->visible(false)
                 ->orderable(false),
             Column::make('action')
                 ->searchable(false)

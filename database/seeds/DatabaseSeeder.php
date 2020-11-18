@@ -17,37 +17,27 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Gerut',
-            'email' => 'admin@dinkes.com',
+            'email' => 'admin@dinkesmelawi.com',
             'phone' => '082225210125',
             'instance' => 'Lab Kesda',
             'instance_place' => 'Nanga Pinoh',
-            'password' => Hash::make('123123'),
+            'password' => Hash::make('gerutganteng'),
             'role' => '1'
         ]);
 
         User::create([
             'name' => 'dr. Gunadi',
-            'email' => 'lab@dinkes.com',
+            'email' => 'lab@dinkesmelawi.com',
             'phone' => '082225210125',
             'instance' => 'Lab Kesda',
             'instance_place' => 'Nanga Pinoh',
-            'password' => Hash::make('123123'),
+            'password' => Hash::make('labkesdajaya'),
             'role' => '2'
         ]);
 
         User::create([
-            'name' => 'Agusnawan',
-            'email' => 'agus@dinkes.com',
-            'phone' => '082225210125',
-            'instance' => 'PE',
-            'instance_place' => 'Nanga Pinoh',
-            'password' => Hash::make('123123'),
-            'role' => '3'
-        ]);
-
-        User::create([
             'name' => 'Heri Dermawan',
-            'email' => 'heri.dermawan@dinkes.com',
+            'email' => 'heri.dermawan@dinkesmelawi.com',
             'phone' => '085389104041',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -57,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Terissia',
-            'email' => 'terissia@dinkes.com',
+            'email' => 'terissia@dinkesmelawi.com',
             'phone' => '081256824870',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -67,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Faulina Intan',
-            'email' => 'faulina.intan@dinkes.com',
+            'email' => 'faulina.intan@dinkesmelawi.com',
             'phone' => '081356767487',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -77,7 +67,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Paulina Saragi',
-            'email' => 'paulina.saragi@dinkes.com',
+            'email' => 'paulina.saragi@dinkesmelawi.com',
             'phone' => '082351404027',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -87,7 +77,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Anita Cristina',
-            'email' => 'anita.cristina@dinkes.com',
+            'email' => 'anita.cristina@dinkesmelawi.com',
             'phone' => '081345200405',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -97,7 +87,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Devi Puspasari',
-            'email' => 'devi.puspasari@dinkes.com',
+            'email' => 'devi.puspasari@dinkesmelawi.com',
             'phone' => '085348361761',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -107,7 +97,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Beatriks Halla',
-            'email' => 'beatriks.halla@dinkes.com',
+            'email' => 'beatriks.halla@dinkesmelawi.com',
             'phone' => '082252145050',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -117,7 +107,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Agnes',
-            'email' => 'agnes@dinkes.com',
+            'email' => 'agnes@dinkesmelawi.com',
             'phone' => '081251417455',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -127,7 +117,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Bambang Eko T.',
-            'email' => 'bambang.eko@dinkes.com',
+            'email' => 'bambang.eko@dinkesmelawi.com',
             'phone' => '081270522847',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',
@@ -137,7 +127,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Hendrika Ratnasari',
-            'email' => 'hendrika.ratnasari@dinkes.com',
+            'email' => 'hendrika.ratnasari@dinkesmelawi.com',
             'phone' => '089669041680',
             'instance' => 'Dinas Kesehatan',
             'instance_place' => 'Melawi',

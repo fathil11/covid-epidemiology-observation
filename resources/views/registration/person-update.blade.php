@@ -58,11 +58,7 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 mt-3">
-                @if ($person->card_path != null)
-                    <img src="{{ asset('storage/id_cards/' . $person->card_path) }}" class="img-fluid" alt="">
-                @else
-                    <h4 class="mt-3">Foto KTP belum ada</h4>
-                @endif
+                    <img src="{{ $person->card_path != null ? asset('storage/id_cards/' . $person->card_path) : '' }}" id="card_view" class="img-fluid" alt="">
                 </div>
 
                 @include('components.form-section-end')
@@ -188,4 +184,23 @@
         </div>
     </form>
 </div>
+@push('scripts')
+<script>
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#card_view').attr('src', e.target.result);
+    }
+
+   function readURL(input) {
+        if (input.files && input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#id_card_file").change(function(){
+        console.log('tes');
+        readURL(this);
+    });
+</script>
+@endpush
 @endsection

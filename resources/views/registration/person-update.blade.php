@@ -49,12 +49,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 mt-3">
+                <div class="col-md-6 mt-3">
                     <label for="id_card_file" class="d-block">Foto KTP/Identitas lain</label>
                     <div class="custom-file rounded-pill">
                         <input name="id_card_file" type="file" class="custom-file-input" id="id_card_file" accept="image/*" value="{{ $person->id_card_file }}">
                         <label class="custom-file-label rounded-pill" for="id_card_file" data-browse="Ambil File">Masukan foto KTP/Identitas lain</label>
                     </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <img src="{{ asset($person->card_path) }}" class="img-fluid" alt="">
                 </div>
 
                 @include('components.form-section-end')

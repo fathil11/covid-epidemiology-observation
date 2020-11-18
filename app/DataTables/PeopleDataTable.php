@@ -32,7 +32,10 @@ class PeopleDataTable extends DataTable
             })
             ->rawColumns(['action'])
             ->addColumn('latestTest', function($person){
-                return $person->latestTest->created_at->isoFormat('D MMMM Y');
+                if($person->latestTest != null){
+                    return $person->latestTest->created_at->isoFormat('D MMMM Y');
+                }
+                return '';
             })
             ->editColumn('name', function(Person $person){
                 return Str::title($person->name);
@@ -86,8 +89,9 @@ class PeopleDataTable extends DataTable
             ->title('Jenis Kelamin'),
             Column::make('latestTest')
                 ->title('Tanggal Terakhir SWAB')
-                ->name('latestTest.created_at')
+                ->name('latestTest')
                 ->orderable(false)
+                ->searchable(false)
                 ->type('date-eu')
                 ->addClass('text-center')
                 ->responsivePriority(2),

@@ -58,7 +58,11 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 mt-3">
+                @if ($person->card_path != null)
                     <img src="{{ asset('storage/id_cards/' . $person->card_path) }}" class="img-fluid" alt="">
+                @else
+                    <h4>Foto KTP belum ada</h4>
+                @endif
                 </div>
 
                 @include('components.form-section-end')

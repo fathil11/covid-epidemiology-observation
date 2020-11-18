@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 mt-3">
-                    <img src="{{ asset($person->card_path) }}" class="img-fluid" alt="">
+                    <img src="{{ asset('storage/id_cards/'$person->card_path) }}" class="img-fluid" alt="">
                 </div>
 
                 @include('components.form-section-end')

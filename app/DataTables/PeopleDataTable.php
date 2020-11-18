@@ -51,7 +51,7 @@ class PeopleDataTable extends DataTable
 
     public function query()
     {
-        $model = Person::has('latestTest')->with('latestTest');
+        $model = Person::with('latestTest');
         return $model->newQuery();
     }
 

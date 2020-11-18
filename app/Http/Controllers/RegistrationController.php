@@ -88,7 +88,7 @@ class RegistrationController extends Controller
         $person->gender = $request->gender;
 
         // Store Person ID Card File
-        $path = $request->file('id_card_file')->store('storage/id_cards');
+        $path = $request->file('id_card_file')->store('id_cards');
         $path_proc = explode('/',$path);
         $file_path = end($path_proc);
 
@@ -131,7 +131,7 @@ class RegistrationController extends Controller
 
         // Store Person ID Card File
         if($request->file('id_card_file') != null){
-            $path = $request->file('id_card_file')->store('storage/id_cards');
+            $path = $request->file('id_card_file')->store('id_cards');
 
             $path_proc = explode('/',$path);
             $file_path = end($path_proc);

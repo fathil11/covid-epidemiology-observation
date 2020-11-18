@@ -49,12 +49,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 mt-3">
+                <div class="col-md-6 col-sm-12 mt-3">
                     <label for="id_card_file" class="d-block">Foto KTP/Identitas lain</label>
                     <div class="custom-file rounded-pill">
                         <input name="id_card_file" type="file" class="custom-file-input" id="id_card_file" accept="image/*" value="{{ old('id_card_file') }}">
                         <label class="custom-file-label rounded-pill" for="id_card_file" data-browse="Ambil File">Masukan foto KTP/Identitas lain</label>
                     </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <img id="card_view" class="img-fluid" src="" alt="">
                 </div>
 
                 @include('components.form-section-end')
@@ -176,4 +180,23 @@
         </div>
     </form>
 </div>
+@push('scripts')
+<script>
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#card_view').attr('src', e.target.result);
+    }
+
+   function readURL(input) {
+        if (input.files && input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#id_card_file").change(function(){
+        console.log('tes');
+        readURL(this);
+    });
+</script>
+@endpush
 @endsection

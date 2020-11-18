@@ -129,7 +129,7 @@ class RegistrationController extends Controller
 
         // Store Person ID Card File
         if($request->file('id_card_file') != null){
-            $path = $request->file('id_card_file')->store('public/id_cards');
+            $path = $request->file('id_card_file')->store(asset('storage/id_cards'));
 
             // Store Person ID Card File Path
             $person->card_path = $path;

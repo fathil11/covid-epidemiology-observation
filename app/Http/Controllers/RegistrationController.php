@@ -88,7 +88,8 @@ class RegistrationController extends Controller
         $person->gender = $request->gender;
 
         // Store Person ID Card File
-        $path = $request->file('id_card_file')->store(asset('storage/id_cards'));
+        $path = $request->file('id_card_file')->store('storage/id_cards');
+        dd($path);
 
         // Store Person ID Card File Path
         $person->card_path = $path;

@@ -19,7 +19,22 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->route('registration.person.create');
+            $settings = [
+                'isAdmin' => route('registration.person.create'),
+                'isLab' => route('lab.pe'),
+                'isPe' => route('registration.person.create'),
+                'isDoctor' => route('registration.person.create'),
+                'isReviewer' => route('statistic'),
+            ];
+
+            /** @var App\User */
+            $user = Auth::user();
+
+            foreach ($settings as $role => $route) {
+                if($user->{$role}()){
+                    return redirect($route);
+                }
+            }
         }
 
         return $next($request);

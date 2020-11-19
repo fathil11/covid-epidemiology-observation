@@ -1,4 +1,4 @@
-@extends('layouts.registration')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <h1 class="text-primary text-center mt-5">Daftar Pasien <br class="d-block d-md-none">E-SWAB</h1>

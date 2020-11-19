@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'lab' => \App\Http\Middleware\LabMiddleware::class,
         'pe' => \App\Http\Middleware\PeMiddleware::class,
+        'statistic' => \App\Http\Middleware\StatisticMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

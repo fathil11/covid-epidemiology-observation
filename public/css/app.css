@@ -11746,6 +11746,17 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before
   }
 }
 
+@media (min-width: 480px) {
+  #statisticpeople-table_length {
+    display: inline-block;
+  }
+
+  #statisticpeople-table_filter {
+    float: right;
+    display: flex;
+  }
+}
+
 .dt-buttons {
   margin-bottom: 1rem;
 }

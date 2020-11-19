@@ -20,26 +20,12 @@ class PeMiddleware
             return redirect()->route('login');
         }
 
-        switch (Auth::user()->role) {
-            case '1':
-                return $next($request);
-            break;
-
-            case '2':
-                return redirect();
-            break;
-
-            case '3':
-                return $next($request);
-                break;
-
-            case '4':
-                return redirect();
-                break;
-
-            default:
-                return abort(501);
-                break;
+        /** @var \App\User */
+        $user = Auth::user();
+        if($user->isPe() || $user->isAdmin()){
+            return $next($request);
         }
+
+        return abort(403);
     }
 }

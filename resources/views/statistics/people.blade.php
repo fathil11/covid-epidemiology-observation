@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h1 class="text-primary text-center mt-5">Daftar PE <br class="d-block d-md-none">E-SWAB</h1>
-    <h5 class="text-primary text-center">Daftar PE yang sudah dimasukan</h5>
+    <h1 class="text-primary text-center mt-5">Data {{ $title }} COVID-19 <br class="d-block d-md-none">E-SWAB</h1>
+    <h5 class="text-primary text-center">Powered by Melawi Software Dev</h5>
 
     <div class="mt-4">
         {!! $dataTable->table() !!}
@@ -17,6 +17,9 @@
 <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 <script src="/vendor/datatables/buttons.server-side.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
 {!! $dataTable->scripts() !!}
+
+
 @endpush
 @endsection

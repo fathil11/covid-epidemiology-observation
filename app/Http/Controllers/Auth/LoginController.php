@@ -31,28 +31,22 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        switch (Auth::user()->role) {
-            case '1':
-                $this->redirectTo = route('registration.person.create');
-                return $this->redirectTo;
-                break;
-            case '2':
-                $this->redirectTo = route('lab.pe');
-                return $this->redirectTo;
-                break;
-            case '3':
-                $this->redirectTo = route('registration.person.create');
-                return $this->redirectTo;
-                break;
+        $settings = [
+            'isAdmin' => route('registration.person.create'),
+            'isLab' => route('lab.pe'),
+            'isPe' => route('registration.person.create'),
+            'isDoctor' => route('registration.person.create'),
+            'isReviewer' => route('statistic'),
+        ];
 
-            default:
-                $this->redirectTo = route('registration.person.create');
-                return $this->redirectTo;
-                break;
+        /** @var App\User */
+        $user = Auth::user();
+
+        foreach ($settings as $role => $route) {
+            if($user->{$role}()){
+                return $route;
+            }
         }
-        $this->redirectTo = route('registration.new-person');
-        return $this->redirectTo;
-
     }
     /**
      * Create a new controller instance.

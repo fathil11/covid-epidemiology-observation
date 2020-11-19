@@ -24,7 +24,7 @@
     <title>E-SWAB</title>
 </head>
 <body class="bg-primary login-page">
-
+    @include('sweetalert::alert')
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-5 col-sm-12 text-white">
@@ -54,6 +54,6 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+
 </body>
 </html>

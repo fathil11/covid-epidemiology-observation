@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class LabMiddleware
+class StatisticMiddleware
 {
     /**
      * Handle an incoming request.
@@ -22,7 +22,7 @@ class LabMiddleware
 
         /** @var \App\User */
         $user = Auth::user();
-        if($user->isLab()){
+        if($user->isAdmin() || $user->isReviewer()){
             return $next($request);
         }
 

@@ -16,6 +16,7 @@ class TriggerController extends Controller
 {
     public function storePeopleData() {
         $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1kMfESbeUvt05hO2e81g1HYOJnEqx00m-JFxaOUTLTJM/edit#gid=0')->get();
+
         foreach ($datas as $data) {
             $person = Person::find($data['No']);
 
@@ -92,71 +93,7 @@ class TriggerController extends Controller
         $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
 
         foreach($datas as $key => $data){
-            $test = new Test();
-
-            // UUID
-            $uuid = Uuid::uuid4();
-            while(Test::where('code', $uuid)->get()->count() != 0){
-                $uuid = Uuid::uuid4();
-            }
-
-            $test->code = $uuid;
-
-            $test->user_id = 1;
-            $test->person_id = $data['No'];
-            $test->test = 'swab';
-            $test->type = 'nasofaring-orofaring';
-
-            $test->criteria = null;
-
-            $test->living_province = Str::upper($data['Provinsi Tinggal']);
-            $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
-            $test->living_district = Str::upper($data['Kecamatan Tinggal']);
-            $test->living_village = Str::upper($data['Desa Tinggal']);
-            $test->living_street = null;
-            $test->living_rt = null;
-            $test->living_rw = null;
-            $test->location = "external";
-            $test->tube_code = null;
-            $test->group_code = null;
-
-            $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 1']);
-
-            if($test->save(['timestamps' => false])){
-                echo $data['No'] . '| ';
-                if($key%10 == 0){
-                    echo '<br>';
-                }
-            }
-
-            if($data['No HP'] != null){
-                $person = Person::find($data['No']);
-                $person->phone = $data['No HP'];
-                $person->save();
-            }
-
-            if($data['Hasil 1'] != 'SWAB'){
-                $result = new Result();
-                $result->test_id = $test->id;
-                $result->value = $data['Hasil 1'];
-
-                if($data['Tanggal Hasil 1'] != null){
-                    $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 1']);
-                }else{
-                    $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 1']);
-                }
-
-                $result->save(['timestamps' => false]);
-            }
-        }
-    }
-
-    public function storeSecondTestData()
-    {
-        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
-
-        foreach($datas as $key => $data){
-            if($data['Tanggal Swab 2'] != null){
+            if($data['No'] != null){
                 $test = new Test();
 
                 // UUID
@@ -185,7 +122,7 @@ class TriggerController extends Controller
                 $test->tube_code = null;
                 $test->group_code = null;
 
-                $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 2']);
+                $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 1']);
 
                 if($test->save(['timestamps' => false])){
                     echo $data['No'] . '| ';
@@ -197,21 +134,89 @@ class TriggerController extends Controller
                 if($data['No HP'] != null){
                     $person = Person::find($data['No']);
                     $person->phone = $data['No HP'];
-                    $person->save(['timestamps' => false]);
+                    $person->save();
                 }
 
-                if($data['Hasil 2'] != 'SWAB'){
+                if($data['Hasil 1'] != 'SWAB'){
                     $result = new Result();
                     $result->test_id = $test->id;
-                    $result->value = $data['Hasil 2'];
+                    $result->value = $data['Hasil 1'];
 
-                    if($data['Tanggal Hasil 2'] != null){
-                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 2']);
+                    if($data['Tanggal Hasil 1'] != null){
+                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 1']);
                     }else{
-                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 2']);
+                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 1']);
                     }
 
                     $result->save(['timestamps' => false]);
+                }
+            }
+        }
+    }
+
+    public function storeSecondTestData()
+    {
+        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
+
+        foreach($datas as $key => $data){
+            if($data['No'] != null){
+                if($data['Tanggal Swab 2'] != null){
+                    $test = new Test();
+
+                    // UUID
+                    $uuid = Uuid::uuid4();
+                    while(Test::where('code', $uuid)->get()->count() != 0){
+                        $uuid = Uuid::uuid4();
+                    }
+
+                    $test->code = $uuid;
+
+                    $test->user_id = 1;
+                    $test->person_id = $data['No'];
+                    $test->test = 'swab';
+                    $test->type = 'nasofaring-orofaring';
+
+                    $test->criteria = null;
+
+                    $test->living_province = Str::upper($data['Provinsi Tinggal']);
+                    $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
+                    $test->living_district = Str::upper($data['Kecamatan Tinggal']);
+                    $test->living_village = Str::upper($data['Desa Tinggal']);
+                    $test->living_street = null;
+                    $test->living_rt = null;
+                    $test->living_rw = null;
+                    $test->location = "external";
+                    $test->tube_code = null;
+                    $test->group_code = null;
+
+                    $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 2']);
+
+                    if($test->save(['timestamps' => false])){
+                        echo $data['No'] . '| ';
+                        if($key%10 == 0){
+                            echo '<br>';
+                        }
+                    }
+
+                    if($data['No HP'] != null){
+                        $person = Person::find($data['No']);
+                        $person->phone = $data['No HP'];
+                        $person->save(['timestamps' => false]);
+                    }
+
+                    if($data['Hasil 2'] != 'SWAB'){
+                        $result = new Result();
+                        $result->test_id = $test->id;
+                        $result->value = $data['Hasil 2'];
+
+                        if($data['Tanggal Hasil 2'] != null){
+                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 2']);
+                        }else{
+                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 2']);
+                        }
+
+                        $result->save(['timestamps' => false]);
+                    }
                 }
             }
         }
@@ -222,62 +227,64 @@ class TriggerController extends Controller
         $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
 
         foreach($datas as $key => $data){
-            if($data['Tanggal Swab 3'] != null){
-                $test = new Test();
+            if($data['No'] != null){
+                if($data['Tanggal Swab 3'] != null){
+                    $test = new Test();
 
-                // UUID
-                $uuid = Uuid::uuid4();
-                while(Test::where('code', $uuid)->get()->count() != 0){
+                    // UUID
                     $uuid = Uuid::uuid4();
-                }
-
-                $test->code = $uuid;
-
-                $test->user_id = 1;
-                $test->person_id = $data['No'];
-                $test->test = 'swab';
-                $test->type = 'nasofaring-orofaring';
-
-                $test->criteria = null;
-
-                $test->living_province = Str::upper($data['Provinsi Tinggal']);
-                $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
-                $test->living_district = Str::upper($data['Kecamatan Tinggal']);
-                $test->living_village = Str::upper($data['Desa Tinggal']);
-                $test->living_street = null;
-                $test->living_rt = null;
-                $test->living_rw = null;
-                $test->location = "external";
-                $test->tube_code = null;
-                $test->group_code = null;
-
-                $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 3']);
-
-                if($test->save(['timestamps' => false])){
-                    echo $data['No'] . '| ';
-                    if($key%10 == 0){
-                        echo '<br>';
-                    }
-                }
-
-                if($data['No HP'] != null){
-                    $person = Person::find($data['No']);
-                    $person->phone = $data['No HP'];
-                    $person->save(['timestamps' => false]);
-                }
-
-                if($data['Hasil 3'] != 'SWAB'){
-                    $result = new Result();
-                    $result->test_id = $test->id;
-                    $result->value = $data['Hasil 3'];
-
-                    if($data['Tanggal Hasil 3'] != null){
-                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 3']);
-                    }else{
-                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 3']);
+                    while(Test::where('code', $uuid)->get()->count() != 0){
+                        $uuid = Uuid::uuid4();
                     }
 
-                    $result->save(['timestamps' => false]);
+                    $test->code = $uuid;
+
+                    $test->user_id = 1;
+                    $test->person_id = $data['No'];
+                    $test->test = 'swab';
+                    $test->type = 'nasofaring-orofaring';
+
+                    $test->criteria = null;
+
+                    $test->living_province = Str::upper($data['Provinsi Tinggal']);
+                    $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
+                    $test->living_district = Str::upper($data['Kecamatan Tinggal']);
+                    $test->living_village = Str::upper($data['Desa Tinggal']);
+                    $test->living_street = null;
+                    $test->living_rt = null;
+                    $test->living_rw = null;
+                    $test->location = "external";
+                    $test->tube_code = null;
+                    $test->group_code = null;
+
+                    $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 3']);
+
+                    if($test->save(['timestamps' => false])){
+                        echo $data['No'] . '| ';
+                        if($key%10 == 0){
+                            echo '<br>';
+                        }
+                    }
+
+                    if($data['No HP'] != null){
+                        $person = Person::find($data['No']);
+                        $person->phone = $data['No HP'];
+                        $person->save(['timestamps' => false]);
+                    }
+
+                    if($data['Hasil 3'] != 'SWAB'){
+                        $result = new Result();
+                        $result->test_id = $test->id;
+                        $result->value = $data['Hasil 3'];
+
+                        if($data['Tanggal Hasil 3'] != null){
+                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 3']);
+                        }else{
+                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 3']);
+                        }
+
+                        $result->save(['timestamps' => false]);
+                    }
                 }
             }
         }
@@ -285,16 +292,14 @@ class TriggerController extends Controller
 
     public function showStat()
     {
-        $person = Person::whereHas('tests', function(Builder $query){
-            $query->whereHas('result', function(Builder $query){
-                $query->where('value', 'positif');
-            });
-        })->get();
+        $people = Person::whereHas('tests.result', function($q){
+            return $q->where('value', 'Positif');
+        })->orderBy('name')->get();
 
-        $tests = Test::whereHas('result', function(Builder $query){
-            $query->where('value', 'positif');
-        })->get();
+        foreach ($people as $key => $value) {
+            echo(($key+1) . '. ' . $value->name  . '|' . $value->id . '<br>');
+        }
 
-        dd($tests->count());
     }
+
 }

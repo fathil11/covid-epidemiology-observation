@@ -37,4 +37,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin()
+    {
+        return $this->role == 1;
+    }
+
+    public function isLab()
+    {
+        return $this->role == 2;
+    }
+
+    public function isPe()
+    {
+        return $this->role == 3;
+    }
+
+    public function isDoctor()
+    {
+        return $this->role == 4;
+    }
+
+    public function isReviewer()
+    {
+        return $this->role == 5;
+    }
+
 }

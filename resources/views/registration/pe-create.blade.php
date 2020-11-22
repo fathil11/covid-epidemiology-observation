@@ -29,6 +29,16 @@
 
                 @include('components.form-section-end')
                 @include('components.form-header', ['title' => 'Informasi SWAB'])
+
+                <div class="col-md-6 mt-3 text-center">
+                    <div class="form-group">
+                        <label for="swab_priority">Prioritas SWAB</label>
+                        <select name="swab_priority" class="form-control" data-style="bg-white rounded-pill"
+                            title="Pilih jenis SWAB" id="swab_priorities" data-live-search="true">
+                        </select>
+                    </div>
+                </div>
+
                 <div class="col-md-6 mt-3 text-center">
                     <div class="form-group">
                         <label for="swab_type">Jenis SWAB</label>
@@ -47,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12 mt-3">
+                <div class="col-md-6 col-sm-12 mt-3">
                     <div class="form-group">
                         <label for="note">Catatan</label>
                         <textarea type="text" name="note" class="form-control rounded-pill"

@@ -16,6 +16,7 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users'); // User creator
+            $table->enum('nationality', ['wni', 'wna'])->default('wni');
             $table->string('nik')->nullable();
             $table->string('name');
             $table->string('phone')->nullable();

@@ -18,6 +18,7 @@ class CreateTestsTable extends Migration
             $table->uuid('code');
             $table->foreignId('user_id')->constrained('users'); // PE User
             $table->foreignId('person_id')->nullable()->constrained('people');
+            $table->boolean('cito')->default(false);
             $table->string('test')->default('swab');
             $table->string('type')->default('nasofaring-orofaring');
             $table->string('location')->default('internal');

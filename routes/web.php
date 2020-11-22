@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('trigger', 'TriggerController@storePeopleData');
-// Route::get('trigger2', 'TriggerController@storeTestData');
-// Route::get('trigger3', 'TriggerController@storeSecondTestData');
-// Route::get('trigger4', 'TriggerController@storeThirthTestData');
-// Route::get('trigger5', 'TriggerController@showStat');
+
+Route::get('trigger', 'TriggerController@storePeopleData');
+Route::get('trigger2', 'TriggerController@storeTestData');
+Route::get('trigger3', 'TriggerController@storeSecondTestData');
+Route::get('trigger4', 'TriggerController@storeThirthTestData');
+Route::get('trigger5', 'TriggerController@showStat');
 
 Route::get('/', function () {
     return redirect()->route('login');

@@ -29,6 +29,8 @@ class TriggerController extends Controller
             // Admin User
             $person->user_id = 1;
 
+            $person->nationality = 'wni';
+
             if($person->nik == null){
                 $person->nik = $data['NIK'];
             }
@@ -47,7 +49,7 @@ class TriggerController extends Controller
             $person->card_path = null;
 
             if($person->work == null){
-                $person->work = Str::upper($data['PEKERJAAN']);
+                $person->work = Str::lower($data['PEKERJAAN']);
             }
 
             $person->work_instance = null;
@@ -61,25 +63,25 @@ class TriggerController extends Controller
             }
 
             if($person->card_province == null){
-                $person->card_province = Str::upper($data['Provinsi KTP']);
+                $person->card_province = Str::lower($data['Provinsi KTP']);
             }
             if($person->card_regency == null){
-                $person->card_regency = Str::upper($data['Kota/Kabupaten KTP']);
+                $person->card_regency = Str::lower($data['Kota/Kabupaten KTP']);
             }
             if($person->card_district == null){
-                $person->card_district = Str::upper($data['Kecamatan KTP']);
+                $person->card_district = Str::lower($data['Kecamatan KTP']);
             }
             if($person->card_village == null){
-                $person->card_village = Str::upper($data['Desa KTP']);
+                $person->card_village = Str::lower($data['Desa KTP']);
             }
             if($person->card_street == null){
                 $person->card_street = Str::upper($data['Alamat KTP']);
             }
             if($person->card_rt == null){
-                $person->card_rt = Str::upper($data['RT KTP']);
+                $person->card_rt = $data['RT KTP'];
             }
             if($person->card_rw == null){
-                $person->card_rw = Str::upper($data['RW KTP']);
+                $person->card_rw = $data['RW KTP'];
             }
             $person->save();
             echo $person->id . ' | <br>';
@@ -111,10 +113,10 @@ class TriggerController extends Controller
 
                 $test->criteria = null;
 
-                $test->living_province = Str::upper($data['Provinsi Tinggal']);
-                $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
-                $test->living_district = Str::upper($data['Kecamatan Tinggal']);
-                $test->living_village = Str::upper($data['Desa Tinggal']);
+                $test->living_province = Str::lower($data['Provinsi Tinggal']);
+                $test->living_regency = Str::lower($data['Kota/Kabupaten Tinggal']);
+                $test->living_district = Str::lower($data['Kecamatan Tinggal']);
+                $test->living_village = Str::lower($data['Desa Tinggal']);
                 $test->living_street = null;
                 $test->living_rt = null;
                 $test->living_rw = null;
@@ -140,7 +142,7 @@ class TriggerController extends Controller
                 if($data['Hasil 1'] != 'SWAB'){
                     $result = new Result();
                     $result->test_id = $test->id;
-                    $result->value = $data['Hasil 1'];
+                    $result->value = Str::lower($data['Hasil 1']);
 
                     if($data['Tanggal Hasil 1'] != null){
                         $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 1']);
@@ -178,10 +180,10 @@ class TriggerController extends Controller
 
                     $test->criteria = null;
 
-                    $test->living_province = Str::upper($data['Provinsi Tinggal']);
-                    $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
-                    $test->living_district = Str::upper($data['Kecamatan Tinggal']);
-                    $test->living_village = Str::upper($data['Desa Tinggal']);
+                    $test->living_province = Str::lower($data['Provinsi Tinggal']);
+                    $test->living_regency = Str::lower($data['Kota/Kabupaten Tinggal']);
+                    $test->living_district = Str::lower($data['Kecamatan Tinggal']);
+                    $test->living_village = Str::lower($data['Desa Tinggal']);
                     $test->living_street = null;
                     $test->living_rt = null;
                     $test->living_rw = null;
@@ -207,7 +209,7 @@ class TriggerController extends Controller
                     if($data['Hasil 2'] != 'SWAB'){
                         $result = new Result();
                         $result->test_id = $test->id;
-                        $result->value = $data['Hasil 2'];
+                        $result->value = Str::lower($data['Hasil 2']);
 
                         if($data['Tanggal Hasil 2'] != null){
                             $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 2']);
@@ -246,10 +248,10 @@ class TriggerController extends Controller
 
                     $test->criteria = null;
 
-                    $test->living_province = Str::upper($data['Provinsi Tinggal']);
-                    $test->living_regency = Str::upper($data['Kota/Kabupaten Tinggal']);
-                    $test->living_district = Str::upper($data['Kecamatan Tinggal']);
-                    $test->living_village = Str::upper($data['Desa Tinggal']);
+                    $test->living_province = Str::lower($data['Provinsi Tinggal']);
+                    $test->living_regency = Str::lower($data['Kota/Kabupaten Tinggal']);
+                    $test->living_district = Str::lower($data['Kecamatan Tinggal']);
+                    $test->living_village = Str::lower($data['Desa Tinggal']);
                     $test->living_street = null;
                     $test->living_rt = null;
                     $test->living_rw = null;
@@ -275,7 +277,7 @@ class TriggerController extends Controller
                     if($data['Hasil 3'] != 'SWAB'){
                         $result = new Result();
                         $result->test_id = $test->id;
-                        $result->value = $data['Hasil 3'];
+                        $result->value = Str::lower($data['Hasil 3']);
 
                         if($data['Tanggal Hasil 3'] != null){
                             $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 3']);

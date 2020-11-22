@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
             'role' => '2'
         ]);
 
+        //! PE Account
         User::create([
             'name' => 'Heri Dermawan',
             'email' => 'heri.dermawan@dinkesmelawi.com',

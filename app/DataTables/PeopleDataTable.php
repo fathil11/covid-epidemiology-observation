@@ -11,7 +11,6 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-use function PHPSTORM_META\type;
 
 class PeopleDataTable extends DataTable
 {
@@ -70,8 +69,7 @@ class PeopleDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->responsive(true)
-                    ->dom('lfrtip')
-                    ->orderBy(3, 'desc');
+                    ->dom('lfrtip');
     }
 
     /**
@@ -90,9 +88,8 @@ class PeopleDataTable extends DataTable
             Column::make('latestTest')
                 ->title('Tanggal Terakhir SWAB')
                 ->name('latestTest')
-                ->orderable(false)
+                ->orderable(true)
                 ->searchable(false)
-                ->type('date-eu')
                 ->addClass('text-center')
                 ->responsivePriority(2),
             Column::make('nik')

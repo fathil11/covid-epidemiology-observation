@@ -2,8 +2,8 @@ import * as ListFun from './script-select';
 import * as DateFun from './script-date';
 import * as ValidateFun from './script-validation';
 import * as PeFun from './script-pe';
-import 'datatables.net-bs4';
-
+import Chart from 'chart.js';
+require('chart.js')
 
 const works = require('../data/work-list.json');
 const countries = require('../data/country-list.json');
@@ -22,6 +22,7 @@ $(function () {
     //*PE Script
     //--PE Validation
     ValidateFun.createPeValidationInit()
+    ListFun.listInit(['Normal', 'Cito'], '#swab_priorities');
     ListFun.listInit(['Nasofaring', 'Orofaring', 'Nasofaring-Orofaring'], '#swab_types');
     ListFun.listInit(['Sintang', 'Pontianak'], '#swab_locations');
 
@@ -98,14 +99,5 @@ $(function () {
         }, 2300)
 
     })
-
-    //*Datatable
-    $('#pe').DataTable({
-        responsive: true,
-        language: {
-            search: "Cari :",
-            lengthMenu: "Tampilkan_MENU_entri",
-        },
-    });
 
 })

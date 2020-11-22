@@ -183,6 +183,7 @@ class RegistrationController extends Controller
         $test->person_id = $person->id;
 
         //-----Test & Type
+        $test->cito = $request->swab_priority == 'Cito';
         $test->test = "swab";
         $test->location = Str::lower($request->swab_location);
         $test->type = Str::lower($request->swab_type);

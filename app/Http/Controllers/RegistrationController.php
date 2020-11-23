@@ -271,24 +271,30 @@ class RegistrationController extends Controller
             $epidemiology_hospital->status = Str::lower($request->hospital_status);
             $epidemiology_hospital->name_histories = Str::upper($request->hospital_name_history);
 
-            foreach ($request->hospital_additions as $value) {
-                switch ($value) {
-                    case 'icu':
-                        $epidemiology_hospital->icu = true;
-                    break;
-                    case 'intubation':
-                        $epidemiology_hospital->intubation = true;
-                    break;
-                    case 'emco':
-                        $epidemiology_hospital->emco = true;
-                    break;
+            if($request->hospital_additions != null){
+                foreach ($request->hospital_additions as $value) {
+                    switch ($value) {
+                        case 'icu':
+                            $epidemiology_hospital->icu = true;
+                        break;
+                        case 'intubation':
+                            $epidemiology_hospital->intubation = true;
+                        break;
+                        case 'emco':
+                            $epidemiology_hospital->emco = true;
+                        break;
 
-                    default:
-                        $epidemiology_hospital->icu = false;
-                        $epidemiology_hospital->intubation = false;
-                        $epidemiology_hospital->emco = false;
-                    break;
+                        default:
+                            $epidemiology_hospital->icu = false;
+                            $epidemiology_hospital->intubation = false;
+                            $epidemiology_hospital->emco = false;
+                        break;
+                    }
                 }
+            }else{
+                $epidemiology_hospital->icu = false;
+                $epidemiology_hospital->intubation = false;
+                $epidemiology_hospital->emco = false;
             }
 
             $epidemiology_hospital->save();

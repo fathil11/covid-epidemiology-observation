@@ -10,6 +10,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use App\Person;
+use Carbon\Carbon;
 
 class TestDataTable extends DataTable
 {
@@ -37,11 +38,22 @@ class TestDataTable extends DataTable
 
                 return '';
             })
+            ->addColumn('created_at_print', function(Test $test){
+                return $test->created_at->isoFormat('DD MMMM Y');
+            })
+            ->addColumn('created_at_display', function(Test $test){
+                return [
+                    'format' => $test->created_at->isoFormat('DD MMMM Y'),
+                    'timestamp' => $test->created_at->timestamp,
+                ];
+            })
+
+            //* PERSON SECTION
             ->addColumn('person.name', function(Test $test){
                 return $test->person->name;
             })
-            ->addColumn('person.nik_modified', function(Test $test){
-                return "`" . $test->person->nik;
+            ->editColumn('person.nik', function(Test $test){
+                return $test->person->nik != null ? "'" . $test->person->nik : '';
             })
             ->editColumn('person.name_modified', function(Test $test){
                 return '<b>' . Str::title($test->person->name) . "</b><br>{$test->person->nik}";
@@ -49,14 +61,13 @@ class TestDataTable extends DataTable
             ->editColumn('person.gender', function(Test $test){
                 return $test->person->gender == 'm' ? 'Laki-laki' : 'Perempuan';
             })
-            ->addColumn('created_at_print', function($result){
-                    return $result->created_at->isoFormat('DD MMMM Y');
+            ->editColumn('person.birth_at', function(Test $test){
+                return $test->person->birth_at != null ? $test->person->birth_at->isoFormat('DD MMMM Y') : '';
             })
-            ->addColumn('created_at_display', function($result){
-                return [
-                    'format' => $result->created_at->isoFormat('DD MMMM Y'),
-                    'timestamp' => $result->created_at->timestamp,
-                ];
+
+            //* USER SECTION
+            ->addColumn('user.instance', function(Test $test){
+                return $test->user->instance;
             })
             ->rawColumns(['person.name_modified', 'action']);
     }
@@ -69,7 +80,7 @@ class TestDataTable extends DataTable
      */
     public function query()
     {
-        $model = Test::whereNotNull('code')->with('person');
+        $model = Test::whereNotNull('code')->with(['person', 'user']);
         return $model->newQuery();
     }
 
@@ -86,10 +97,11 @@ class TestDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Blfrtip')
                     ->responsive(true)
-                    // ->orderBy(4, 'desc')
+                    ->orderBy(13, 'desc')
                     ->buttons(
                         Button::make('excel')
-                            ->text('Download Excel'),
+                        ->text('Download Excel')
+                        ->customize(''),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload'),
@@ -104,37 +116,75 @@ class TestDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('person.name')
-                ->title('Nama')
-                ->visible(false),
-            Column::make('person.nik_modified')
-                ->name('person.nik')
-                ->title('NIK')
-                ->type('string')
-                ->visible(false),
             Column::make('person.name_modified')
                 ->name('person.name')
                 ->exportable(false)
                 ->printable(false)
                 ->title('Nama (NIK)'),
+            Column::make('person.name')
+                ->title('Nama')
+                ->visible(false),
+            Column::make('person.nik')
+                ->name('person.nik')
+                ->title('NIK')
+                ->visible(false),
+            Column::make('person.phone')
+                ->name('person.phone')
+                ->title('Nomor HP')
+                ->visible(false),
             Column::make('person.gender')
                 ->title('Jenis Kelamin'),
-            Column::make('created_at_print')
-                ->title('Tanggal SWAB')
+            Column::make('person.birth_at')
+                ->title('Tanggal Lahir')
+                ->visible(false),
+            Column::make('living_province')
+                ->title('Provinsi')
+                ->visible(false),
+            Column::make('living_regency')
+                ->title('Kota/Kabupaten')
+                ->visible(false),
+            Column::make('living_district')
+                ->title('Kecamatan')
+                ->visible(false),
+            Column::make('living_village')
+                ->title('Desa')
+                ->visible(false),
+            Column::make('living_street')
+                ->title('Alamat')
+                ->visible(false),
+            Column::make('living_rt')
+                ->title('RT')
+                ->visible(false),
+            Column::make('living_rw')
+                ->title('RW')
                 ->visible(false),
             Column::make('created_at_display')
                 ->title('Tanggal SWAB')
                 ->name('created_at')
                 ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp', "show" => 'created_at'])
-                ->printable(false)
-                ->exportable(false)
                 ->orderable(true)
-                ->searchable(true),
+                ->searchable(true)
+                ->printable(false)
+                ->exportable(false),
+            Column::make('created_at_print')
+                ->title('Tanggal SWAB')
+                ->visible(false),
+
+            Column::make('type')
+                ->title('Jenis SWAB')
+                ->visible(false),
+            Column::make('user.instance')
+                ->title('Asal Sampel')
+                ->visible(false),
+            Column::make('criteria')
+                ->title('Alasan SWAB')
+                ->visible(false),
+
             Column::computed('action')
                 ->title('Aksi')
+                ->addClass('text-center')
                 ->exportable(false)
-                ->printable(false)
-                ->addClass('text-center'),
+                ->printable(false),
         ];
     }
 

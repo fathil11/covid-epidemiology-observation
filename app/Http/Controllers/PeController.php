@@ -29,6 +29,8 @@ class PeController extends Controller
         $pe = Test::where('code', $code)->firstOrFail();
 
         $document = new TemplateProcessor('document-layouts/pe.docx');
+        // dd(asset('storage/id_cards/' . $pe->person->card_path));
+        $document->setImageValue('id_card', asset('storage/id_cards/' . $pe->person->card_path));
 
         $document->setValue('tube_code', $pe->tube_code);
         $document->setValue('fasyankes', $pe->user->instance);

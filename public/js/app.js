@@ -109538,8 +109538,8 @@ $(function () {
   //--PE Validation
 
   _script_validation__WEBPACK_IMPORTED_MODULE_2__["createPeValidationInit"]();
-  _script_select__WEBPACK_IMPORTED_MODULE_0__["listInit"](['Normal', 'Cito'], '#swab_priorities');
   _script_select__WEBPACK_IMPORTED_MODULE_0__["listInit"](['Nasofaring', 'Orofaring', 'Nasofaring-Orofaring'], '#swab_types');
+  _script_select__WEBPACK_IMPORTED_MODULE_0__["listInit"](['Normal', 'Cito'], '#swab_priorities');
   _script_select__WEBPACK_IMPORTED_MODULE_0__["listInit"](['Sintang', 'Pontianak'], '#swab_locations'); //--Full Location Living Init
 
   _script_select__WEBPACK_IMPORTED_MODULE_0__["fullLocationListInit"]('living'); //--NIK Check

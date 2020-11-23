@@ -22,8 +22,8 @@ $(function () {
     //*PE Script
     //--PE Validation
     ValidateFun.createPeValidationInit()
-    ListFun.listInit(['Normal', 'Cito'], '#swab_priorities');
     ListFun.listInit(['Nasofaring', 'Orofaring', 'Nasofaring-Orofaring'], '#swab_types');
+    ListFun.listInit(['Normal', 'Cito'], '#swab_priorities');
     ListFun.listInit(['Sintang', 'Pontianak'], '#swab_locations');
 
     //--Full Location Living Init

@@ -116,6 +116,9 @@ class TestDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('tube_code')
+                ->title('Nomor Tabung')
+                ->visible(false),
             Column::make('person.name_modified')
                 ->name('person.name')
                 ->exportable(false)

@@ -36,7 +36,7 @@ class PublicController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('layouts.mail-result', $data);
-        return $pdf->stream('Hasil SWAB' . $test->person->name . '.pdf');
+        return $pdf->stream('Hasil SWAB ' . $test->person->name . '.pdf');
     }
 
 

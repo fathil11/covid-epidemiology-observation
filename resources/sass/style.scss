@@ -37,7 +37,7 @@
 }
 
 .text-rainbow {
-    animation: effect1 1s linear infinite;
+    // animation: effect1 1s linear infinite;
 }
 
 #pe_wrapper {
@@ -49,19 +49,19 @@
     margin-left: 0;
 }
 
-@keyframes effect1 {
-    0% {
-        color: white;
-    }
+// @keyframes effect1 {
+//     0% {
+//         color: white;
+//     }
 
-    50% {
-        color: blue;
-    }
+//     50% {
+//         color: blue;
+//     }
 
-    100% {
-        color: red;
-    }
-}
+//     100% {
+//         color: red;
+//     }
+// }
 
 #qrcode path {
     fill: #42B168;
@@ -69,22 +69,22 @@
 
 #qrcode path:last-child {
     stroke: white;
-    animation: effect2 1s linear infinite;
+    // animation: effect2 1s linear infinite;
 }
 
-@keyframes effect2 {
-    0% {
-        stroke: white;
-    }
+// @keyframes effect2 {
+//     0% {
+//         stroke: white;
+//     }
 
-    50% {
-        stroke: blue;
-    }
+//     50% {
+//         stroke: blue;
+//     }
 
-    100% {
-        stroke: red;
-    }
-}
+//     100% {
+//         stroke: red;
+//     }
+// }
 
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td.dtr-control:before,
 table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th.dtr-control:before {

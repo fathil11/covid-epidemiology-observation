@@ -177,7 +177,6 @@ class TestDataTable extends DataTable
             Column::make('created_at_print')
                 ->title('Tanggal SWAB')
                 ->visible(false),
-
             Column::make('type')
                 ->title('Jenis SWAB')
                 ->visible(false),

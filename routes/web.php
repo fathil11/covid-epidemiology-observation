@@ -59,7 +59,8 @@ Route::group(['middleware' => 'statistic', 'prefix' => 'statistik'], function ()
     Route::get('negatif', 'StatisticController@showNegativePeople')->name('statistic.negative');
 });
 
-Route::get('hasil/{code}', 'PublicController@showResult');
+Route::get('hasil/{code}', 'PublicController@showResult')->name('public.result');
+Route::get('hasil/{code}/download-surat', 'PublicController@downloadResult')->name('public.result.mail.download');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();

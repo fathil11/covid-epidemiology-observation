@@ -39,17 +39,27 @@
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Nama</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-                                    <td><p class="h5"><b>Fathil Arham</b></p></td>
+                                    <td><p class="h5"><b>{{ Str::title($test->person->name) }}</b></p></td>
                                 </tr>
                                 <tr>
-                                    <td class="pr-md-4 pr-1"><p class="h5">Umur</p></td>
+                                    <td class="pr-md-4 pr-1"><p class="h5">Tanggal Lahir</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-                                    <td><p class="h5"><b>20 tahun</b></p></td>
+                                    <td><p class="h5"><b>{{ $test->person->birth_at != null ? $test->person->birth_at->isoFormat('DD MMMM Y') : '-'}}</b></p></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-md-4 pr-1"><p class="h5">Alamat</p></td>
+                                    <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
+                                    <td><p class="h5"><b>{{ $test->living_village .', '. $test->living_district . ', ' . $test->living_regency}}</b></p></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-md-4 pr-1"><p class="h5">Tanggal Keluar Hasil</p></td>
+                                    <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
+                                    <td><p class="h5"><b>{{ $test->result != null ? $test->result->created_at->isoFormat('DD MMMM Y') : '-'}}</b></p></td>
                                 </tr>
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Hasil SWAB</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
-                                    <td><p class="h5"><b>Negatif</b></p></td>
+                                    <td><p class="h5"><b>{{ $test->result != null ? Str::title($test->result->value) : 'Belum keluar hasil' }}</b></p></td>
                                 </tr>
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Penanggung Jawab</p></td>
@@ -59,10 +69,15 @@
                             </table>
                         </div>
                         <hr>
+
                         <div class="row">
-                            <div class="col mt-1 mx-5 px-5">
-                                <div class="" id="qrcode"></div>
+                            <div class="col-md-12 mt-1 px-0 px-md-15 px-15" id="qrcode" data-link="{{ route('public.result', $test->code) }}">
                             </div>
+                            @if ($test->result != null)
+                            <div class="col-md-12 mt-3">
+                                <a href="{{ route('public.result.mail.download', $test->code) }}" class="btn btn-outline-light btn-block">Download Surat Keterangan</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
 
@@ -72,10 +87,11 @@
         </div>
     </div>
 
-    <audio id="bgsound1">
+    {{-- <audio id="bgsound1">
         <source src="/sounds/robbert.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-    </audio>
+    </audio> --}}
     @include('sweetalert::alert')
+
 </body>
 </html>

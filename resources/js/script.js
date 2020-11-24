@@ -79,7 +79,7 @@ $(function () {
 
 
     //*Result Script
-    QRCode.toString("{{ route('hasil') }}", {
+    QRCode.toString($('#qrcode').data('link'), {
         margin: 0
     }, function (err, string) {
         $('#qrcode').html(string)
@@ -89,14 +89,14 @@ $(function () {
 
     $('#btn-show-result').on('click', function () {
         $('#btn-show-result').hide()
-        var audio = document.getElementById("bgsound1");
-        audio.play()
+        // var audio = document.getElementById("bgsound1");
+        // audio.play()
         $('#result').after(`<h5 id="wait">Mohon menunggu</h5>`);
         setTimeout(function () {
             $('#wait').hide();
             $('#result').show();
 
-        }, 2300)
+        }, 100)
 
     })
 

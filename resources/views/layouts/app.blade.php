@@ -39,6 +39,11 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    @access('admin')
+                    <li class="nav-item {{ Request::url() == route('admin.result.all') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.result.all') }}">Daftar Hasil</a>
+                    </li>
+                    @endaccess
 
                     @access('registration')
                     <li class="nav-item {{ Request::url() == route('registration.person.create') ? 'active' : '' }}">

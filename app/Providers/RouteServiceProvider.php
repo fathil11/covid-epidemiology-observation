@@ -34,8 +34,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         Blade::if('access', function ($parameter) {
             $roles = [
-                'lab' => ['isAdmin', 'isLab'],
-                'registration' => ['isAdmin', 'isPe'],
+                'admin' => ['isAdmin'],
+                'lab' => ['isLab'],
+                'registration' => ['isPe'],
                 'statistic' => ['isAdmin', 'isReviewer'],
             ];
 

@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('pe', 'AdminController@showPe')->name('admin.pe.index');
+    Route::get('hasil', 'AdminController@showAllResults')->name('admin.result.all');
 });
 
 Route::group(['middleware' => 'lab', 'prefix' => 'lab'], function () {

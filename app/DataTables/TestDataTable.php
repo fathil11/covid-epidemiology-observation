@@ -38,6 +38,11 @@ class TestDataTable extends DataTable
 
                 return '';
             })
+
+            //* TEST SECTION
+            ->editColumn('cito', function(Test $test){
+                return $test->cito ? 'CITO' : '';
+            })
             ->addColumn('created_at_print', function(Test $test){
                 return $test->created_at->isoFormat('DD MMMM Y');
             })
@@ -97,7 +102,7 @@ class TestDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Blfrtip')
                     ->responsive(true)
-                    ->orderBy(13, 'desc')
+                    ->orderBy(14, 'desc')
                     ->buttons(
                         Button::make('excel')
                         ->text('Download Excel')
@@ -164,7 +169,7 @@ class TestDataTable extends DataTable
             Column::make('created_at_display')
                 ->title('Tanggal SWAB')
                 ->name('created_at')
-                ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp', "show" => 'created_at'])
+                ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
                 ->orderable(true)
                 ->searchable(true)
                 ->printable(false)
@@ -182,7 +187,9 @@ class TestDataTable extends DataTable
             Column::make('criteria')
                 ->title('Alasan SWAB')
                 ->visible(false),
-
+            Column::make('cito')
+                ->title('Prioritas')
+                ->visible(false),
             Column::computed('action')
                 ->title('Aksi')
                 ->addClass('text-center')

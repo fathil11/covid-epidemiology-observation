@@ -100,8 +100,11 @@ class PeController extends Controller
             switch ($test->type) {
                 case 'Nasofaring':
                     $document->setValue('np_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('np_place', $test->location);
+                    // ! TEMPORARY
+                    $document->setValue('np_place', 'Labkesda');
+                    // $document->setValue('np_place', $test->location);
                     $document->setValue('np_result', $test->result != null ? $test->result->value : '');
+
                     $document->setValue('op_at', '');
                     $document->setValue('op_place', '');
                     $document->setValue('op_result', '');
@@ -111,17 +114,25 @@ class PeController extends Controller
                     $document->setValue('np_at', '');
                     $document->setValue('np_place', '');
                     $document->setValue('np_result', '');
+
                     $document->setValue('op_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('op_place', $test->location);
+                    // ! TEMPORARY
+                    $document->setValue('op_place', 'Labkesda');
+                    // $document->setValue('op_place', $test->location);
                     $document->setValue('op_result', $test->result != null ? $test->result->value : '');
                 break;
 
                 case 'Nasofaring-Orofaring':
                     $document->setValue('np_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('np_place', $test->location);
+                    // ! TEMPORARY
+                    $document->setValue('np_place', 'Labkesda');
+                    // $document->setValue('np_place', $test->location);
                     $document->setValue('np_result', $test->result != null ? $test->result->value : '');
+
                     $document->setValue('op_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('op_place', $test->location);
+                    // ! TEMPORARY
+                    $document->setValue('op_place', 'Labkesda');
+                    // $document->setValue('op_place', $test->location);
                     $document->setValue('op_result', $test->result != null ? $test->result->value : '');
                 break;
                 default:
@@ -132,9 +143,14 @@ class PeController extends Controller
         $test = $person_tests[$person_tests->count()-1];
         switch ($test->type) {
             case 'Nasofaring':
-                $document->setValue('np2_at', $test->created_at->format('m/d/Y'));
-                $document->setValue('np2_place', $test->location);
+                // ! TEMPORARY
+                $document->setValue('np2_at', '');
+                // $document->setValue('np2_at', $test->created_at->format('m/d/Y'));
+                // ! TEMPORARY
+                $document->setValue('np2_place', 'Labkesda');
+                // $document->setValue('np2_place', $test->location);
                 $document->setValue('np2_result', $test->result != null ? $test->result->value : '');
+
                 $document->setValue('op2_at', '');
                 $document->setValue('op2_place', '');
                 $document->setValue('op2_result', '');
@@ -144,17 +160,31 @@ class PeController extends Controller
                 $document->setValue('np2_at', '');
                 $document->setValue('np2_place', '');
                 $document->setValue('np2_result', '');
-                $document->setValue('op2_at', $test->created_at->format('m/d/Y'));
-                $document->setValue('op2_place', $test->location);
+
+                // ! TEMPORARY
+                $document->setValue('op2_at', '');
+                // $document->setValue('op2_at', $test->created_at->format('m/d/Y'));
+                // ! TEMPORARY
+                $document->setValue('op2_place', 'Labkesda');
+                // $document->setValue('op2_place', $test->location);
                 $document->setValue('op2_result', $test->result != null ? $test->result->value : '');
                 break;
 
             case 'Nasofaring-Orofaring':
-                $document->setValue('np2_at', $test->created_at->format('m/d/Y'));
-                $document->setValue('np2_place', $test->location);
+                // ! TEMPORARY
+                $document->setValue('np2_at', '');
+                // $document->setValue('np2_at', $test->created_at->format('m/d/Y'));
+                // ! TEMPORARY
+                $document->setValue('np2_place', 'Labkesda');
+                // $document->setValue('np2_place', $test->location);
                 $document->setValue('np2_result', $test->result != null ? $test->result->value : '');
-                $document->setValue('op2_at', $test->created_at->format('m/d/Y'));
-                $document->setValue('op2_place', $test->location);
+
+                // ! TEMPORARY
+                $document->setValue('op2_at', '');
+                // $document->setValue('op2_at', $test->created_at->format('m/d/Y'));
+                // ! TEMPORARY
+                $document->setValue('op2_place', 'Labkesda');
+                // $document->setValue('op2_place', $test->location);
                 $document->setValue('op2_result', $test->result != null ? $test->result->value : '');
                 break;
             default:
@@ -164,9 +194,14 @@ class PeController extends Controller
             $test = $person_tests->first();
             switch ($test->type) {
                 case 'Nasofaring':
-                    $document->setValue('np_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('np_place', $test->location);
+                    // ! TEMPORARY
+                    $document->setValue('np_at', '');
+                    // $document->setValue('np_at', $test->created_at->format('m/d/Y'));
+                    // ! TEMPORARY
+                    $document->setValue('np_place', 'Labkesda');
+                    // $document->setValue('np_place', $test->location);
                     $document->setValue('np_result', $test->result != null ? $test->result->value : '');
+
                     $document->setValue('op_at', '');
                     $document->setValue('op_place', '');
                     $document->setValue('op_result', '');
@@ -176,22 +211,43 @@ class PeController extends Controller
                     $document->setValue('np_at', '');
                     $document->setValue('np_place', '');
                     $document->setValue('np_result', '');
-                    $document->setValue('op_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('op_place', $test->location);
+
+                    // ! TEMPORARY
+                    $document->setValue('op_at', '');
+                    // $document->setValue('op_at', $test->created_at->format('m/d/Y'));
+                    // ! TEMPORARY
+                    $document->setValue('op_place', 'Labkesda');
+                    // $document->setValue('op_place', $test->location);
                     $document->setValue('op_result', $test->result != null ? $test->result->value : '');
                 break;
 
                 case 'Nasofaring-Orofaring':
-                    $document->setValue('np_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('np_place', $test->location);
+                    // ! TEMPORARY
+                    $document->setValue('np_at', '');
+                    // $document->setValue('np_at', $test->created_at->format('m/d/Y'));
+                    // ! TEMPORARY
+                    $document->setValue('np_place', 'Labkesda');
+                    // $document->setValue('np_place', $test->location);
                     $document->setValue('np_result', $test->result != null ? $test->result->value : '');
-                    $document->setValue('op_at', $test->created_at->format('m/d/Y'));
-                    $document->setValue('op_place', $test->location);
+
+                    // ! TEMPORARY
+                    $document->setValue('op_at', '');
+                    // $document->setValue('op_at', $test->created_at->format('m/d/Y'));
+                    // ! TEMPORARY
+                    $document->setValue('op_place', 'Labkesda');
+                    // $document->setValue('op_place', $test->location);
                     $document->setValue('op_result', $test->result != null ? $test->result->value : '');
                     break;
                 default:
                     break;
             }
+
+            $document->setValue('np2_at', '');
+            $document->setValue('np2_place', '');
+            $document->setValue('np2_result', '');
+            $document->setValue('op2_at', '');
+            $document->setValue('op2_place', '');
+            $document->setValue('op2_result', '');
         }
 
         //! End of Test History Processing

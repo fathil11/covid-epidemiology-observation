@@ -136,6 +136,8 @@ class AdminTestDataTable extends DataTable
                 ->name('result.value'),
             Column::make('action')
                 ->title('Aksi')
+                ->exportable(false)
+                ->printable(false)
         ];
     }
 

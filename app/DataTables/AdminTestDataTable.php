@@ -68,7 +68,7 @@ class AdminTestDataTable extends DataTable
      */
     public function query()
     {
-        $model = Test::with(['person', 'result']);
+        $model = Test::with(['person', 'result'])->select('test.*');
         return $model->newQuery();
     }
 
@@ -103,8 +103,7 @@ class AdminTestDataTable extends DataTable
     {
         return [
             Column::make('id')
-                ->title('Id')
-                ->name('id'),
+                ->title('Id'),
             Column::make('person_name')
                 ->title('Nama')
                 ->name('person.name'),

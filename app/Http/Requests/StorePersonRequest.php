@@ -31,7 +31,7 @@ class StorePersonRequest extends FormRequest
             "id_card_file" => "required|mimes:jpeg,bmp,png,jpg",
             "birth_regency" => "required",
             "birth_at" => "required",
-            "parent_name" => "required",
+            "parent_name" => "nullable",
             "work" => "required",
             "work_instance" => "nullable",
             "card_province" => "required",

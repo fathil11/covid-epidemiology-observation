@@ -47,7 +47,7 @@ function createPersonValidationInit() {
                 required: true,
             },
             parent_name: {
-                required: true,
+                required: false,
                 letterswithbasicpunc: true,
                 minlength: 3,
                 maxlength: 70

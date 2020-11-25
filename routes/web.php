@@ -22,6 +22,7 @@ Route::get('trigger2', 'TriggerController@storeTestData');
 Route::get('trigger5', 'TriggerController@updateTestAt');
 Route::get('trigger6', 'TriggerController@updateAllEntitiesCase');
 Route::get('trigger7', 'TriggerController@updatePersonWork');
+Route::get('trigger8', 'TriggerController@personCheck');
 
 Route::get('/', function () {
     return redirect()->route('login');

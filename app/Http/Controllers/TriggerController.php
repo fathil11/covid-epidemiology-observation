@@ -353,4 +353,13 @@ class TriggerController extends Controller
             }
         }
     }
+
+    public function personCheck()
+    {
+        $people = Person::where('name', 'ANANDA CAHAYA MONALISA')->get();
+        dd($people);
+        // foreach ($people as $key => $person) {
+        //     dump(($key+1) .'. '. $person->name);
+        // }
+    }
 }

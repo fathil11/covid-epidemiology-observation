@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e13ceddd2c654a6518b5153d2240398a",
+    "content-hash": "d490613aaf258180ca20893294dd10c9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -557,6 +557,34 @@
                 "validator"
             ],
             "time": "2020-09-26T15:48:38+00:00"
+        },
+        {
+            "name": "fathilarhm/google-sheets-collection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fathil11/google-sheets-collection.git",
+                "reference": "ae00e58d3f1857554d0627c675c575250659ab11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fathil11/google-sheets-collection/zipball/ae00e58d3f1857554d0627c675c575250659ab11",
+                "reference": "ae00e58d3f1857554d0627c675c575250659ab11",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fathil Arham",
+                    "email": "fathil.arham@gmail.com"
+                }
+            ],
+            "description": "A simple Laravel packages to create a beautiful data collection from the Google Spreadsheet.",
+            "time": "2020-11-12T06:58:21+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -8578,7 +8606,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "fathilarhm/google-sheets-collection": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

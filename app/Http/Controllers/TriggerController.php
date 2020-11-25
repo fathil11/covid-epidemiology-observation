@@ -362,4 +362,23 @@ class TriggerController extends Controller
         //     dump(($key+1) .'. '. $person->name);
         // }
     }
+
+    // public function countPerson()
+    // {
+    //     $tests = Test::whereDate('created_at', Carbon::create(2020,11,13))->get();
+    //     foreach($tests as $test){
+    //         $personId = $test->person_id;
+
+    //         if($test->result != null) {
+    //             $result = $test->result;
+    //             $result->delete();
+    //         }
+
+    //         if($test->delete()) {
+    //             $person = Person::find($personId);
+    //             $person->delete();
+    //         }
+    //     }
+
+    // }
 }

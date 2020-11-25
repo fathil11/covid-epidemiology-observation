@@ -15,19 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('trigger', 'TriggerController@storePeopleData');
-Route::get('trigger2', 'TriggerController@storeTestData');
-Route::get('trigger3', 'TriggerController@storeSecondTestData');
-Route::get('trigger4', 'TriggerController@storeThirthTestData');
-Route::get('trigger5', 'TriggerController@showStat');
+// Route::get('trigger', 'TriggerController@storePeopleData');
+// Route::get('trigger2', 'TriggerController@storeTestData');
+// Route::get('trigger3', 'TriggerController@storeSecondTestData');
+// Route::get('trigger4', 'TriggerController@storeThirthTestData');
+Route::get('trigger5', 'TriggerController@updateTestAt');
+Route::get('trigger6', 'TriggerController@updateAllEntitiesCase');
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
-    Route::get('pe', 'AdminController@showPe')->name('admin.pe.index');
+    // Route::get('pe', 'AdminController@showPe')->name('admin.pe.index');
     Route::get('hasil', 'AdminController@showAllResults')->name('admin.result.all');
+    Route::get('pe', 'AdminController@showAllPe')->name('admin.pe.all');
+    Route::get('pe/{code}/hasil/positif', 'AdminController@positiveTestResult')->name('admin.pe.result.positive');
+    Route::get('pe/{code}/hasil/negatif', 'AdminController@negativeTestResult')->name('admin.pe.result.negative');
+    Route::get('pe/{code}/hasil/hapus', 'AdminController@deleteTestResult')->name('admin.pe.result.delete');
 });
 
 Route::group(['middleware' => 'lab', 'prefix' => 'lab'], function () {

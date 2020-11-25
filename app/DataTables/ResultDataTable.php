@@ -31,9 +31,9 @@ class ResultDataTable extends DataTable
             ->addColumn('test.person', function($result){
                 return $result->test->person;
             })
-            ->editColumn('test.person.name', function($result){
-                return Str::title($result->test->person->name);
-            })
+            // ->editColumn('test.person.name', function($result){
+            //     return Str::title($result->test->person->name);
+            // })
             ->editColumn('created_at', function($result){
                 return [
                     'format' => $result->created_at->isoFormat('DD MMMM Y'),

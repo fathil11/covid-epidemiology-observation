@@ -12,6 +12,10 @@ class Test extends Model
 {
     use SoftDeletes;
 
+    protected $dates = [
+        'test_at',
+    ];
+
     protected $guarded = [];
 
     public function person()

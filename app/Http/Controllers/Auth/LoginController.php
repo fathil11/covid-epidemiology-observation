@@ -32,7 +32,7 @@ class LoginController extends Controller
     public function redirectTo()
     {
         $settings = [
-            'isAdmin' => route('registration.person.create'),
+            'isAdmin' => route('admin.pe.all'),
             'isLab' => route('lab.pe'),
             'isPe' => route('registration.person.create'),
             'isDoctor' => route('registration.person.create'),

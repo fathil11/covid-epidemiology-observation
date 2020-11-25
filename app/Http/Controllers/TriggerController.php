@@ -304,4 +304,31 @@ class TriggerController extends Controller
 
     }
 
+    public function updateTestAt()
+    {
+        $tests = Test::all();
+        foreach ($tests as $key => $test) {
+            $test->test_at = $test->created_at;
+            $test->save();
+        }
+        dd('Success');
+    }
+
+    public function updateAllEntitiesCase()
+    {
+        $people = Person::all();
+        foreach ($people as $key => $person) {
+            $person->name = Str::upper($person->name);
+            $person->work = Str::lower($person->work);
+            $person->birth_regency = Str::lower($person->birth_regency);
+            $person->card_province = Str::lower($person->card_province);
+            $person->card_regency = Str::lower($person->card_regency);
+            $person->card_district = Str::lower($person->card_district);
+            $person->card_village = Str::lower($person->card_village);
+            $person->card_street = Str::upper($person->card_street);
+            $person->save();
+        }
+
+    }
+
 }

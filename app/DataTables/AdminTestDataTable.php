@@ -123,6 +123,14 @@ class AdminTestDataTable extends DataTable
             Column::make('person_gender')
                 ->title('Jenis Kelamin')
                 ->name('person.gender'),
+            Column::make('created_at_display')
+                ->title('Tanggal PE')
+                ->name('created_at')
+                ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
+                ->orderable(true)
+                ->searchable(true)
+                ->printable(false)
+                ->exportable(false),
             Column::make('test_at_display')
                 ->title('Tanggal SWAB')
                 ->name('test_at')

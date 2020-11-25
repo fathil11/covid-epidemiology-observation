@@ -31,22 +31,28 @@ class AdminTestDataTable extends DataTable
             })
 
             //* TEST SECTION
-            ->editColumn('test_at', function($test){
-                return $test->test_at->isoFormat('DD MMMM Y');
+            ->addColumn('created_at_display', function(Test $test){
+                return [
+                    'format' => $test->created_at->isoFormat('DD MMMM Y'),
+                    'timestamp' => $test->created_at->timestamp,
+                ];
             })
 
             //* RESULT SECTION
+            ->addColumn('result', function($test){
+                return $test->result;
+            })
             ->addColumn('result_value', function($test){
                 if($test->result != null){
                     return $test->result->value == 'negatif' ? 'Negatif' : 'Positif';
                 }
                 return '';
             })
-            ->addColumn('result_at', function($test){
-                if($test->result != null){
-                    return $test->result->created_at->isoFormat('DD MMMM Y');
-                }
-                return '';
+            ->addColumn('result_created_at_display', function(Test $test){
+                return [
+                    'format' => $test->result != null ? $test->result->created_at->isoFormat('DD MMMM Y') : '',
+                    'timestamp' => $test->result != null ? $test->result->created_at->timestamp : '',
+                ];
             })
             ->addColumn('action', function($test){
                 $positive_btn = '<a href="' . route('admin.pe.result.positive', $test->code) . '" class="btn btn-danger mr-2"><p class="mb-0">+</p></a>';
@@ -110,11 +116,22 @@ class AdminTestDataTable extends DataTable
             Column::make('person_gender')
                 ->title('Jenis Kelamin')
                 ->name('person.gender'),
-            Column::make('test_at')
-                ->title('Tanggal Tes'),
-            Column::make('result_at')
+            Column::make('created_at_display')
+                ->title('Tanggal SWAB')
+                ->name('created_at')
+                ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
+                ->orderable(true)
+                ->searchable(true)
+                ->printable(false)
+                ->exportable(false),
+            Column::make('result_created_at_display')
                 ->title('Tanggal Hasil')
-                ->name('result.created_at'),
+                ->name('result.created_at')
+                ->data(["_" => 'result_created_at_display.format', "sort" => 'result_created_at_display.timestamp'])
+                ->orderable(true)
+                ->searchable(true)
+                ->printable(false)
+                ->exportable(false),
             Column::make('result_value')
                 ->title('Hasil')
                 ->name('result.value'),

@@ -33,8 +33,8 @@ class AdminTestDataTable extends DataTable
             //* TEST SECTION
             ->addColumn('created_at_display', function(Test $test){
                 return [
-                    'format' => $test->created_at->isoFormat('DD MMMM Y'),
-                    'timestamp' => $test->created_at->timestamp,
+                    'format' => $test->test_at->isoFormat('DD MMMM Y'),
+                    'timestamp' => $test->test_at->timestamp,
                 ];
             })
 
@@ -117,7 +117,7 @@ class AdminTestDataTable extends DataTable
                 ->name('person.gender'),
             Column::make('created_at_display')
                 ->title('Tanggal SWAB')
-                ->name('created_at')
+                ->name('test_at')
                 ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
                 ->orderable(true)
                 ->searchable(true)

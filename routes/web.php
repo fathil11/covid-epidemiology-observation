@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('trigger', 'TriggerController@storePeopleData');
-// Route::get('trigger2', 'TriggerController@storeTestData');
+Route::get('trigger', 'TriggerController@storePeopleData');
+Route::get('trigger2', 'TriggerController@storeTestData');
 // Route::get('trigger3', 'TriggerController@storeSecondTestData');
 // Route::get('trigger4', 'TriggerController@storeThirthTestData');
 Route::get('trigger5', 'TriggerController@updateTestAt');
 Route::get('trigger6', 'TriggerController@updateAllEntitiesCase');
+Route::get('trigger7', 'TriggerController@updatePersonWork');
 
 Route::get('/', function () {
     return redirect()->route('login');

@@ -17,8 +17,11 @@ class TriggerController extends Controller
     public function storePeopleData() {
         $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1kMfESbeUvt05hO2e81g1HYOJnEqx00m-JFxaOUTLTJM/edit#gid=0')->get();
 
-        foreach ($datas as $data) {
-            $person = Person::find($data['No']);
+        $start_at = 1550-2;
+
+        foreach ($datas as $key => $data) {
+            if($key >= $start_at){
+                $person = Person::find($data['No']);
 
             if($person == null){
                 $person = new Person();
@@ -85,6 +88,8 @@ class TriggerController extends Controller
             }
             $person->save();
             echo $person->id . ' | <br>';
+            }
+
         }
 
         echo 'Success :)';
@@ -94,8 +99,10 @@ class TriggerController extends Controller
     {
         $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
 
+        $start_at = 1551-2;
+
         foreach($datas as $key => $data){
-            if($data['No'] != null){
+            if($data['No'] != null && $key>=$start_at){
                 $test = new Test();
 
                 // UUID
@@ -331,4 +338,19 @@ class TriggerController extends Controller
 
     }
 
+    public function updatePersonWork()
+    {
+        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1kMfESbeUvt05hO2e81g1HYOJnEqx00m-JFxaOUTLTJM/edit#gid=0')->get();
+
+        $start_at = 1458-2;
+        foreach ($datas as $key => $data) {
+            if($key >= $start_at){
+                $person = Person::find($data['No']);
+                dump($person->id);
+                $person->work = $data['PEKERJAAN'] != null ? Str::lower($data['PEKERJAAN']) : '';
+                dump($person->id . "|" . $person->name . "|" . $person->work);
+                $person->save();
+            }
+        }
+    }
 }

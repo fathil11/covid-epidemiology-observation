@@ -37,6 +37,12 @@ class AdminTestDataTable extends DataTable
                     'timestamp' => $test->created_at->timestamp,
                 ];
             })
+            ->addColumn('test_at_display', function(Test $test){
+                return [
+                    'format' => $test->test_at != null ? $test->test_at->isoFormat('DD MMMM Y') : '',
+                    'timestamp' => $test->test_at != null ? $test->test_at->timestamp : '',
+                ];
+            })
 
             //* RESULT SECTION
             ->addColumn('result', function($test){
@@ -107,6 +113,8 @@ class AdminTestDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('person_id')
+                ->title('ID Orang'),
             Column::make('id')
                 ->title('Id'),
             Column::make('person_name')
@@ -115,10 +123,10 @@ class AdminTestDataTable extends DataTable
             Column::make('person_gender')
                 ->title('Jenis Kelamin')
                 ->name('person.gender'),
-            Column::make('created_at_display')
+            Column::make('test_at_display')
                 ->title('Tanggal SWAB')
-                ->name('created_at')
-                ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
+                ->name('test_at')
+                ->data(["_" => 'test_at_display.format', "sort" => 'test_at_display.timestamp'])
                 ->orderable(true)
                 ->searchable(true)
                 ->printable(false)

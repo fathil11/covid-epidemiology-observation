@@ -54,9 +54,7 @@ class TestDataTable extends DataTable
             })
 
             //* PERSON SECTION
-            ->addColumn('person.name', function(Test $test){
-                return $test->person->name;
-            })
+
             ->editColumn('person.nik', function(Test $test){
                 return $test->person->nik != null ? "'" . $test->person->nik : '';
             })
@@ -167,7 +165,7 @@ class TestDataTable extends DataTable
                 ->title('RW')
                 ->visible(false),
             Column::make('created_at_display')
-                ->title('Tanggal SWAB')
+                ->title('Tanggal PE')
                 ->name('created_at')
                 ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
                 ->orderable(true)
@@ -175,7 +173,7 @@ class TestDataTable extends DataTable
                 ->printable(false)
                 ->exportable(false),
             Column::make('created_at_print')
-                ->title('Tanggal SWAB')
+                ->title('Tanggal PE')
                 ->visible(false),
             Column::make('type')
                 ->title('Jenis SWAB')

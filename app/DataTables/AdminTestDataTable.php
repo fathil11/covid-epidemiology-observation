@@ -23,8 +23,8 @@ class AdminTestDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             //* PERSON SECTION
-            ->addColumn('person_name', function($test){
-                return Str::title($test->person->name);
+            ->addColumn('person_display', function($test){
+                return '<b>' . Str::title($test->person->name) . "</b><br>{$test->person->nik}";
             })
             ->addColumn('person_gender', function($test){
                 return $test->person->gender == 'm' ? 'Laki-laki' : 'Perempuan';
@@ -69,7 +69,7 @@ class AdminTestDataTable extends DataTable
                 }
                 return $positive_btn . $negative_btn . $delete_btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'person_display']);
     }
 
     /**
@@ -113,11 +113,15 @@ class AdminTestDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('person_id')
-                ->title('ID Orang'),
-            Column::make('id')
-                ->title('Id'),
-            Column::make('person_name')
+            // Column::make('person_id')
+            //     ->title('ID Orang'),
+            // Column::make('id')
+            //     ->title('Id'),
+            Column::make('person.nik')
+                ->title('NIK')
+                ->name('person.nik')
+                ->visible(false),
+            Column::make('person_display')
                 ->title('Nama')
                 ->name('person.name'),
             Column::make('person_gender')

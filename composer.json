@@ -43,7 +43,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Fathilarhm\\": "vendor/fathilarhm/google-sheets-collection/src"
         },
         "classmap": [
             "database/seeds",

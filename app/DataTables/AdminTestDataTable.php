@@ -68,7 +68,7 @@ class AdminTestDataTable extends DataTable
      */
     public function query()
     {
-        $model = Test::with(['person', 'result'])->select('test.*');
+        $model = Test::with(['person', 'result'])->select('tests.*');
         return $model->newQuery();
     }
 

@@ -102,6 +102,9 @@ class AdminTestDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('id')
+                ->title('Id')
+                ->name('id'),
             Column::make('person_name')
                 ->title('Nama')
                 ->name('person.name'),

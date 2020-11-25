@@ -92,8 +92,7 @@ class AdminTestDataTable extends DataTable
                     ->dom('Blfrtip')
                     ->orderBy(0)
                     ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
+                        Button::make('excel'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')

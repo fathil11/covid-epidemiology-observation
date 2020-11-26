@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
             $roles = [
                 'admin' => ['isAdmin'],
                 'lab' => ['isLab'],
-                'registration' => ['isAdmin', 'isPe'],
+                'registration' => ['isPe'],
                 'statistic' => ['isAdmin', 'isReviewer'],
             ];
 

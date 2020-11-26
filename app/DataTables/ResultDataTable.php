@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Result;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -43,9 +44,29 @@ class ResultDataTable extends DataTable
                 ];
             })
 
+            ->addColumn('district_display', function($result){
+                return $result->test->living_district;
+            })
+
+            ->addColumn('village_display', function($result){
+                return $result->test->living_village;
+            })
+
             //* PERSON SECTION
             ->addColumn('name_display', function($result){
                 return '<b>' . Str::title($result->test->person->name) . "</b><br>{$result->test->person->nik}";
+            })
+
+            ->addColumn('gender_display', function($result){
+                return $result->test->person->gender == 'm' ? 'Laki-laki' : 'Perempuan';
+            })
+
+            ->addColumn('age_display', function($result){
+                return $result->test->person->birth_at != null ? Carbon::parse($result->test->person->birth_at)->age : '' ;
+            })
+
+            ->addColumn('phone_display', function($result){
+                return $result->test->person->phone != null ? $result->test->person->phone : '' ;
             })
 
             ->addColumn('action', function($result){
@@ -78,7 +99,13 @@ class ResultDataTable extends DataTable
                     ->setTableId('result-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('lfrtip')
+                    ->dom('Blfrtip')
+                    ->buttons([
+                        Button::make('excel')->text('Download Excel'),
+                        Button::make('print')->text('Cetak'),
+                        Button::make('reload')->text('Reload'),
+                        Button::make('reset')->text('Reset'),
+                    ])
                     ->orderBy(3, 'desc');
     }
 
@@ -94,8 +121,21 @@ class ResultDataTable extends DataTable
                 ->name('test.person.name')
                 ->title('Nama')
                 ->orderable(true),
-            Column::make('value')
-                ->title('Hasil'),
+
+            Column::make('gender_display')
+                ->name('test.person.gender')
+                ->title('Jenis Kelamin')
+                ->orderable(true),
+
+            Column::make('age_display')
+                ->name('test.person.birth_at')
+                ->title('Umur')
+                ->orderable(false),
+
+            Column::make('phone_display')
+                ->name('test.person.phone')
+                ->title('Nomor HP')
+                ->orderable(false),
 
             Column::make('test')
                 ->title('Tanggal Tes')
@@ -110,6 +150,17 @@ class ResultDataTable extends DataTable
                 ->data(["_" => 'created_at.format', "sort" => 'created_at.timestamp'])
                 ->orderable(true)
                 ->searchable(false),
+
+            Column::make('value')
+                ->title('Hasil'),
+
+            Column::make('district_display')
+                ->title('Kecamatan')
+                ->name('test.living_district'),
+
+            Column::make('village_display')
+                ->title('Desa')
+                ->name('test.living_village'),
 
             Column::make('action')
                 ->title('Aksi')

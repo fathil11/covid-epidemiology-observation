@@ -52,10 +52,8 @@ class StatisticController extends Controller
     {
         $date = Carbon::today()->subDays(7);
 
-        return Person::whereHas('tests', function($query) use ($date){
-            return $query->whereDate('created_at', '>=', $date)->whereHas('result', function($query){
-                return $query->where('value', 'Positif');
-            });
+        return Person::whereHas('tests.result', function($query) use ($date){
+            return $query->where('value', 'Positif')->whereDate('created_at', '>=', $date);
         })->get();
     }
 
@@ -73,10 +71,8 @@ class StatisticController extends Controller
     {
         $date = Carbon::today()->subDays(7);
 
-        return Person::whereHas('tests', function($query) use ($date){
-            return $query->whereDate('created_at', '>=', $date)->whereHas('result', function($query){
-                return $query->where('value', 'Negatif');
-            });
+        return Person::whereHas('tests.result', function($query) use ($date){
+            return $query->where('value', 'Negatif')->whereDate('created_at', '>=', $date);
         })->get();
     }
 

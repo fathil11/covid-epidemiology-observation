@@ -21,7 +21,7 @@
 
     {{-- Favico --}}
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
-    <title>E-SWAB</title>
+    <title>E-SWAB {{ Str::title($test->person->name) }} ({{ Str::upper($test->result->value) }})</title>
 </head>
 <body class="bg-primary login-page">
 

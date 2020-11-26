@@ -36,7 +36,11 @@ class ApiController extends Controller
 
     public function villages($districts)
     {
-        $district = District::where('name', $districts)->firstOrFail();
+        if($districts == 'BELIMBING'){
+            $district = District::find(6110040);
+        }else{
+            $district = District::where('name', $districts)->firstOrFail();
+        }
         return $district->villages;
     }
 

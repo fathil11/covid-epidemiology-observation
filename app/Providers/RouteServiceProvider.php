@@ -35,16 +35,16 @@ class RouteServiceProvider extends ServiceProvider
         Blade::if('access', function ($parameter) {
             $roles = [
                 'admin' => ['isAdmin'],
-                'lab' => ['isLab'],
-                'registration' => ['isAdmin', 'isPe'],
-                'statistic' => ['isAdmin', 'isReviewer'],
+                'lab' => [env('ADMIN_PE_DEBUG') ? 'isAdmin' : '','isLab'],
+                'registration' => [env('ADMIN_PE_DEBUG') ? 'isAdmin' : '', 'isPe'],
+                'statistic' => [env('ADMIN_REVIEWER_DEBUG') ? 'isAdmin' : '', 'isReviewer'],
             ];
 
             /** @var App\User */
             $user = Auth::user();
             $role = $roles[$parameter];
             foreach ($role as $value) {
-                if($user->{$value}()){
+                if($value != '' && $user->{$value}()){
                     return true;
                 }
             }

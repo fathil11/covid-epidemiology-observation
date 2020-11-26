@@ -60,6 +60,10 @@
                     <li class="nav-item {{ Request::url() == route('pe.index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('pe.index') }}">Daftar PE</a>
                     </li>
+
+                    <li class="nav-item {{ Request::url() == route('pe.presence.show') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('pe.presence.show') }}">Absensi PE</a>
+                    </li>
                     @endaccess
 
                     @access('lab')

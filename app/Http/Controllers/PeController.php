@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PePresenceDataTable;
 use App\DataTables\TestDataTable;
 use App\Test;
 use Carbon\Carbon;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeController extends Controller
 {
@@ -22,6 +24,39 @@ class PeController extends Controller
     {
         $pe = Test::where('code', $code)->firstOrFail();
         return view('registration.pe-view', compact('pe'));
+    }
+
+    public function showPresence(PePresenceDataTable $dataTable)
+    {
+        return $dataTable->render('pe.pe');
+    }
+
+    public function presence($code)
+    {
+        $test = Test::where('code', $code)->firstOrFail();
+        if($test->test_at != null){
+            return abort(404);
+        }
+
+        $test->test_at = Carbon::now();
+        $test->save();
+
+        Alert('Hore', 'Berhasil meng-absenkan pasien', 'success');
+        return redirect()->back();
+    }
+
+    public function deletePresence($code)
+    {
+        $test = Test::where('code', $code)->firstOrFail();
+        if($test->test_at == null){
+            return abort(404);
+        }
+
+        $test->test_at = null;
+        $test->save();
+
+        Alert('Hore', 'Berhasil menarik absen pasien', 'success');
+        return redirect()->back();
     }
 
     public function download($code)

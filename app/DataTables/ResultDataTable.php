@@ -36,12 +36,20 @@ class ResultDataTable extends DataTable
                 ];
             })
 
+            ->addColumn('created_at_print', function($result){
+                return $result->created_at->isoFormat('DD MMMM Y');
+            })
+
             //* TEST SECTION
             ->addColumn('test', function($result){
                 return [
                     'format' => $result->test->test_at != '' ? $result->test->test_at->isoFormat('DD MMMM Y') : '',
                     'timestamp' => $result->test->test_at != '' ? $result->test->test_at->timestamp : '',
                 ];
+            })
+
+            ->addColumn('test_at_print', function($result){
+                return $result->test->test_at != '' ? $result->test->test_at->isoFormat('DD MMMM Y') : '';
             })
 
             ->addColumn('district_display', function($result){
@@ -53,6 +61,10 @@ class ResultDataTable extends DataTable
             })
 
             //* PERSON SECTION
+            ->addColumn('name_print', function($result){
+                return Str::title($result->test->person->name);
+            })
+
             ->addColumn('name_display', function($result){
                 return '<b>' . Str::title($result->test->person->name) . "</b><br>{$result->test->person->nik}";
             })
@@ -118,9 +130,17 @@ class ResultDataTable extends DataTable
     {
         return [
             Column::make('name_display')
+                ->title('Nama')
+                ->name('test.person.name')
+                ->printable(false)
+                ->exportable(false)
+                ->orderable(true),
+
+            Column::make('name_print')
                 ->name('test.person.name')
                 ->title('Nama')
-                ->orderable(true),
+                ->visible(false)
+                ->orderable(false),
 
             Column::make('gender_display')
                 ->name('test.person.gender')
@@ -142,14 +162,26 @@ class ResultDataTable extends DataTable
                 ->name('test.test_at')
                 ->data(["_" => 'test.format', "sort" => 'test.timestamp'])
                 ->orderable(true)
-                ->searchable(false),
+                ->searchable(false)
+                ->printable(false)
+                ->exportable(false),
+
+            Column::make('test_at_print')
+                ->title('Tanggal Tes')
+                ->visible(false),
 
             Column::make('created_at')
                 ->title('Tanggal Keluar Hasil')
                 ->name('created_at')
                 ->data(["_" => 'created_at.format', "sort" => 'created_at.timestamp'])
                 ->orderable(true)
-                ->searchable(false),
+                ->searchable(false)
+                ->printable(false)
+                ->exportable(false),
+
+            Column::make('created_at_print')
+                ->title('Tanggal Keluar Hasil')
+                ->visible(false),
 
             Column::make('value')
                 ->title('Hasil'),
@@ -166,7 +198,8 @@ class ResultDataTable extends DataTable
                 ->title('Aksi')
                 ->orderable(false)
                 ->searchable(false)
-                ->printable(false),
+                ->printable(false)
+                ->exportable(false),
         ];
     }
 

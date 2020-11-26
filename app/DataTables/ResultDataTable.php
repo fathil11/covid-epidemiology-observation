@@ -22,29 +22,37 @@ class ResultDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+
+            //* RESULT SECTION
             ->editColumn('value', function($result){
                 return Str::title($result->value);
             })
-            ->addColumn('test', function($result){
-                return $result->test;
-            })
-            ->addColumn('test.person', function($result){
-                return $result->test->person;
-            })
-            // ->editColumn('test.person.name', function($result){
-            //     return Str::title($result->test->person->name);
-            // })
+
             ->editColumn('created_at', function($result){
                 return [
                     'format' => $result->created_at->isoFormat('DD MMMM Y'),
                     'timestamp' => $result->created_at->timestamp,
                 ];
             })
+
+            //* TEST SECTION
+            ->addColumn('test', function($result){
+                return [
+                    'format' => $result->test->test_at != '' ? $result->test->test_at->isoFormat('DD MMMM Y') : '',
+                    'timestamp' => $result->test->test_at != '' ? $result->test->test_at->timestamp : '',
+                ];
+            })
+
+            //* PERSON SECTION
+            ->addColumn('name_display', function($result){
+                return '<b>' . Str::title($result->test->person->name) . "</b><br>{$result->test->person->nik}";
+            })
+
             ->addColumn('action', function($result){
                 $mail_btn = '<a href="' . route('public.result', $result->test->code) . '" class="btn btn-success mr-2" target="_blank">Lihat Keterangan</a>';
                 return $mail_btn;
             })
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'name_display']);
     }
 
     /**
@@ -55,7 +63,7 @@ class ResultDataTable extends DataTable
      */
     public function query()
     {
-        $model = Result::with(['test', 'test.person']);
+        $model = Result::with(['test', 'test.person'])->select('results.*');
         return $model->newQuery();
     }
 
@@ -71,7 +79,7 @@ class ResultDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('lfrtip')
-                    ->orderBy(2);
+                    ->orderBy(3, 'desc');
     }
 
     /**
@@ -82,19 +90,32 @@ class ResultDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('test.person.name')
+            Column::make('name_display')
                 ->name('test.person.name')
-                ->title('Nama'),
+                ->title('Nama')
+                ->orderable(true),
             Column::make('value')
                 ->title('Hasil'),
-                Column::make('created_at')
-                ->title('Tanggal Keluar Hasil')
-                ->data(["_" => 'created_at.format', "sort" => 'created_at.timestamp'])
-                ->title('Tanggal SWAB')
+
+            Column::make('test')
+                ->title('Tanggal Tes')
+                ->name('test.test_at')
+                ->data(["_" => 'test.format', "sort" => 'test.timestamp'])
                 ->orderable(true)
                 ->searchable(false),
+
+            Column::make('created_at')
+                ->title('Tanggal Keluar Hasil')
+                ->name('created_at')
+                ->data(["_" => 'created_at.format', "sort" => 'created_at.timestamp'])
+                ->orderable(true)
+                ->searchable(false),
+
             Column::make('action')
-                ->title('Aksi'),
+                ->title('Aksi')
+                ->orderable(false)
+                ->searchable(false)
+                ->printable(false),
         ];
     }
 

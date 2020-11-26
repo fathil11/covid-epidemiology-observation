@@ -51,6 +51,13 @@
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
                                     <td><p class="h5"><b>{{ $test->living_village .', '. $test->living_district . ', ' . $test->living_regency}}</b></p></td>
                                 </tr>
+                                @if ($test->test_at != $test->result->created_at)
+                                <tr>
+                                    <td class="pr-md-4 pr-1"><p class="h5">Tanggal Tes SWAB</p></td>
+                                    <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>
+                                    <td><p class="h5"><b>{{ $test->test_at != null ? $test->test_at->isoFormat('DD MMMM Y') : '-'}}</b></p></td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td class="pr-md-4 pr-1"><p class="h5">Tanggal Keluar Hasil</p></td>
                                     <td class="pr-md-3 pr-2"><p class="h5"> : </p></td>

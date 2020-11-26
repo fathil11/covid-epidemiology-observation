@@ -118,7 +118,7 @@ class ResultDataTable extends DataTable
                         Button::make('reload')->text('Reload'),
                         Button::make('reset')->text('Reset'),
                     ])
-                    ->orderBy(3, 'desc');
+                    ->orderBy(7, 'desc');
     }
 
     /**

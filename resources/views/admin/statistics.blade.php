@@ -20,12 +20,12 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row" class="text-danger">Total</th>
-                      <td scope="row" class="text-danger">{{ $statistics['tests_total'] }}</td>
-                      <td scope="row" class="text-danger">{{ $statistics['tests_resulted_total'] }}</td>
-                      <td scope="row" class="text-danger">{{ $statistics['tests_unresulted_total'] }}</td>
-                      <td scope="row" class="text-danger">{{ $statistics['positive_total'] }}</td>
-                      <td scope="row" class="text-danger">{{ $statistics['negative_total'] }}</td>
+                      <th scope="row">Total</th>
+                      <td scope="row">{{ $statistics['tests_total'] }}</td>
+                      <td scope="row">{{ $statistics['tests_resulted_total'] }}</td>
+                      <td scope="row">{{ $statistics['tests_unresulted_total'] }}</td>
+                      <td scope="row">{{ $statistics['positive_total'] }}</td>
+                      <td scope="row">{{ $statistics['negative_total'] }}</td>
                     </tr>
                     <tr>
                       <th scope="row" class="text-danger">Melawi</th>
@@ -46,12 +46,12 @@
                       </tr>
                     @endforeach
                     <tr>
-                        <th scope="row" class="text-danger">Luar Wilayah</th>
-                        <td scope="row" class="text-danger">{{ $statistics['external_tests_total'] }}</td>
-                        <td scope="row" class="text-danger">{{ $statistics['external_tests_resulted_total'] }}</td>
-                        <td scope="row" class="text-danger">{{ $statistics['external_tests_unresulted_total'] }}</td>
-                        <td scope="row" class="text-danger">{{ $statistics['external_positive_total'] }}</td>
-                        <td scope="row" class="text-danger">{{ $statistics['external_negative_total'] }}</td>
+                        <th scope="row" class="text-secondary">Luar Wilayah</th>
+                        <td scope="row" class="text-secondary">{{ $statistics['external_tests_total'] }}</td>
+                        <td scope="row" class="text-secondary">{{ $statistics['external_tests_resulted_total'] }}</td>
+                        <td scope="row" class="text-secondary">{{ $statistics['external_tests_unresulted_total'] }}</td>
+                        <td scope="row" class="text-secondary">{{ $statistics['external_positive_total'] }}</td>
+                        <td scope="row" class="text-secondary">{{ $statistics['external_negative_total'] }}</td>
                       </tr>
                   </tbody>
             </table>

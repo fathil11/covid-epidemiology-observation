@@ -94,7 +94,7 @@ class PePresenceDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('lfrtip')
-                    ->orderBy(1);
+                    ->orderBy(2, 'desc');
     }
 
     /**
@@ -117,7 +117,7 @@ class PePresenceDataTable extends DataTable
                 ->name('created_at')
                 ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
                 ->orderable(true)
-                ->searchable(false)
+                ->searchable(true)
                 ->printable(false)
                 ->exportable(false),
             Column::make('test_at_display')

@@ -40,6 +40,9 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     @access('admin')
+                    <li class="nav-item {{ Request::url() == route('admin.statistics') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.statistics') }}">Statistik Keseluruhan</a>
+                    </li>
                     <li class="nav-item {{ Request::url() == route('admin.pe.all') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.pe.all') }}">Pengaturan Hasil</a>
                     </li>

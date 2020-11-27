@@ -41,20 +41,38 @@ class AdminController extends Controller
 
         $tests = Test::with(['person', 'result'])->get();
 
-        $statistics['tests_total'] = $tests->filter(function ($test){
-            return Str::lower($test->living_regency) == 'kabupaten melawi';
-        })->count();
 
-        $statistics['positive_total'] = $tests->filter(function ($test){
-            return Str::lower($test->living_regency) == 'kabupaten melawi';
-        })->where('result.value', 'positif')->count();
 
-        $statistics['negative_total'] = $tests->filter(function ($test){
-            return Str::lower($test->living_regency) == 'kabupaten melawi';
-        })->where('result.value', 'negatif')->count();
+        $statistics['tests_total'] = $tests->count();
+
+        $statistics['positive_total'] = $tests->where('result.value', 'positif')->count();
+
+        $statistics['negative_total'] = $tests->where('result.value', 'negatif')->count();
 
         $statistics['tests_unresulted_total'] = $statistics['tests_total'] - $statistics['positive_total'] - $statistics['negative_total'];
         $statistics['tests_resulted_total'] = $statistics['tests_total'] - $statistics['tests_unresulted_total'];
+
+
+        $statistics['melawi_tests_total'] = $tests->filter(function ($test){
+            return Str::lower($test->living_regency) == 'kabupaten melawi';
+        })->count();
+
+        $statistics['melawi_positive_total'] = $tests->filter(function ($test){
+            return Str::lower($test->living_regency) == 'kabupaten melawi';
+        })->where('result.value', 'positif')->count();
+
+        $statistics['melawi_negative_total'] = $tests->filter(function ($test){
+            return Str::lower($test->living_regency) == 'kabupaten melawi';
+        })->where('result.value', 'negatif')->count();
+
+        $statistics['melawi_tests_unresulted_total'] = $statistics['melawi_tests_total'] - $statistics['melawi_positive_total'] - $statistics['melawi_negative_total'];
+        $statistics['melawi_tests_resulted_total'] = $statistics['melawi_tests_total'] - $statistics['melawi_tests_unresulted_total'];
+
+        $statistics['external_tests_total'] = $statistics['tests_total'] - $statistics['melawi_tests_total'];
+        $statistics['external_positive_total'] = $statistics['positive_total'] - $statistics['melawi_positive_total'];
+        $statistics['external_negative_total'] = $statistics['negative_total'] - $statistics['melawi_negative_total'];
+        $statistics['external_tests_unresulted_total'] = $statistics['tests_unresulted_total'] - $statistics['melawi_tests_unresulted_total'];
+        $statistics['external_tests_resulted_total'] = $statistics['tests_resulted_total'] - $statistics['melawi_tests_resulted_total'];
 
         foreach ($districts as $district) {
             $statistics[$district.'_tests_total'] = $tests->filter(function ($test) use ($district) {

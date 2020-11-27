@@ -3,7 +3,6 @@ import * as DateFun from './script-date';
 import * as ValidateFun from './script-validation';
 import * as PeFun from './script-pe';
 import Chart from 'chart.js';
-require('chart.js')
 
 const works = require('../data/work-list.json');
 const countries = require('../data/country-list.json');

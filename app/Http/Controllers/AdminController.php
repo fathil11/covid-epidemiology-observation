@@ -41,9 +41,18 @@ class AdminController extends Controller
 
         $tests = Test::with(['person', 'result'])->get();
 
-        $statistics['tests_total'] = $tests->count();
-        $statistics['positive_total'] = $tests->where('result.value', 'positif')->count();
-        $statistics['negative_total'] = $tests->where('result.value', 'negatif')->count();
+        $statistics['tests_total'] = $tests->filter(function ($test){
+            return Str::lower($test->living_regency) == 'melawi';
+        })->count();
+
+        $statistics['positive_total'] = $tests->filter(function ($test){
+            return Str::lower($test->living_regency) == 'melawi';
+        })->where('result.value', 'positif')->count();
+
+        $statistics['negative_total'] = $tests->filter(function ($test){
+            return Str::lower($test->living_regency) == 'melawi';
+        })->where('result.value', 'negatif')->count();
+
         $statistics['tests_unresulted_total'] = $statistics['tests_total'] - $statistics['positive_total'] - $statistics['negative_total'];
         $statistics['tests_resulted_total'] = $statistics['tests_total'] - $statistics['tests_unresulted_total'];
 

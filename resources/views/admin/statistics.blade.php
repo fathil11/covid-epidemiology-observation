@@ -61,7 +61,7 @@
 
     <div class="row mt-5 mb-5">
         <div class="col-md-12">
-            <h4 class="text-center">Grafik Konfirmasi & Total SWAB Per Desa</h4>
+            <h4 class="text-center">Grafik Konfirmasi & Total SWAB Per Kecamatan</h4>
             <canvas class="mt-3" id="district_chart"
             data-positive-sokan="{{ $statistics['sokan_positive_total'] }}" data-positive-tanah-pinoh="{{ $statistics['tanah pinoh_positive_total'] }}"
             data-positive-tanah-pinoh-barat="{{ $statistics['tanah pinoh barat_positive_total'] }}"

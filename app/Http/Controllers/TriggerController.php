@@ -356,11 +356,19 @@ class TriggerController extends Controller
 
     public function personCheck()
     {
-        $people = Person::where('name', 'ANANDA CAHAYA MONALISA')->get();
-        dd($people);
-        // foreach ($people as $key => $person) {
-        //     dump(($key+1) .'. '. $person->name);
-        // }
+        $tests = Test::whereNotIn('living_district', [
+            'sokan',
+            'tanah pinoh',
+            'tanah pinoh barat',
+            'sayan', 'belimbing',
+            'belimbing hulu',
+            'nanga pinoh',
+            'pinoh selatan',
+            'pinoh utara',
+            'ella hilir',
+            'menukung'
+        ])->get();
+        dd($tests);
     }
 
     // public function countPerson()

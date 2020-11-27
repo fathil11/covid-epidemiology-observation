@@ -42,7 +42,7 @@ class AdminController extends Controller
         $tests = Test::with(['person', 'result'])->get();
 
 
-
+        //! TOTAL
         $statistics['tests_total'] = $tests->count();
 
         $statistics['positive_total'] = $tests->where('result.value', 'positif')->count();
@@ -52,7 +52,7 @@ class AdminController extends Controller
         $statistics['tests_unresulted_total'] = $statistics['tests_total'] - $statistics['positive_total'] - $statistics['negative_total'];
         $statistics['tests_resulted_total'] = $statistics['tests_total'] - $statistics['tests_unresulted_total'];
 
-
+        //! MELAWI
         $statistics['melawi_tests_total'] = $tests->filter(function ($test){
             return Str::lower($test->living_regency) == 'kabupaten melawi';
         })->count();
@@ -68,12 +68,14 @@ class AdminController extends Controller
         $statistics['melawi_tests_unresulted_total'] = $statistics['melawi_tests_total'] - $statistics['melawi_positive_total'] - $statistics['melawi_negative_total'];
         $statistics['melawi_tests_resulted_total'] = $statistics['melawi_tests_total'] - $statistics['melawi_tests_unresulted_total'];
 
+        //! EXTERNAL
         $statistics['external_tests_total'] = $statistics['tests_total'] - $statistics['melawi_tests_total'];
         $statistics['external_positive_total'] = $statistics['positive_total'] - $statistics['melawi_positive_total'];
         $statistics['external_negative_total'] = $statistics['negative_total'] - $statistics['melawi_negative_total'];
         $statistics['external_tests_unresulted_total'] = $statistics['tests_unresulted_total'] - $statistics['melawi_tests_unresulted_total'];
         $statistics['external_tests_resulted_total'] = $statistics['tests_resulted_total'] - $statistics['melawi_tests_resulted_total'];
 
+        //! DISTRICTS
         foreach ($districts as $district) {
             $statistics[$district.'_tests_total'] = $tests->filter(function ($test) use ($district) {
                 return Str::lower($test->living_district) == Str::lower($district);

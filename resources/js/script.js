@@ -23,7 +23,7 @@ $(function () {
     ValidateFun.createPeValidationInit()
     ListFun.listInit(['Nasofaring', 'Orofaring', 'Nasofaring-Orofaring'], '#swab_types');
     ListFun.listInit(['Normal', 'Cito'], '#swab_priorities');
-    ListFun.listInit(['Sintang', 'Pontianak'], '#swab_locations');
+    ListFun.listInit(['Internal', 'Sintang', 'Pontianak'], '#swab_locations');
 
     //--Full Location Living Init
     ListFun.fullLocationListInit('living')

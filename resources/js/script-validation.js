@@ -286,7 +286,7 @@ function updatePersonValidationInit() {
                 required: true,
             },
             parent_name: {
-                required: true,
+                required: false,
                 letterswithbasicpunc: true,
                 minlength: 3,
                 maxlength: 70
@@ -669,7 +669,7 @@ function createPeValidationInit() {
                 required: "#health_worker_toggle_yes:checked",
             },
             tube_code: {
-                required: true,
+                required: false,
             },
             group_code: {
                 required: false,

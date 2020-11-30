@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
         Blade::if('access', function ($parameter) {
             $roles = [
                 'admin' => ['isAdmin'],
-                'lab' => [env('ADMIN_PE_DEBUG') ? 'isAdmin' : '','isLab'],
+                'lab' => [env('ADMIN_LAB_DEBUG') ? 'isAdmin' : '','isLab'],
                 'registration' => [env('ADMIN_PE_DEBUG') ? 'isAdmin' : '', 'isPe'],
                 'statistic' => [env('ADMIN_REVIEWER_DEBUG') ? 'isAdmin' : '', 'isReviewer'],
             ];

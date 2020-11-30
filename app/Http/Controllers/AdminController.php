@@ -40,6 +40,7 @@ class AdminController extends Controller
         ];
 
         $tests = Test::with(['person', 'result'])->get();
+        // $people = Person::with(['tests', 'tests.result'])->get();
 
 
         //! TOTAL

@@ -82,7 +82,7 @@ class StorePeRequest extends FormRequest
             "pet" => "required_if:pet_toggle,yes",
             "health_worker_toggle" => "required",
             "protectors" => "required_if:health_worker_toggle,yes",
-            "tube_code" => "required",
+            "tube_code" => "nullable",
             "group_code" => "nullable",
         ];
     }

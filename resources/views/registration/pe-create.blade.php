@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="swab_priority">Prioritas SWAB</label>
                         <select name="swab_priority" class="form-control" data-style="bg-white rounded-pill"
-                            title="Pilih jenis SWAB" id="swab_priorities" data-live-search="true">
+                            title="Pilih prioritas SWAB" id="swab_priorities" data-live-search="true">
                         </select>
                     </div>
                 </div>

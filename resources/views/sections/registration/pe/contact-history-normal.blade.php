@@ -70,6 +70,7 @@
                     id="contact_history_normal_statuses">
                     <option value="suami/istri">Suami/Istri</option>
                     <option value="anak">Anak</option>
+                    <option value="orang tua">Orang Tua</option>
                     <option value="saudara">Saudara</option>
                     <option value="teman">Teman</option>
                     <option value="rekan kerja">Rekan Kerja</option>

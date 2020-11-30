@@ -56,7 +56,7 @@ Route::group(['middleware' => 'pe'], function () {
     Route::get('pe', 'PeController@index')->name('pe.index');
 
     Route::get('pe/absen', 'PeController@showPresence')->name('pe.presence.show');
-    Route::get('pe/{code}/absen', 'PeController@presence')->name('pe.presence');
+    Route::post('pe/{code}/absen', 'PeController@presence')->name('pe.presence');
     Route::get('pe/{code}/absen/hapus', 'PeController@deletePresence')->name('pe.presence.delete');
 
     Route::get('pe/{code}', 'PeController@show')->name('pe.view');

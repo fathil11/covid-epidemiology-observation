@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AllTestResultEntryDataTable;
+use App\DataTables\TestResultEntryDataTable;
 use App\Result;
 use App\Test;
 use Illuminate\Http\Request;
@@ -10,16 +12,20 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LabController extends Controller
 {
-    public function showPe()
+    public function showPe(TestResultEntryDataTable $dataTable)
     {
-        $pes = Test::with('person')->doesntHave('result')->get();
-        return view('lab.pe', compact('pes'));
+        return $dataTable->render('datatables.index', [
+            'title' => 'Data PE',
+            'sub_title' => 'Daftar PE yang belum mendapatkan hasil',
+        ]);
     }
 
-    public function showAllPe()
+    public function showAllPe(AllTestResultEntryDataTable $dataTable)
     {
-        $pes = Test::with('person')->get();
-        return view('lab.pe', compact('pes'));
+        return $dataTable->render('datatables.index', [
+            'title' => 'Data PE',
+            'sub_title' => 'Daftar seluruh PE',
+        ]);
     }
 
     public function positive($code)

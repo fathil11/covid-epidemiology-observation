@@ -53,7 +53,7 @@ class PeopleDataTable extends DataTable
 
     public function query()
     {
-        $model = Person::with('latestTest');
+        $model = Person::with('latestTest')->select(['people.*']);
         return $model->newQuery();
     }
 
@@ -87,9 +87,7 @@ class PeopleDataTable extends DataTable
             ->title('Jenis Kelamin'),
             Column::make('latestTest')
                 ->title('Tanggal Terakhir SWAB')
-                ->name('latestTest')
-                ->orderable(true)
-                ->searchable(false)
+                ->name('latestTest.created_at')
                 ->addClass('text-center')
                 ->responsivePriority(2),
             Column::make('nik')

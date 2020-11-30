@@ -31,13 +31,22 @@ class PeController extends Controller
         return $dataTable->render('pe.pe');
     }
 
-    public function presence($code)
+    public function presence(Request $request, $code)
     {
+        // Check if tube_code has been used
+        $tube_code_check = Test::where('tube_code', $request->tube_code)->first();
+        if($tube_code_check != null){
+            Alert('Ups,', 'Nomor tabung sudah pernah digunakan, cek kembali nomor tabung', 'error');
+            return redirect()->back();
+        }
+
+        // Check if Test has been presenced
         $test = Test::where('code', $code)->firstOrFail();
         if($test->test_at != null){
             return abort(404);
         }
 
+        $test->tube_code = $request->tube_code;
         $test->test_at = Carbon::now();
         $test->save();
 
@@ -52,6 +61,7 @@ class PeController extends Controller
             return abort(404);
         }
 
+        $test->tube_code = null;
         $test->test_at = null;
         $test->save();
 
@@ -64,7 +74,6 @@ class PeController extends Controller
         $pe = Test::where('code', $code)->firstOrFail();
 
         $document = new TemplateProcessor('document-layouts/pe.docx');
-        // dd(asset('storage/id_cards/' . $pe->person->card_path));
         $document->setImageValue('id_card', ['path' => asset('storage/id_cards/' . $pe->person->card_path), 'width' => '300pt', 'height' => '']);
 
         $document->setValue('tube_code', $pe->tube_code);

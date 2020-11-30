@@ -83,7 +83,7 @@ class TestDataTable extends DataTable
      */
     public function query()
     {
-        $model = Test::whereNotNull('tube_code')->with(['person', 'user']);
+        $model = Test::with(['person', 'user']);
         return $model->newQuery();
     }
 

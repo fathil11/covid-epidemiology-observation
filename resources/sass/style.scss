@@ -96,6 +96,30 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th.dtr-control:before {
     background-color: #495057 !important;
 }
 
+.dt-buttons {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+    .dt-buttons {
+        float: none;
+        width: 100%;
+    }
+}
+
+//! DATA TABLE SECTION
+@media (min-width: 480px) {
+    #test-table_length {
+        display: inline-block;
+        margin-left: 2rem;
+    }
+
+    #test-table_filter {
+        float: right;
+        display: flex;
+    }
+}
+
 @media (min-width: 480px) {
     #people-table_length {
         display: inline-block;
@@ -118,24 +142,23 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th.dtr-control:before {
     }
 }
 
-.dt-buttons {
-    margin-bottom: 1rem;
-}
+@media (min-width: 480px) {
+    #pepresence-table_length {
+        display: inline-block;
+    }
 
-@media (max-width: 480px) {
-    .dt-buttons {
-        float: none;
-        width: 100%;
+    #pepresence-table_filter {
+        float: right;
+        display: flex;
     }
 }
 
 @media (min-width: 480px) {
-    #test-table_length {
+    #testresultentry-table_length {
         display: inline-block;
-        margin-left: 2rem;
     }
 
-    #test-table_filter {
+    #testresultentry-table_filter {
         float: right;
         display: flex;
     }

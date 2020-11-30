@@ -482,6 +482,9 @@ function createPeValidationInit() {
         lang: 'id',
         debug: false,
         rules: {
+            swab_priority: {
+                required: true
+            },
             swab_type: {
                 required: true
             },

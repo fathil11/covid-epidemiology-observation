@@ -26,6 +26,13 @@ class AdminController extends Controller
 
     public function showStatistics()
     {
+        $people = Person::with(['tests', 'tests.result'])->get();
+        $people = $people->filter(function($value, $key){
+            return $value['code'] != null;
+        });
+        dump($people);
+
+        dd('-- HOLD --');
         $districts = [
             'sokan',
             'tanah pinoh',

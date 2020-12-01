@@ -34,6 +34,9 @@ class AllTestResultEntryDataTable extends DataTable
             ->addColumn('person_age_display', function($test){
                 return $test->person->birth_at->age;
             })
+            ->addColumn('person_gender_print', function($test){
+                return $test->person->gender == 'm' ? 'Laki-laki' : 'Perempuan';
+            })
 
             //* TEST SECTION
             ->addColumn('test_at_display', function(Test $test){
@@ -41,6 +44,9 @@ class AllTestResultEntryDataTable extends DataTable
                     'format' => $test->test_at != null ? $test->test_at->isoFormat('DD MMMM Y') : '',
                     'timestamp' => $test->test_at != null ? $test->test_at->timestamp : '',
                 ];
+            })
+            ->addColumn('test_at_print', function(Test $test){
+                return $test->test_at != null ? $test->test_at->isoFormat('DD MMMM Y') : '';
             })
 
             //* RESULT SECTION
@@ -53,6 +59,9 @@ class AllTestResultEntryDataTable extends DataTable
                     'format' => $test->result != null ? $test->result->created_at->isoFormat('DD MMMM Y') : '',
                     'timestamp' => $test->result != null ? $test->result->created_at->timestamp : '',
                 ];
+            })
+            ->addColumn('result_created_at_print', function(Test $test){
+                return $test->result != null ? $test->result->created_at->isoFormat('DD MMMM Y') : '';
             })
 
             ->rawColumns(['person_name_display', 'action']);
@@ -81,7 +90,12 @@ class AllTestResultEntryDataTable extends DataTable
                     ->setTableId('testresultentry-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('lfrtip')
+                    ->dom('Blfrtip')
+                    ->buttons([
+                        Button::make('excel')->text('Download Excel'),
+                        Button::make('print')->text('Cetak'),
+                        Button::make('reset')->text('Muat Ulang'),
+                    ])
                     ->orderBy(3);
     }
 
@@ -93,14 +107,52 @@ class AllTestResultEntryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('test_at_print')
+                ->title('Tanggal SWAB')
+                ->name('test_at')
+                ->visible(false),
             Column::make('tube_code')
                 ->title('Nomor Tabung'),
             Column::make('person_name_display')
                 ->title('Nama (NIK)')
-                ->name('person.name'),
+                ->name('person.name')
+                ->printable(false)
+                ->exportable(false),
+            Column::make('person.name')
+                ->title('Nama')
+                ->name('person.name')
+                ->visible(false),
+            Column::make('person.nik')
+                ->title('NIK')
+                ->name('person.nik')
+                ->visible(false),
+            Column::make('person_gender_print')
+                ->title('Jenis Kelamin')
+                ->name('person.gender')
+                ->visible(false),
             Column::make('person_age_display')
                 ->title('Umur')
                 ->name('person.birth_at'),
+            Column::make('person.phone')
+                ->title('Nomor HP')
+                ->name('person.phone')
+                ->visible(false),
+            Column::make('living_province')
+                ->title('Provinsi')
+                ->name('living_province')
+                ->visible(false),
+            Column::make('living_regency')
+                ->title('Kabupaten/Kota')
+                ->name('living_regency')
+                ->visible(false),
+            Column::make('living_district')
+                ->title('Kecamatan')
+                ->name('living_district')
+                ->visible(false),
+            Column::make('living_village')
+                ->title('Desa')
+                ->name('living_village')
+                ->visible(false),
             Column::make('test_at_display')
                 ->title('Tanggal SWAB')
                 ->name('test_at')
@@ -117,6 +169,9 @@ class AllTestResultEntryDataTable extends DataTable
                 ->searchable(true)
                 ->printable(false)
                 ->exportable(false),
+            Column::make('result_created_at_print')
+                ->title('Tanggal Hasil')
+                ->name('result.value'),
             Column::make('result_display')
                 ->title('Hasil')
                 ->name('result.value'),

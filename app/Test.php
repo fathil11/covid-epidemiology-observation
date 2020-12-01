@@ -17,6 +17,22 @@ class Test extends Model
 
     protected $guarded = [];
 
+    public static function boot(){
+        parent::boot();
+
+        static::deleting(function($test){
+            $test->symptoms()->delete();
+            $test->comorbidities()->delete();
+            $test->diagnoses()->delete();
+            $test->hospital()->delete();
+            $test->travels()->delete();
+            $test->contacts()->delete();
+            $test->additional()->delete();
+            $test->protectors()->delete();
+            $test->result()->delete();
+        });
+    }
+
     public function person()
     {
         return $this->belongsTo(Person::class);

@@ -44,7 +44,7 @@
         <p class="text-center"><u><b>SURAT KETERANGAN</b></u></p>
         <p class="text-center">No: 443/{{ $id }}/DINKES-C19-A/2020</p>
 
-        <p class="text-justify"><span class="indent">Berdasarkan hasil pemeriksaan sampel swab Real Time Polymerase Chain Reaction (RT-PCR) yang dilaksanakan di Pontianak, tanggal {{ $result_at }}. Berikut ini kami menerangkan bahwa:</p>
+        <p class="text-justify"><span class="indent">Berdasarkan hasil pemeriksaan sampel swab Real Time Polymerase Chain Reaction (RT-PCR) yang dilaksanakan di {{ $location }}, tanggal {{ $result_at }}. Berikut ini kami menerangkan bahwa:</p>
 
         <table style="margin-top: 1.5em;margin-bottom: 1.5em; padding-top: 0;">
             <tr>

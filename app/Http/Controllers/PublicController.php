@@ -26,7 +26,7 @@ class PublicController extends Controller
         }
 
         $data['id'] = $test->id;
-        $data['location'] = $test->result->location == 'internal' ? 'Labkesda Kabupaten Melawi' : Str::title($test->result->location);
+        $data['location'] = $test->location == 'internal' ? 'Labkesda Kabupaten Melawi' : Str::title($test->location);
         $data['result_at'] = $test->result->created_at->isoFormat('DD MMMM Y');
         $data['mail_at'] = Carbon::make($test->result->created_at)->addDay()->isoFormat('DD MMMM Y');
         $data['name'] = $test->person->name;

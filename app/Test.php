@@ -201,10 +201,10 @@ class Test extends Model
         return $value == '' ? '-' : $value;
     }
 
-    public function getLocationAttribute($value)
-    {
-        return $value == 'internal' ? 'Lab KESDA' : Str::title($value);
-    }
+    // public function getLocationAttribute($value)
+    // {
+    //     return $value == 'internal' ? 'Lab KESDA' : Str::title($value);
+    // }
 
     public function getTestAttribute($value)
     {

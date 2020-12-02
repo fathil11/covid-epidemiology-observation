@@ -5,7 +5,7 @@
     <h5 class="text-primary text-center">{{ $sub_title }}</h5>
 
     <div class="mt-4">
-        {!! $dataTable->table() !!}
+        {!! $dataTable->table([], true) !!}
     </div>
 </div>
 
@@ -17,6 +17,13 @@
 <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 <script src="/vendor/datatables/buttons.server-side.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap4.min.css">
+<script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+<style>
+    tfoot {
+        display: table-header-group;
+    }
+</style>
 {!! $dataTable->scripts() !!}
 @endpush
 @endsection

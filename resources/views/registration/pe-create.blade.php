@@ -231,7 +231,7 @@
                 <div class="col-md-6 col-sm-12 mt-3">
                     <div class="form-group">
                         <label for="tube_code">Nomor Tabung</label>
-                        <input type="text" name="tube_code" placeholder="Masukan nomor tabung" class="form-control rounded-pill" id="tube_code">
+                        <input type="text" name="tube_code" placeholder="Masukan nomor tabung" class="form-control rounded-pill" id="tube_code" disabled>
                     </div>
                 </div>
 

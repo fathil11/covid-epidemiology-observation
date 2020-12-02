@@ -111,6 +111,7 @@ class ResultDataTable extends DataTable
                     ->setTableId('result-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->responsive(true)
                     ->dom('Blfrtip')
                     ->buttons([
                         Button::make('excel')->text('Download Excel'),
@@ -118,6 +119,105 @@ class ResultDataTable extends DataTable
                         Button::make('reload')->text('Reload'),
                         Button::make('reset')->text('Reset'),
                     ])
+                    ->initComplete("
+                    function () {
+                        this.api().columns([0,4,11]).every(function () {
+                            var column = this;
+                            var input = document.createElement(\"input\");
+                            $(input).appendTo($(column.footer()).empty())
+                            $(input).addClass('form-control')
+                            $(input).attr('placeholder', this.header().innerHTML)
+                            .on('keyup', function () {
+                                column.search($(this).val(), false, false, true).draw();
+                            });
+                        });
+
+                        this.api().columns([3]).every(function () {
+                            var column = this;
+                            var input = document.createElement(\"input\");
+                            $(input).appendTo($(column.footer()).empty())
+                            $(input).addClass('form-control')
+                            $(input).attr('placeholder', this.header().innerHTML)
+                            .on('keyup', function () {
+                                if($(this).val().length == 0){
+                                    this.api().clear();
+                                    this.api().reload();
+                                }
+                                column.search((2020-$(this).val()), false, false, true).draw();
+                            });
+                        });
+
+                        this.api().columns([5,7]).every(function () {
+                            var column = this;
+                            var input = document.createElement(\"input\");
+                            $(input).appendTo($(column.footer()).empty())
+                            $(input).addClass('form-control')
+                            $(input).attr('placeholder', 'Th-Bln-Tg')
+                            .on('keyup', function () {
+                                if($(this).val().length >= 7){
+                                    column.search($(this).val(), false, false, true).draw();
+                                }
+                            });
+                        });
+
+                        this.api().column(2).every( function () {
+                            var column = this;
+                            var select = $('<select class=\"custom-select\"><option value=\"\">--Jenis Kelamin--</option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+
+                            $.each([['Laki-laki','m'], ['Perempuan','f']] , function ( key, gender ) {
+                                select.append( '<option value=\"'+gender[1]+'\">'+gender[0]+'</option>' )
+                            } );
+                        } );
+
+                        this.api().column(9).every( function () {
+                            var column = this;
+                            var select = $('<select class=\"custom-select\"><option value=\"\">--Hasil--</option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+
+                            $.each(['positif', 'negatif'] , function ( key, result ) {
+                                select.append( '<option style=\"text-transform:capitalize;\" value=\"'+result+'\">'+result+'</option>' )
+                            } );
+                        } );
+
+                        this.api().column(10).every( function () {
+                            var column = this;
+                            var select = $('<select class=\"custom-select\"><option value=\"\">--Kecamatan--</option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+                            var districts = ['sokan', 'tanah pinoh', 'tanah pinoh barat', 'sayan', 'belimbing', 'belimbing hulu', 'nanga pinoh', 'pinoh selatan', 'pinoh utara', 'ella hilir', 'menukung'];
+                            $.each(districts , function ( key, district ) {
+                                select.append( '<option style=\"text-transform:capitalize;\" value=\"'+district+'\">'+district+'</option>' )
+                            } );
+                        } );
+                    }
+                    ")
                     ->orderBy(7, 'desc');
     }
 
@@ -150,7 +250,8 @@ class ResultDataTable extends DataTable
             Column::make('age_display')
                 ->name('test.person.birth_at')
                 ->title('Umur')
-                ->orderable(false),
+                ->orderable(false)
+                ->searchable(true),
 
             Column::make('phone_display')
                 ->name('test.person.phone')
@@ -162,7 +263,7 @@ class ResultDataTable extends DataTable
                 ->name('test.test_at')
                 ->data(["_" => 'test.format', "sort" => 'test.timestamp'])
                 ->orderable(true)
-                ->searchable(false)
+                ->searchable(true)
                 ->printable(false)
                 ->exportable(false),
 
@@ -175,7 +276,7 @@ class ResultDataTable extends DataTable
                 ->name('created_at')
                 ->data(["_" => 'created_at.format', "sort" => 'created_at.timestamp'])
                 ->orderable(true)
-                ->searchable(false)
+                ->searchable(true)
                 ->printable(false)
                 ->exportable(false),
 

@@ -13,14 +13,14 @@ class StatisticController extends Controller
 {
     public function index()
     {
-        $statistics['positive'] = $this->getPositivePeople()->count();
-        $statistics['last_positive'] =$this->getLastWeekPositivePeople()->count();
+        $statistics['positive'] = $this->getPositivePeople();
+        $statistics['last_positive'] =$this->getLastWeekPositivePeople();
 
-        $statistics['negative'] = $this->getNegativePeople()->count();
-        $statistics['last_negative'] =$this->getLastWeekNegativePeople()->count();
+        $statistics['negative'] = $this->getNegativePeople();
+        $statistics['last_negative'] =$this->getLastWeekNegativePeople();
 
-        $statistics['swab_total'] = $this->getTests()->count();
-        $statistics['swab_unresulted'] = $this->getUnresultedTests()->count();
+        $statistics['swab_total'] = $this->getTests();
+        $statistics['swab_unresulted'] = $this->getUnresultedTests();
 
         $districts = [
             'sokan',
@@ -106,7 +106,7 @@ class StatisticController extends Controller
             return $query->whereHas('result', function($query){
                 return $query->where('value', 'Positif');
             });
-        })->get();
+        })->count();
     }
 
     public function getLastWeekPositivePeople()
@@ -115,7 +115,7 @@ class StatisticController extends Controller
 
         return Person::whereHas('tests.result', function($query) use ($date){
             return $query->where('value', 'Positif')->whereDate('created_at', '>=', $date);
-        })->get();
+        })->count();
     }
 
     //! Negative Section
@@ -125,7 +125,7 @@ class StatisticController extends Controller
             return $query->whereHas('result', function($query){
                 return $query->where('value', 'Negatif');
             });
-        })->get();
+        })->count();
     }
 
     public function getLastWeekNegativePeople()
@@ -134,7 +134,7 @@ class StatisticController extends Controller
 
         return Person::whereHas('tests.result', function($query) use ($date){
             return $query->where('value', 'Negatif')->whereDate('created_at', '>=', $date);
-        })->get();
+        })->count();
     }
 
     public function getTests()
@@ -144,7 +144,7 @@ class StatisticController extends Controller
 
     public function getUnresultedTests()
     {
-        return Test::doesntHave('result')->get();
+        return Test::whereNotNull('test_at')->doesntHave('result')->count();
     }
 
     public function getPeopleStatistic($people, $regency, $district, $result)

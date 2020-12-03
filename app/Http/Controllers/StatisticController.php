@@ -139,7 +139,7 @@ class StatisticController extends Controller
 
     public function getTests()
     {
-        return Test::all();
+        return Test::whereNotNull('test_at')->count();
     }
 
     public function getUnresultedTests()

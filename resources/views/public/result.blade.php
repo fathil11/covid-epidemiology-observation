@@ -10,14 +10,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- Scripts --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 
     {{-- Styles --}}
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     {{-- Favico --}}
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
@@ -78,7 +78,7 @@
                         <hr>
 
                         <div class="row">
-                            <div class="col-md-12 mt-1 px-0 px-md-15 px-15" id="qrcode" data-link="{{ route('public.result', $test->code) }}">
+                            <div class="col-md-12 mt-1 px-0 px-md-20 px-20" id="qrcode" data-link="{{ route('public.result', $test->code) }}">
                             </div>
                             @if ($test->result != null)
                             <div class="col-md-12 mt-3">

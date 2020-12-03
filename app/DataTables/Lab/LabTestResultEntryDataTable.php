@@ -3,15 +3,15 @@
 namespace App\DataTables;
 
 use App\Test;
-use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\App\TestResultEntry;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PePresenceDataTable extends DataTable
+class LabTestResultEntryDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,16 +23,19 @@ class PePresenceDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'components.presence.tube-code-entry-action')
-
-            //* TEST SECTION
-            ->addColumn('created_at_display', function(Test $test){
-                return [
-                    'format' => $test->created_at->isoFormat('DD MMMM Y'),
-                    'timestamp' => $test->created_at->timestamp,
-                ];
+            ->addColumn('action', function(Test $test){
+                return view('components.lab.result-entry-action', ['test' => $test]);
             })
 
+            //* PERSON SECTION
+            ->addColumn('person_name_display', function($test){
+                return '<b>' . Str::title($test->person->name) . "</b><br>{$test->person->nik}";
+            })
+            ->addColumn('person_age_display', function($test){
+                return $test->person->birth_at->age;
+            })
+
+            //* TEST SECTION
             ->addColumn('test_at_display', function(Test $test){
                 return [
                     'format' => $test->test_at != null ? $test->test_at->isoFormat('DD MMMM Y') : '',
@@ -40,28 +43,18 @@ class PePresenceDataTable extends DataTable
                 ];
             })
 
-            //* PERSON SECTION
-            ->addColumn('name_display', function(Test $test){
-                return '<b>' . Str::title($test->person->name) . "</b><br>{$test->person->nik}";
-            })
-
-            //* USER SECTION
-            ->addColumn('user.instance', function(Test $test){
-                return $test->user->instance;
-            })
-
-            ->rawColumns(['name_display', 'action']);
+            ->rawColumns(['person_name_display', 'action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\PePresence $model
+     * @param \App\App\TestResultEntry $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
-        $model = Test::where('location', 'internal')->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
+        $model = Test::whereNotNull(['tube_code','test_at'])->where('location', 'internal')->whereDoesntHave('result')->with(['person', 'user'])->select('tests.*');
         return $model->newQuery();
     }
 
@@ -73,12 +66,11 @@ class PePresenceDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('pepresence-table')
+                    ->setTableId('testresultentry-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->responsive(true)
                     ->dom('lfrtip')
-                    ->orderBy(2, 'desc');
+                    ->orderBy(3);
     }
 
     /**
@@ -89,27 +81,20 @@ class PePresenceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name_display')
-                ->title('Nama (NIK)')
-                ->name('person.name')
-                ->exportable(false)
-                ->printable(false),
             Column::make('tube_code')
                 ->title('Nomor Tabung'),
-            Column::make('created_at_display')
-                ->title('Tanggal PE')
-                ->name('created_at')
-                ->data(["_" => 'created_at_display.format', "sort" => 'created_at_display.timestamp'])
-                ->orderable(true)
-                ->searchable(true)
-                ->printable(false)
-                ->exportable(false),
+            Column::make('person_name_display')
+                ->title('Nama (NIK)')
+                ->name('person.name'),
+            Column::make('person_age_display')
+                ->title('Umur')
+                ->name('person.birth_at'),
             Column::make('test_at_display')
-                ->title('Tanggal Tes')
+                ->title('Tanggal SWAB')
                 ->name('test_at')
                 ->data(["_" => 'test_at_display.format', "sort" => 'test_at_display.timestamp'])
                 ->orderable(true)
-                ->searchable(false)
+                ->searchable(true)
                 ->printable(false)
                 ->exportable(false),
             Column::make('action')
@@ -118,6 +103,7 @@ class PePresenceDataTable extends DataTable
                 ->orderable(false)
                 ->printable(false)
                 ->exportable(false),
+
         ];
     }
 
@@ -128,6 +114,6 @@ class PePresenceDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'PePresence_' . date('YmdHis');
+        return 'TestResultEntry_' . date('YmdHis');
     }
 }

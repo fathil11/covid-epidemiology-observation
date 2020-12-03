@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Pe\PePeopleDataTable;
 use App\Test;
 use App\Person;
 use App\Province;
@@ -39,7 +40,7 @@ class RegistrationController extends Controller
         return view('registration.person-update', compact('person'));
     }
 
-    public function showPeopleSearch(PeopleDataTable $dataTable)
+    public function showPeopleSearch(PePeopleDataTable $dataTable)
     {
         return $dataTable->render('registration.people-search');
     }

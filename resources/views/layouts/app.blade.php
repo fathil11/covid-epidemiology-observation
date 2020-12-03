@@ -14,10 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     {{-- Styles --}}
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     {{-- Favico --}}
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
@@ -44,7 +44,7 @@
                         <a class="nav-link" href="{{ route('admin.statistics') }}">Statistik Keseluruhan</a>
                     </li>
                     <li class="nav-item {{ Request::url() == route('admin.pe.all') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.pe.all') }}">Pengaturan Hasil</a>
+                        <a class="nav-link" href="{{ route('admin.pe.all') }}">Daftar PE</a>
                     </li>
                     <li class="nav-item {{ Request::url() == route('admin.result.all') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.result.all') }}">Daftar Hasil</a>

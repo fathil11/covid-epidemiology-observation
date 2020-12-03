@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Pe;
 
 use App\Person;
 use Carbon\Carbon;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 
-class PeopleDataTable extends DataTable
+class PePeopleDataTable extends DataTable
 {
     /**
      * Build DataTable class.

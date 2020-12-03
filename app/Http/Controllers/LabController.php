@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\AllTestResultEntryDataTable;
+use App\DataTables\LabAllTestDataTable;
+use App\DataTables\LabTestResultEntryDataTable;
 use App\DataTables\TestResultEntryDataTable;
 use App\Result;
 use App\Test;
@@ -12,7 +13,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LabController extends Controller
 {
-    public function showPe(TestResultEntryDataTable $dataTable)
+    public function showPe(LabTestResultEntryDataTable $dataTable)
     {
         return $dataTable->render('datatables.index', [
             'title' => 'Data PE',
@@ -20,7 +21,7 @@ class LabController extends Controller
         ]);
     }
 
-    public function showAllPe(AllTestResultEntryDataTable $dataTable)
+    public function showAllPe(LabAllTestDataTable $dataTable)
     {
         return $dataTable->render('datatables.index', [
             'title' => 'Data PE',

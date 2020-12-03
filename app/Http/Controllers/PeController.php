@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\PePresenceDataTable;
-use App\DataTables\TestDataTable;
+use App\DataTables\Pe\PePresenceDataTable;
+use App\DataTables\Pe\PeTestDataTable;
 use App\Test;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,7 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PeController extends Controller
 {
-    public function index(TestDataTable $dataTable)
+    public function index(PeTestDataTable $dataTable)
     {
         return $dataTable->render('pe.pe');
     }

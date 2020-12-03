@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Pe;
 
 use App\Test;
 use Illuminate\Support\Str;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Services\DataTable;
 use App\Person;
 use Carbon\Carbon;
 
-class TestDataTable extends DataTable
+class PeTestDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -54,7 +54,6 @@ class TestDataTable extends DataTable
             })
 
             //* PERSON SECTION
-
             ->editColumn('person.nik', function(Test $test){
                 return $test->person->nik != null ? "'" . $test->person->nik : '';
             })

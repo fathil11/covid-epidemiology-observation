@@ -37,6 +37,9 @@ class LabAllTestDataTable extends DataTable
             ->addColumn('person_gender_print', function($test){
                 return $test->person->gender == 'm' ? 'Laki-laki' : 'Perempuan';
             })
+            ->editColumn('person.nik', function($test){
+                return $test->person->nik != null ? '\'' . $test->person->nik : '';
+            })
 
             //* TEST SECTION
             ->addColumn('test_at_display', function(Test $test){

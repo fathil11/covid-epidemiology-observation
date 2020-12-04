@@ -13,14 +13,9 @@ class StatisticController extends Controller
 {
     public function index()
     {
-        $statistics['positive'] = $this->getPositivePeople();
         $statistics['last_positive'] =$this->getLastWeekPositivePeople();
 
-        $statistics['negative'] = $this->getNegativePeople();
         $statistics['last_negative'] =$this->getLastWeekNegativePeople();
-
-        $statistics['swab_total'] = $this->getTests();
-        $statistics['swab_unresulted'] = $this->getUnresultedTests();
 
         $districts = [
             'sokan',
@@ -100,15 +95,6 @@ class StatisticController extends Controller
     }
 
     //! Positive Section
-    public function getPositivePeople()
-    {
-        return Person::whereHas('tests', function($query){
-            return $query->whereHas('result', function($query){
-                return $query->where('value', 'Positif');
-            });
-        })->count();
-    }
-
     public function getLastWeekPositivePeople()
     {
         $date = Carbon::today()->subDays(7);
@@ -119,15 +105,6 @@ class StatisticController extends Controller
     }
 
     //! Negative Section
-    public function getNegativePeople()
-    {
-        return Person::whereHas('tests', function($query){
-            return $query->whereHas('result', function($query){
-                return $query->where('value', 'Negatif');
-            });
-        })->count();
-    }
-
     public function getLastWeekNegativePeople()
     {
         $date = Carbon::today()->subDays(7);
@@ -137,15 +114,6 @@ class StatisticController extends Controller
         })->count();
     }
 
-    public function getTests()
-    {
-        return Test::whereNotNull('test_at')->count();
-    }
-
-    public function getUnresultedTests()
-    {
-        return Test::whereNotNull('test_at')->doesntHave('result')->count();
-    }
 
     public function getPeopleStatistic($people, $regency, $district, $result)
     {

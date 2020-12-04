@@ -8,7 +8,7 @@
         <div class="col-md-3 col-6">
             <div class="bg-danger rounded text-center text-white py-3">
                 <h4 class="">Total <br>Konfirmasi</h4>
-                <h2 class="font-weight-bold">{{ $statistics['positive'] }}</h2>
+                <h2 class="font-weight-bold">{{ $statistics['positive_total'] }}</h2>
             </div>
         </div>
         <div class="col-md-3 col-6">
@@ -20,7 +20,7 @@
         <div class="col-md-3 col-6 mt-md-0 mt-3">
             <div class="bg-success rounded text-center text-white py-3">
                 <h4 class="">Total <br>Negatif</h4>
-                <h2 class="font-weight-bold">{{ $statistics['negative'] }}</h2>
+                <h2 class="font-weight-bold">{{ $statistics['negative_total'] }}</h2>
             </div>
         </div>
         <div class="col-md-3 col-6 mt-md-0 mt-3">
@@ -32,13 +32,13 @@
         <div class="col-md-3 col-6 mt-md-3 mt-3">
             <div class="bg-secondary rounded text-center text-white py-3">
                 <h4 class="">Total <br>SWAB</h4>
-                <h2 class="font-weight-bold">{{ $statistics['swab_total'] }}</h2>
+                <h2 class="font-weight-bold">{{ $statistics['tests_total'] }}</h2>
             </div>
         </div>
         <div class="col-md-3 col-6 mt-md-3 mt-3">
             <div class="bg-secondary rounded text-center text-white py-3">
                 <h4 class="">SWAB <br>Tanpa Hasil</h4>
-                <h2 class="font-weight-bold">{{ $statistics['swab_unresulted'] }}</h2>
+                <h2 class="font-weight-bold">{{ $statistics['tests_unresulted_total'] }}</h2>
             </div>
         </div>
     </div>

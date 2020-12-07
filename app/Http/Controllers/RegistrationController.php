@@ -57,7 +57,6 @@ class RegistrationController extends Controller
         if(
             $person->nik == null ||
             $person->phone == null ||
-            $person->parent_name == null ||
             $person->card_path == null ||
             $person->work == null ||
             $person->birth_regency == null ||

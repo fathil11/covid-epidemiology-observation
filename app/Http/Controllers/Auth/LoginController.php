@@ -35,7 +35,7 @@ class LoginController extends Controller
             'isAdmin' => route('admin.statistics'),
             'isLab' => route('lab.pe'),
             'isPe' => route('registration.person.create'),
-            'isDoctor' => route('registration.person.create'),
+            'isSecondPe' => route('registration.person.create'),
             'isReviewer' => route('statistic'),
         ];
 

@@ -11,6 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use App\Person;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PeTestDataTable extends DataTable
 {
@@ -82,7 +83,14 @@ class PeTestDataTable extends DataTable
      */
     public function query()
     {
-        $model = Test::with(['person', 'user']);
+        /** @var App\User */
+        $user = Auth::user();
+        if($user->isPe()){
+            $model = Test::with(['person', 'user']);
+        }elseif($user->isSecondPe()){
+            $model = Test::where('user_id', Auth::user()->id)->with(['person', 'user']);
+        }
+
         return $model->newQuery();
     }
 

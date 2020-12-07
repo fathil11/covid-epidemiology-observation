@@ -51,7 +51,7 @@
                     </li>
                     @endaccess
 
-                    @access('registration')
+                    @access('pe')
                     <li class="nav-item {{ Request::url() == route('registration.person.create') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('registration.person.create') }}">Pendaftaran Pasien Baru</a>
                     </li>

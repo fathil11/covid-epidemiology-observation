@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
@@ -61,7 +62,14 @@ class PePresenceDataTable extends DataTable
      */
     public function query()
     {
-        $model = Test::where('location', 'internal')->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
+        /** @var App\User */
+        $user = Auth::user();
+        if($user->isPe()){
+            $model = Test::where('location', 'internal')->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
+        }elseif($user->isSecondPe()){
+            $model = Test::where('location', 'internal')->where('user_id', Auth::user()->id)->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
+
+        }
         return $model->newQuery();
     }
 

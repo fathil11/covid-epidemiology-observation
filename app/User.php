@@ -37,6 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+
     public function isAdmin()
     {
         return $this->role == 1;
@@ -52,7 +57,7 @@ class User extends Authenticatable
         return $this->role == 3;
     }
 
-    public function isDoctor()
+    public function isSecondPe()
     {
         return $this->role == 4;
     }

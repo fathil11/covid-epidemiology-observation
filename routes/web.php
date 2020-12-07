@@ -46,7 +46,7 @@ Route::group(['middleware' => 'lab', 'prefix' => 'lab'], function () {
     Route::get('pe/{code}/aksi/tarik', 'LabController@retire')->name('lab.pe.action.retire');
 });
 
-Route::group(['middleware' => 'pe'], function () {
+Route::group(['middleware' => 'registration'], function () {
     Route::get('pasien', 'RegistrationController@showPeopleSearch')->name('registration.pe.people-search');
     Route::get('pasien/buat', 'RegistrationController@showCreatePerson')->name('registration.person.create');
     Route::post('pasien/buat', 'RegistrationController@storePerson')->name('registration.person.store');
@@ -65,6 +65,10 @@ Route::group(['middleware' => 'pe'], function () {
     Route::get('pe/buat/{id}', 'RegistrationController@showCreatePe')->name('registration.pe.create');
     Route::post('pe/buat/{id}', 'RegistrationController@storePe')->name('registration.pe.store');
 
+});
+
+Route::group(['middleware' => 'isSecondPe'], function(){
+    Route::get('/daftar/hasil', 'ResultController@index');
 });
 
 Route::group(['middleware' => 'statistic', 'prefix' => 'statistik'], function () {

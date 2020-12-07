@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
             $roles = [
                 'admin' => ['isAdmin'],
                 'lab' => [env('ADMIN_LAB_DEBUG') ? 'isAdmin' : '','isLab'],
-                'registration' => [env('ADMIN_PE_DEBUG') ? 'isAdmin' : '', 'isPe'],
+                'pe' => [env('ADMIN_PE_DEBUG') ? 'isAdmin' : '', 'isPe', 'isSecondPe'],
                 'statistic' => [env('ADMIN_REVIEWER_DEBUG') ? 'isAdmin' : '', 'isReviewer'],
             ];
 

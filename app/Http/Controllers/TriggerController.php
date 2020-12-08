@@ -11,314 +11,42 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Fathilarhm\GsheetsCollection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Http;
 
 class TriggerController extends Controller
 {
-    public function storePeopleData() {
-        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1kMfESbeUvt05hO2e81g1HYOJnEqx00m-JFxaOUTLTJM/edit#gid=0')->get();
-
-        $start_at = 1550-2;
-
-        foreach ($datas as $key => $data) {
-            if($key >= $start_at){
-                $person = Person::find($data['No']);
-
-            if($person == null){
-                $person = new Person();
-            }
-
-            $person->id = $data['No'];
-
-            // Admin User
-            $person->user_id = 1;
-
-            $person->nationality = 'wni';
-
-            if($person->nik == null){
-                $person->nik = $data['NIK'];
-            }
-            if($person->name == null){
-                $person->name = Str::upper($data['Nama']);
-            }
-
-            $person->phone = null;
-
-            if($person->gender == null){
-                $person->gender = $data['Jenis Kelamin'] == 'L' ? "m" : "f";
-            }
-
-            $person->parent_name = null;
-
-            $person->card_path = null;
-
-            if($person->work == null){
-                $person->work = Str::lower($data['PEKERJAAN']);
-            }
-
-            $person->work_instance = null;
-
-            if($person->birth_regency == null){
-                $person->birth_regency = Str::upper($data['Tempat Lahir']);
-            }
-
-            if($person->birth_at == null && $data['Tanggal Lahir'] != null){
-                $person->birth_at = Carbon::createFromFormat('m/d/Y', $data['Tanggal Lahir']);
-            }
-
-            if($person->card_province == null){
-                $person->card_province = Str::lower($data['Provinsi KTP']);
-            }
-            if($person->card_regency == null){
-                $person->card_regency = Str::lower($data['Kota/Kabupaten KTP']);
-            }
-            if($person->card_district == null){
-                $person->card_district = Str::lower($data['Kecamatan KTP']);
-            }
-            if($person->card_village == null){
-                $person->card_village = Str::lower($data['Desa KTP']);
-            }
-            if($person->card_street == null){
-                $person->card_street = Str::upper($data['Alamat KTP']);
-            }
-            if($person->card_rt == null){
-                $person->card_rt = $data['RT KTP'];
-            }
-            if($person->card_rw == null){
-                $person->card_rw = $data['RW KTP'];
-            }
-            $person->save();
-            echo $person->id . ' | <br>';
-            }
-
-        }
-
-        echo 'Success :)';
-    }
-
-    public function storeTestData()
-    {
-        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
-
-        $start_at = 1551-2;
-
-        foreach($datas as $key => $data){
-            if($data['No'] != null && $key>=$start_at){
-                $test = new Test();
-
-                // UUID
-                $uuid = Uuid::uuid4();
-                while(Test::where('code', $uuid)->get()->count() != 0){
-                    $uuid = Uuid::uuid4();
-                }
-
-                $test->code = $uuid;
-
-                $test->user_id = 1;
-                $test->person_id = $data['No'];
-                $test->test = 'swab';
-                $test->type = 'nasofaring-orofaring';
-
-                $test->criteria = null;
-
-                $test->living_province = Str::lower($data['Provinsi Tinggal']);
-                $test->living_regency = Str::lower($data['Kota/Kabupaten Tinggal']);
-                $test->living_district = Str::lower($data['Kecamatan Tinggal']);
-                $test->living_village = Str::lower($data['Desa Tinggal']);
-                $test->living_street = null;
-                $test->living_rt = null;
-                $test->living_rw = null;
-                $test->location = "external";
-                $test->tube_code = null;
-                $test->group_code = null;
-
-                $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 1']);
-
-                if($test->save(['timestamps' => false])){
-                    echo $data['No'] . '| ';
-                    if($key%10 == 0){
-                        echo '<br>';
-                    }
-                }
-
-                if($data['No HP'] != null){
-                    $person = Person::find($data['No']);
-                    $person->phone = $data['No HP'];
-                    $person->save();
-                }
-
-                if($data['Hasil 1'] != 'SWAB'){
-                    $result = new Result();
-                    $result->test_id = $test->id;
-                    $result->value = Str::lower($data['Hasil 1']);
-
-                    if($data['Tanggal Hasil 1'] != null){
-                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 1']);
-                    }else{
-                        $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 1']);
-                    }
-
-                    $result->save(['timestamps' => false]);
-                }
-            }
-        }
-    }
-
-    public function storeSecondTestData()
-    {
-        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
-
-        foreach($datas as $key => $data){
-            if($data['No'] != null){
-                if($data['Tanggal Swab 2'] != null){
-                    $test = new Test();
-
-                    // UUID
-                    $uuid = Uuid::uuid4();
-                    while(Test::where('code', $uuid)->get()->count() != 0){
-                        $uuid = Uuid::uuid4();
-                    }
-
-                    $test->code = $uuid;
-
-                    $test->user_id = 1;
-                    $test->person_id = $data['No'];
-                    $test->test = 'swab';
-                    $test->type = 'nasofaring-orofaring';
-
-                    $test->criteria = null;
-
-                    $test->living_province = Str::lower($data['Provinsi Tinggal']);
-                    $test->living_regency = Str::lower($data['Kota/Kabupaten Tinggal']);
-                    $test->living_district = Str::lower($data['Kecamatan Tinggal']);
-                    $test->living_village = Str::lower($data['Desa Tinggal']);
-                    $test->living_street = null;
-                    $test->living_rt = null;
-                    $test->living_rw = null;
-                    $test->location = "external";
-                    $test->tube_code = null;
-                    $test->group_code = null;
-
-                    $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 2']);
-
-                    if($test->save(['timestamps' => false])){
-                        echo $data['No'] . '| ';
-                        if($key%10 == 0){
-                            echo '<br>';
-                        }
-                    }
-
-                    if($data['No HP'] != null){
-                        $person = Person::find($data['No']);
-                        $person->phone = $data['No HP'];
-                        $person->save(['timestamps' => false]);
-                    }
-
-                    if($data['Hasil 2'] != 'SWAB'){
-                        $result = new Result();
-                        $result->test_id = $test->id;
-                        $result->value = Str::lower($data['Hasil 2']);
-
-                        if($data['Tanggal Hasil 2'] != null){
-                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 2']);
-                        }else{
-                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 2']);
-                        }
-
-                        $result->save(['timestamps' => false]);
-                    }
-                }
-            }
-        }
-    }
-
-    public function storeThirthTestData()
-    {
-        $datas = GsheetsCollection::url('https://docs.google.com/spreadsheets/d/1_B_dXksWcRzcOvMESbdOoxhRmio-SBiVmcpwkHXH3nk/edit#gid=0')->get();
-
-        foreach($datas as $key => $data){
-            if($data['No'] != null){
-                if($data['Tanggal Swab 3'] != null){
-                    $test = new Test();
-
-                    // UUID
-                    $uuid = Uuid::uuid4();
-                    while(Test::where('code', $uuid)->get()->count() != 0){
-                        $uuid = Uuid::uuid4();
-                    }
-
-                    $test->code = $uuid;
-
-                    $test->user_id = 1;
-                    $test->person_id = $data['No'];
-                    $test->test = 'swab';
-                    $test->type = 'nasofaring-orofaring';
-
-                    $test->criteria = null;
-
-                    $test->living_province = Str::lower($data['Provinsi Tinggal']);
-                    $test->living_regency = Str::lower($data['Kota/Kabupaten Tinggal']);
-                    $test->living_district = Str::lower($data['Kecamatan Tinggal']);
-                    $test->living_village = Str::lower($data['Desa Tinggal']);
-                    $test->living_street = null;
-                    $test->living_rt = null;
-                    $test->living_rw = null;
-                    $test->location = "external";
-                    $test->tube_code = null;
-                    $test->group_code = null;
-
-                    $test->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 3']);
-
-                    if($test->save(['timestamps' => false])){
-                        echo $data['No'] . '| ';
-                        if($key%10 == 0){
-                            echo '<br>';
-                        }
-                    }
-
-                    if($data['No HP'] != null){
-                        $person = Person::find($data['No']);
-                        $person->phone = $data['No HP'];
-                        $person->save(['timestamps' => false]);
-                    }
-
-                    if($data['Hasil 3'] != 'SWAB'){
-                        $result = new Result();
-                        $result->test_id = $test->id;
-                        $result->value = Str::lower($data['Hasil 3']);
-
-                        if($data['Tanggal Hasil 3'] != null){
-                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Hasil 3']);
-                        }else{
-                            $result->created_at = Carbon::createFromFormat('d/m/Y', $data['Tanggal Swab 3']);
-                        }
-
-                        $result->save(['timestamps' => false]);
-                    }
-                }
-            }
-        }
-    }
-
-    public function showStat()
+    public function triggerCountCheck()
     {
         $people = Person::whereHas('tests.result', function($q){
-            return $q->where('value', 'Positif');
-        })->orderBy('name')->get();
+            $q->where('value', 'positif');
+        })->get();
 
-        foreach ($people as $key => $value) {
-            echo(($key+1) . '. ' . $value->name  . '|' . $value->id . '<br>');
-        }
+        dump("Total Positif : " . $people->count());
 
-    }
 
-    public function updateTestAt()
-    {
-        $tests = Test::all();
-        foreach ($tests as $key => $test) {
-            $test->test_at = $test->created_at;
-            $test->save();
-        }
-        dd('Success');
+        $people = Person::whereHas('tests.result', function($q){
+            $q->where('value', 'positif');
+        })
+        ->doesntHave('tests.logs')
+        ->get();
+
+        dump("Sedang Isolasi : " . $people->count());
+
+
+        $people = Person::whereHas('tests.result', function($q){
+            $q->where('value', 'positif');
+        })
+        ->whereHas('tests.logs', function($q){
+            $q->where('value', 'meninggal');
+        })
+        ->get();
+
+        dump("Meninggal : " . $people->count());
+
+
+
+
     }
 
     public function updateAllEntitiesCase()
@@ -354,39 +82,75 @@ class TriggerController extends Controller
         }
     }
 
-    public function personCheck()
+    public function triggerResultPublishedAt()
     {
-        $tests = Test::whereNotIn('living_district', [
-            'sokan',
-            'tanah pinoh',
-            'tanah pinoh barat',
-            'sayan', 'belimbing',
-            'belimbing hulu',
-            'nanga pinoh',
-            'pinoh selatan',
-            'pinoh utara',
-            'ella hilir',
-            'menukung'
-        ])->get();
-        dd($tests);
+        $tests = Result::all();
+        foreach ($tests as $test) {
+            $test->published_at = $test->created_at;
+            $test->save();
+        }
+        dd('success');
     }
 
-    // public function countPerson()
-    // {
-    //     $tests = Test::whereDate('created_at', Carbon::create(2020,11,13))->get();
-    //     foreach($tests as $test){
-    //         $personId = $test->person_id;
+    public function triggerTestStatusLog()
+    {
+        // Healed Section
+        $tests = Test::whereNotIn('code', [
+            // In Isolation
+            "4e1b59dc-f736-489a-b1c7-5c07e5905b86",
+            "24be71ed-df7b-41cf-8911-412cfe24fe8a",
+            "8a3ddbff-52fe-4896-9c2f-bffe931a6e50",
+            "0a73ac90-9433-418c-a1a9-a897fee0de0c",
+            "f668c782-2490-4dec-8805-3a25c719e0fb",
+            "8d738404-611b-4a8e-b4fc-123cacd43c55",
+            "3e9b6c93-c8a9-45f4-bfe9-c0ac145b4967",
+            "73c3584f-cf33-45d7-82b1-7aa9f0b73165",
+            "a0c065cb-770a-4b2c-884d-1d0cc4016128",
+            "570e575d-c9e9-4d3b-a366-4fe2e1a0b67a",
+            "dcdcc37d-1069-4c09-925f-2896d8acc58b",
+            "fe3e0667-9a85-4ac4-85c7-92f56865ac21",
+            "ce7a9a32-b2f5-49e2-9069-3483e94f6f05",
+            "c6a3adb3-fc25-415e-9439-7dde94b402b2",
 
-    //         if($test->result != null) {
-    //             $result = $test->result;
-    //             $result->delete();
-    //         }
+            // Death
+            "7ac22e68-10c3-4e44-be7c-bcce5d27d066",
+            "6466ab6e-997e-449b-8345-4bbe67e76ee3",
+            "a700f8d1-0012-4b5e-860c-c40d83ec8e04",
+            "dcdc2aba-4eb4-4314-869f-db74bee37e45",
+            "e4165856-b19e-484b-bd6f-882f68a77d40",
+            "dc9c31f9-23b0-4c69-a90c-306472b0f6de",
+            "8917e74d-b748-4006-b983-fcf9173251c3",
 
-    //         if($test->delete()) {
-    //             $person = Person::find($personId);
-    //             $person->delete();
-    //         }
-    //     }
+        ])->whereHas('result', function($q){
+            $q->where('value', 'positif');
+        })->get();
 
-    // }
+        foreach($tests as $test){
+            $test->logs()->create([
+                'value' => 'sembuh'
+            ]);
+        }
+
+        // Death Section
+        $tests = Test::whereIn('code', [
+            "7ac22e68-10c3-4e44-be7c-bcce5d27d066",
+            "6466ab6e-997e-449b-8345-4bbe67e76ee3",
+            "a700f8d1-0012-4b5e-860c-c40d83ec8e04",
+            "dcdc2aba-4eb4-4314-869f-db74bee37e45",
+            "e4165856-b19e-484b-bd6f-882f68a77d40",
+            "dc9c31f9-23b0-4c69-a90c-306472b0f6de",
+            "8917e74d-b748-4006-b983-fcf9173251c3",
+        ])->get();
+
+        foreach($tests as $test){
+            $test->logs()->create([
+                'value' => 'meninggal'
+            ]);
+        }
+
+        dd('Success :)');
+    }
+
 }
+
+

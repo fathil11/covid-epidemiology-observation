@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Statistic;
 
 use App\User;
 use App\Person;

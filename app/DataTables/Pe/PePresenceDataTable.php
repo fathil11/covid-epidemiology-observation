@@ -64,7 +64,7 @@ class PePresenceDataTable extends DataTable
     {
         /** @var App\User */
         $user = Auth::user();
-        if($user->isPe()){
+        if($user->isPe() || $user->isAdmin()){
             $model = Test::where('location', 'internal')->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
         }elseif($user->isSecondPe()){
             $model = Test::where('location', 'internal')->where('user_id', Auth::user()->id)->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');

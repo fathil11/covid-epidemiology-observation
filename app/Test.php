@@ -43,6 +43,11 @@ class Test extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function logs()
+    {
+        return $this->hasMany(StatusLog::class);
+    }
+
     public function symptoms()
     {
         return $this->hasMany(EpidemiologySymptom::class);
@@ -234,6 +239,16 @@ class Test extends Model
     public function getLivingVillageAttribute($value)
     {
         return Str::title($value);
+    }
+
+    public function scopeWithAndWhereHas($query, $relation, $callback = null)
+    {
+        if (is_callable($callback)) {
+            return $query->with([$relation => $callback])
+                ->whereHas($relation, $callback);
+        }
+
+        return $query->with($relation)->has($relation);
     }
 
 }

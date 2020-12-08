@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\LabAllTestDataTable;
-use App\DataTables\LabTestResultEntryDataTable;
-use App\DataTables\TestResultEntryDataTable;
+use App\DataTables\Lab\LabAllTestDataTable;
+use App\DataTables\Lab\LabTestResultEntryDataTable;
 use App\Result;
 use App\Test;
 use Illuminate\Http\Request;

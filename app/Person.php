@@ -22,7 +22,7 @@ class Person extends Model
 
     public function latestTest()
     {
-        return $this->hasOne(Test::class)->latest();
+        return $this->hasOne(Test::class)->orderBy('created_at', 'desc')->limit(1);
     }
 
     public function getAgeAttribute()
@@ -53,5 +53,15 @@ class Person extends Model
     public function getCardVillageAttribute($value)
     {
         return Str::title($value);
+    }
+
+    public function scopeWithAndWhereHas($query, $relation, $callback = null)
+    {
+        if (is_callable($callback)) {
+            return $query->with([$relation => $callback])
+                ->whereHas($relation, $callback);
+        }
+
+        return $query->with($relation)->has($relation);
     }
 }

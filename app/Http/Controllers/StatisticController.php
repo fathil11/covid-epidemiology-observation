@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Statistic\StatisticPeopleDataTable;
 use App\Test;
 use App\Person;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\DataTables\StatisticPeopleDataTable;
 
 class StatisticController extends Controller
 {

@@ -31,17 +31,17 @@ class PePeopleDataTable extends DataTable
             })
             ->addColumn('latestTest', function($person){
                 if($person->latestTest != null){
-                    return $person->latestTest->test_at->isoFormat('D MMMM Y');
+                    return $person->latestTest->test_at != null ? $person->latestTest->test_at->isoFormat('D MMMM Y') : '';
                 }
                 return '';
             })
-            ->editColumn('name', function(Person $person){
+            ->addColumn('name_display', function(Person $person){
                 return '<b>' . Str::title($person->name) . "</b><br>{$person->nik}";
             })
             ->editColumn('gender', function ($person) {
                 return $person->gender == 'm' ? "Laki-laki" : "Perempuan";
             })
-            ->rawColumns(['action', 'name']);
+            ->rawColumns(['action', 'name_display']);
         }
 
     /**
@@ -53,7 +53,7 @@ class PePeopleDataTable extends DataTable
 
     public function query()
     {
-        $model = Person::with('latestTest')->select(['people.*']);
+        $model = Person::with(['latestTest', 'tests']);
         return $model->newQuery();
     }
 
@@ -80,11 +80,12 @@ class PePeopleDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('name')
-            ->title('Nama')
-            ->responsivePriority(1),
+            Column::make('name_display')
+                ->title('Nama')
+                ->name('name')
+                ->responsivePriority(1),
             Column::make('gender')
-            ->title('Jenis Kelamin'),
+                ->title('Jenis Kelamin'),
             Column::make('latestTest')
                 ->title('Tanggal Terakhir SWAB')
                 ->name('latestTest.created_at')

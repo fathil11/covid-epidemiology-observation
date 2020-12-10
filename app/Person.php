@@ -22,7 +22,7 @@ class Person extends Model
 
     public function latestTest()
     {
-        return $this->hasOne(Test::class)->orderBy('created_at', 'desc')->limit(1);
+        return $this->hasOne(Test::class)->orderBy('created_at', 'asc')->latest();
     }
 
     public function getAgeAttribute()

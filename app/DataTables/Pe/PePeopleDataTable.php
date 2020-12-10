@@ -89,6 +89,8 @@ class PePeopleDataTable extends DataTable
                 ->title('Tanggal Terakhir SWAB')
                 ->name('latestTest.created_at')
                 ->addClass('text-center')
+                ->orderable(false)
+                ->searchable(false)
                 ->responsivePriority(2),
             Column::make('nik')
                 ->title('NIK')

@@ -31,7 +31,7 @@ class PePeopleDataTable extends DataTable
             })
             ->addColumn('latestTest', function($person){
                 if($person->latestTest != null){
-                    return $person->latestTest->created_at->isoFormat('D MMMM Y');
+                    return $person->latestTest->test_at->isoFormat('D MMMM Y');
                 }
                 return '';
             })

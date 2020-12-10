@@ -151,6 +151,22 @@ class TriggerController extends Controller
         dd('Success :)');
     }
 
+    public function sandBox()
+    {
+        $content = [
+            "code" => Ramsey\Uuid\Uuid::uuid4(),
+            "user_id" => 1,
+            "location" => "pontianak",
+            "living_province" => "kalimantan barat",
+            "living_regency" => "melawi",
+            "living_district" => "nanga pinoh",
+            "living_village" => "paal",
+            "living_street" => "DUSUN BELIAN PERMAI",
+            "living_rt" => "001/001",
+        ];
+
+
+    }
 }
 
 

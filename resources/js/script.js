@@ -80,18 +80,7 @@ $(function () {
         PeFun.radioShowHideToggle("health_worker")
     })
 
-
-
-    //*Result Script
-    $('#qrcode').on('load', function () {
-        QRCode.toString($('#qrcode').data('link'), {
-            margin: 0
-        }, function (err, string) {
-            $('#qrcode').html(string)
-            $('#qrcode>svg>path').removeAttr('fill')
-            $('#qrcode>svg>path').removeAttr('stroke')
-        })
-
+    $('#btn-show-result').on('load', function () {
         $('#btn-show-result').on('click', function () {
             $('#btn-show-result').hide()
             // var audio = document.getElementById("bgsound1");
@@ -103,6 +92,17 @@ $(function () {
 
             }, 100)
 
+        })
+    })
+
+    //*Result Script
+    $('#qrcode').on('load', function () {
+        QRCode.toString($('#qrcode').data('link'), {
+            margin: 0
+        }, function (err, string) {
+            $('#qrcode').html(string)
+            $('#qrcode>svg>path').removeAttr('fill')
+            $('#qrcode>svg>path').removeAttr('stroke')
         })
     })
 

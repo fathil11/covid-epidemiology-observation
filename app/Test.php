@@ -48,6 +48,11 @@ class Test extends Model
         return $this->hasMany(StatusLog::class);
     }
 
+    public function latestLog()
+    {
+        return $this->hasOne(StatusLog::class)->orderBy('created_at', 'asc')->latest();
+    }
+
     public function symptoms()
     {
         return $this->hasMany(EpidemiologySymptom::class);

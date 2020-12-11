@@ -32,6 +32,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('pe/{code}/hasil/negatif', 'AdminController@negativeTestResult')->name('admin.pe.result.negative');
     Route::get('pe/{code}/hasil/hapus', 'AdminController@deleteTestResult')->name('admin.pe.result.delete');
     Route::get('statistik', 'StatisticController@index')->name('admin.statistics');
+    Route::get('konfirmasi/status', 'StatusController@index')->name('admin.status.index');
 });
 
 Route::group(['middleware' => 'lab', 'prefix' => 'lab'], function () {

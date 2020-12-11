@@ -49,6 +49,9 @@
                     <li class="nav-item {{ Request::url() == route('admin.result.all') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.result.all') }}">Daftar Hasil</a>
                     </li>
+                    <li class="nav-item {{ Request::url() == route('admin.status.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.status.index') }}">Daftar Status Konfirmasi</a>
+                    </li>
                     @endaccess
 
                     @access('pe')

@@ -52,6 +52,9 @@
                     <li class="nav-item {{ Request::url() == route('admin.status.index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.status.index') }}">Daftar Status Konfirmasi</a>
                     </li>
+                    <li class="nav-item {{ Request::url() == route('admin.publication') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.publication') }}">Publikasi Data</a>
+                    </li>
                     @endaccess
 
                     @access('pe')

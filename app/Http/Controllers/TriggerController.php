@@ -157,13 +157,13 @@ class TriggerController extends Controller
 
     //     $person->user_id = 1;
 
-    //     $person->nik = null;
-    //     $person->name = "SURATMAN";
-    //     $person->phone = "082153886611";
+    //     $person->nik = "1212090508900003";
+    //     $person->name = "Donny Sirait";
+    //     $person->phone = null;
     //     $person->gender = "m";
 
     //     $person->birth_regency = null;
-    //     $person->birth_at = Carbon\Carbon::create(1975, 4, 29);
+    //     $person->birth_at = Carbon\Carbon::create(1990, 8, 5);
     //     $person->parent_name = null;
     //     $person->work = null;
     //     $person->work_instance = null;
@@ -182,12 +182,13 @@ class TriggerController extends Controller
     //         "user_id" => 1,
     //         "location" => "sintang",
     //         "living_province" => "kalimantan barat",
-    //         "living_regency" => "sintang",
-    //         "living_district" => "sintang",
-    //         "living_village" => "sintang",
-    //         "living_street" => null,
-    //         "living_rt" => null,
-    //         "test_at" => Carbon\Carbon::create(2020, 12, 2)
+    //         "living_regency" => "kabupaten melawi",
+    //         "living_district" => "nanga pinoh",
+    //         "living_village" => "tanjung niaga",
+    //         "living_street" => "DUSUN TANAH TINGGI",
+    //         "living_rt" => "001",
+    //         "living_rw" => "001",
+    //         "test_at" => Carbon\Carbon::create(2020, 12, 4)
     //     ];
 
     //     $test = $person->tests()->create($test_content)
@@ -196,6 +197,7 @@ class TriggerController extends Controller
     //         "value" => "positif",
     //         "published_at" => Carbon\Carbon::create(2020, 12, 4)
     //     ])
+
     // }
 }
 

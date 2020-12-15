@@ -33,6 +33,11 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('pe/{code}/hasil/hapus', 'AdminController@deleteTestResult')->name('admin.pe.result.delete');
     Route::get('statistik', 'StatisticController@index')->name('admin.statistics');
     Route::get('konfirmasi/status', 'StatusController@index')->name('admin.status.index');
+    Route::get('konfirmasi/status/{code}/isolasi', 'StatusController@isolate')->name('admin.status.isolate');
+    Route::get('konfirmasi/status/{code}/sembuh', 'StatusController@recover')->name('admin.status.recover');
+    Route::get('konfirmasi/status/{code}/meninggal', 'StatusController@die')->name('admin.status.die');
+    Route::get('publikasi', 'DataPublicationController@index')->name('admin.publication');
+    Route::get('publikasi/data', 'DataPublicationController@publish')->name('admin.publication.publish');
 });
 
 Route::group(['middleware' => 'lab', 'prefix' => 'lab'], function () {

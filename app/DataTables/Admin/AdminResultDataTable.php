@@ -48,6 +48,10 @@ class AdminResultDataTable extends DataTable
                 ];
             })
 
+            ->addColumn('criteria_print', function($result){
+                return $result->test->criteria;
+            })
+
             ->addColumn('symptom_at_print', function($result){
                 return $result->test->symptoms->count() > 0 ? $result->test->symptoms->first()->symptom_at->isoFormat('DD MMMM Y') : '';
             })
@@ -190,7 +194,7 @@ class AdminResultDataTable extends DataTable
                     ])
                     ->initComplete("
                     function () {
-                        this.api().columns([1,5,20]).every(function () {
+                        this.api().columns([1,5,21]).every(function () {
                             var column = this;
                             var input = document.createElement(\"input\");
                             $(input).appendTo($(column.footer()).empty())
@@ -216,7 +220,7 @@ class AdminResultDataTable extends DataTable
                             });
                         });
 
-                        this.api().columns([12,14]).every(function () {
+                        this.api().columns([13,15]).every(function () {
                             var column = this;
                             var input = document.createElement(\"input\");
                             $(input).appendTo($(column.footer()).empty())
@@ -248,7 +252,7 @@ class AdminResultDataTable extends DataTable
                             } );
                         } );
 
-                        this.api().column(16).every( function () {
+                        this.api().column(17).every( function () {
                             var column = this;
                             var select = $('<select class=\"custom-select\"><option value=\"\">--Hasil--</option></select>')
                                 .appendTo( $(column.footer()).empty() )
@@ -267,7 +271,7 @@ class AdminResultDataTable extends DataTable
                             } );
                         } );
 
-                        this.api().column(19).every( function () {
+                        this.api().column(20).every( function () {
                             var column = this;
                             var select = $('<select class=\"custom-select\"><option value=\"\">--Kecamatan--</option></select>')
                                 .appendTo( $(column.footer()).empty() )
@@ -287,7 +291,7 @@ class AdminResultDataTable extends DataTable
                         } );
                     }
                     ")
-                    ->orderBy(8, 'desc');
+                    ->orderBy(15, 'desc');
     }
 
     /**
@@ -370,6 +374,13 @@ class AdminResultDataTable extends DataTable
                 ->visible(false),
 
             //! 11
+            Column::make('criteria_print')
+                ->title('Alasan')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 12
             Column::make('symptom_at_print')
                 ->name('test.symptoms.symptom_at')
                 ->title('Tanggal Munculnya Gejala')
@@ -377,7 +388,7 @@ class AdminResultDataTable extends DataTable
                 ->orderable(false)
                 ->visible(false),
 
-            //! 12
+            //! 13
             Column::make('symptoms_print')
                 ->name('test.symptoms')
                 ->title('Keluhan')
@@ -385,7 +396,7 @@ class AdminResultDataTable extends DataTable
                 ->orderable(false)
                 ->visible(false),
 
-            //! 13
+            //! 14
             Column::make('test')
                 ->title('Tanggal Tes')
                 ->name('test.test_at')
@@ -395,12 +406,12 @@ class AdminResultDataTable extends DataTable
                 ->printable(false)
                 ->exportable(false),
 
-            //! 14
+            //! 15
             Column::make('test_at_print')
                 ->title('Tanggal Tes')
                 ->visible(false),
 
-            //! 15
+            //! 16
             Column::make('created_at')
                 ->title('Tanggal Keluar Hasil')
                 ->name('created_at')
@@ -410,16 +421,16 @@ class AdminResultDataTable extends DataTable
                 ->printable(false)
                 ->exportable(false),
 
-            //! 16
+            //! 17
             Column::make('created_at_print')
                 ->title('Tanggal Keluar Hasil')
                 ->visible(false),
 
-            //! 17
+            //! 18
             Column::make('value')
                 ->title('Hasil'),
 
-            //! 18
+            //! 19
             Column::make('province_display')
                 ->title('Provinsi')
                 ->name('test.living_province')
@@ -427,7 +438,7 @@ class AdminResultDataTable extends DataTable
                 ->orderable(false)
                 ->visible(false),
 
-            //! 19
+            //! 20
             Column::make('regency_display')
                 ->title('Kota/Kabupaten')
                 ->name('test.living_regency')
@@ -435,17 +446,17 @@ class AdminResultDataTable extends DataTable
                 ->orderable(false)
                 ->visible(false),
 
-            //! 20
+            //! 21
             Column::make('district_display')
                 ->title('Kecamatan')
                 ->name('test.living_district'),
 
-            //! 21
+            //! 22
             Column::make('village_display')
                 ->title('Desa')
                 ->name('test.living_village'),
 
-            //! 22
+            //! 23
             Column::make('action')
                 ->title('Aksi')
                 ->orderable(false)

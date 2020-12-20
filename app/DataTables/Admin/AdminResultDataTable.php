@@ -24,7 +24,7 @@ class AdminResultDataTable extends DataTable
         return datatables()
             ->eloquent($query)
 
-            //* RESULT SECTION
+            //! RESULT SECTION
             ->editColumn('value', function($result){
                 return Str::title($result->value);
             })
@@ -40,7 +40,7 @@ class AdminResultDataTable extends DataTable
                 return $result->created_at->isoFormat('DD MMMM Y');
             })
 
-            //* TEST SECTION
+            //! TEST SECTION
             ->addColumn('test', function($result){
                 return [
                     'format' => $result->test->test_at != '' ? $result->test->test_at->isoFormat('DD MMMM Y') : '',
@@ -48,8 +48,24 @@ class AdminResultDataTable extends DataTable
                 ];
             })
 
+            ->addColumn('symptom_at_print', function($result){
+                return $result->test->symptoms->count() > 0 ? $result->test->symptoms->first()->symptom_at->isoFormat('DD MMMM Y') : '';
+            })
+
+            ->addColumn('symptoms_print', function($result){
+                return $result->test->symptoms->count() > 0 ? $result->test->symptoms_list : '';
+            })
+
             ->addColumn('test_at_print', function($result){
                 return $result->test->test_at != '' ? $result->test->test_at->isoFormat('DD MMMM Y') : '';
+            })
+
+            ->addColumn('province_display', function($result){
+                return $result->test->living_province;
+            })
+
+            ->addColumn('regency_display', function($result){
+                return $result->test->living_regency;
             })
 
             ->addColumn('district_display', function($result){
@@ -60,9 +76,62 @@ class AdminResultDataTable extends DataTable
                 return $result->test->living_village;
             })
 
-            //* PERSON SECTION
+            ->addColumn('living_address_print', function($result){
+                $address = "";
+                if($result->test->living_street != null){
+                    $address = $result->test->living_street;
+                }
+                if($result->test->living_village != null){
+                    $address .= " " . $result->test->living_village;
+                }
+                if($result->test->living_district != null){
+                    $address .= " " . $result->test->living_district;
+                }
+                if($result->test->living_regency != null){
+                    $address .= " " . $result->test->living_regency;
+                }
+                if($result->test->living_province != null){
+                    $address .= " " . $result->test->living_province;
+                }
+                return $address;
+            })
+
+            //! PERSON SECTION
             ->addColumn('name_print', function($result){
                 return Str::title($result->test->person->name);
+            })
+
+            ->addColumn('nik_print', function($result){
+                return $result->test->person->nik != null ? $result->test->person->nik : '';
+            })
+
+            ->addColumn('work_print', function($result){
+                return $result->test->person->work != null ? Str::title($result->test->person->work) : '';
+            })
+
+            ->addColumn('work_instance_print', function($result){
+                return $result->test->person->work_instance != null ? Str::title($result->test->person->work_instance) : '';
+            })
+
+            ->addColumn('card_address_print', function($result){
+                $address = "";
+
+                if($result->test->person->card_street != null){
+                    $address = $result->test->person->card_street;
+                }
+                if($result->test->person->card_village != null){
+                    $address .= " " . $result->test->person->card_village;
+                }
+                if($result->test->person->card_district != null){
+                    $address .= " " . $result->test->person->card_district;
+                }
+                if($result->test->person->card_regency != null){
+                    $address .= " " . $result->test->person->card_regency;
+                }
+                if($result->test->person->card_province != null){
+                    $address .= " " . $result->test->person->card_province;
+                }
+                return $address;
             })
 
             ->addColumn('name_display', function($result){
@@ -121,7 +190,7 @@ class AdminResultDataTable extends DataTable
                     ])
                     ->initComplete("
                     function () {
-                        this.api().columns([0,4,11]).every(function () {
+                        this.api().columns([1,5,20]).every(function () {
                             var column = this;
                             var input = document.createElement(\"input\");
                             $(input).appendTo($(column.footer()).empty())
@@ -132,7 +201,7 @@ class AdminResultDataTable extends DataTable
                             });
                         });
 
-                        this.api().columns([3]).every(function () {
+                        this.api().columns([4]).every(function () {
                             var column = this;
                             var input = document.createElement(\"input\");
                             $(input).appendTo($(column.footer()).empty())
@@ -147,7 +216,7 @@ class AdminResultDataTable extends DataTable
                             });
                         });
 
-                        this.api().columns([5,7]).every(function () {
+                        this.api().columns([12,14]).every(function () {
                             var column = this;
                             var input = document.createElement(\"input\");
                             $(input).appendTo($(column.footer()).empty())
@@ -160,7 +229,7 @@ class AdminResultDataTable extends DataTable
                             });
                         });
 
-                        this.api().column(2).every( function () {
+                        this.api().column(3).every( function () {
                             var column = this;
                             var select = $('<select class=\"custom-select\"><option value=\"\">--Jenis Kelamin--</option></select>')
                                 .appendTo( $(column.footer()).empty() )
@@ -179,7 +248,7 @@ class AdminResultDataTable extends DataTable
                             } );
                         } );
 
-                        this.api().column(9).every( function () {
+                        this.api().column(16).every( function () {
                             var column = this;
                             var select = $('<select class=\"custom-select\"><option value=\"\">--Hasil--</option></select>')
                                 .appendTo( $(column.footer()).empty() )
@@ -198,7 +267,7 @@ class AdminResultDataTable extends DataTable
                             } );
                         } );
 
-                        this.api().column(10).every( function () {
+                        this.api().column(19).every( function () {
                             var column = this;
                             var select = $('<select class=\"custom-select\"><option value=\"\">--Kecamatan--</option></select>')
                                 .appendTo( $(column.footer()).empty() )
@@ -218,7 +287,7 @@ class AdminResultDataTable extends DataTable
                         } );
                     }
                     ")
-                    ->orderBy(7, 'desc');
+                    ->orderBy(8, 'desc');
     }
 
     /**
@@ -229,6 +298,14 @@ class AdminResultDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            //! 1
+        Column::make('nik_print')
+                ->name('test.person.nik')
+                ->title('NIK')
+                ->visible(false)
+                ->orderable(false),
+
+            //! 2
             Column::make('name_display')
                 ->title('Nama')
                 ->name('test.person.name')
@@ -236,28 +313,79 @@ class AdminResultDataTable extends DataTable
                 ->exportable(false)
                 ->orderable(true),
 
+            //! 3
             Column::make('name_print')
                 ->name('test.person.name')
                 ->title('Nama')
                 ->visible(false)
                 ->orderable(false),
 
+            //! 4
             Column::make('gender_display')
                 ->name('test.person.gender')
                 ->title('Jenis Kelamin')
                 ->orderable(true),
 
+            //! 5
             Column::make('age_display')
                 ->name('test.person.birth_at')
                 ->title('Umur')
                 ->orderable(false)
                 ->searchable(true),
 
+            //! 6
             Column::make('phone_display')
                 ->name('test.person.phone')
                 ->title('Nomor HP')
                 ->orderable(false),
 
+            //! 7
+            Column::make('work_print')
+                ->name('test.person.work')
+                ->title('Pekerjaan')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 8
+            Column::make('work_instance_print')
+                ->name('test.person.work_instance')
+                ->title('Instansi')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 9
+            Column::make('card_address_print')
+                ->title('Alamat KTP')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 10
+            Column::make('living_address_print')
+                ->title('Alamat Tinggal')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 11
+            Column::make('symptom_at_print')
+                ->name('test.symptoms.symptom_at')
+                ->title('Tanggal Munculnya Gejala')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 12
+            Column::make('symptoms_print')
+                ->name('test.symptoms')
+                ->title('Keluhan')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 13
             Column::make('test')
                 ->title('Tanggal Tes')
                 ->name('test.test_at')
@@ -267,10 +395,12 @@ class AdminResultDataTable extends DataTable
                 ->printable(false)
                 ->exportable(false),
 
+            //! 14
             Column::make('test_at_print')
                 ->title('Tanggal Tes')
                 ->visible(false),
 
+            //! 15
             Column::make('created_at')
                 ->title('Tanggal Keluar Hasil')
                 ->name('created_at')
@@ -280,21 +410,42 @@ class AdminResultDataTable extends DataTable
                 ->printable(false)
                 ->exportable(false),
 
+            //! 16
             Column::make('created_at_print')
                 ->title('Tanggal Keluar Hasil')
                 ->visible(false),
 
+            //! 17
             Column::make('value')
                 ->title('Hasil'),
 
+            //! 18
+            Column::make('province_display')
+                ->title('Provinsi')
+                ->name('test.living_province')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 19
+            Column::make('regency_display')
+                ->title('Kota/Kabupaten')
+                ->name('test.living_regency')
+                ->searchable(false)
+                ->orderable(false)
+                ->visible(false),
+
+            //! 20
             Column::make('district_display')
                 ->title('Kecamatan')
                 ->name('test.living_district'),
 
+            //! 21
             Column::make('village_display')
                 ->title('Desa')
                 ->name('test.living_village'),
 
+            //! 22
             Column::make('action')
                 ->title('Aksi')
                 ->orderable(false)

@@ -133,7 +133,7 @@ class Test extends Model
             }
 
             if($value->sub_value != null){
-                $list .= ' ('. $value->sub_value . ')';
+                $list .= ' ('. $value->sub_value . ' ℃)';
             }
 
             if($key != ($this->symptoms->count()-1)){

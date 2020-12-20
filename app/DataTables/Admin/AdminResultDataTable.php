@@ -102,7 +102,7 @@ class AdminResultDataTable extends DataTable
             })
 
             ->addColumn('nik_print', function($result){
-                return $result->test->person->nik != null ? $result->test->person->nik : '';
+                return $result->test->person->nik != null ? $result->test->person->nik . " " : '';
             })
 
             ->addColumn('work_print', function($result){

@@ -135,8 +135,9 @@ class Test extends Model
             if($value->sub_value != null){
                 if($value->value == 'demam'){
                     $list .= ' ('. $value->sub_value . ' ℃)';
+                }else{
+                    $list .= 'Lainnya : '. $value->sub_value;
                 }
-                $list .= 'Lainnya : '. $value->sub_value;
             }
 
             if($key != ($this->symptoms->count()-1)){

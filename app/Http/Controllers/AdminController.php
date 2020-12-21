@@ -18,6 +18,18 @@ class AdminController extends Controller
         return $dataTable->render('admin.results');
     }
 
+    public function peEdit($code)
+    {
+        $test = Test::with(['person'])->where('code', $code)->firstOrFail();
+        return view('admin.pe-edit', compact('test'));
+    }
+
+    public function peUpdate($code)
+    {
+        $test = Test::where('code', $code)->firstOrFail();
+        dd($test);
+    }
+
     public function showAllResults(AdminResultDataTable $dataTable)
     {
         return $dataTable->render('datatables.index', [

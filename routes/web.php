@@ -28,6 +28,8 @@ Route::get('/', function () {
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('hasil', 'AdminController@showAllResults')->name('admin.result.all');
     Route::get('pe', 'AdminController@showAllPe')->name('admin.pe.all');
+    Route::get('pe/{code}/edit', 'AdminController@peEdit')->name('admin.pe.edit');
+    Route::post('pe/{code}/update', 'AdminController@peUpdate')->name('admin.pe.update');
     Route::get('pe/{code}/hasil/positif', 'AdminController@positiveTestResult')->name('admin.pe.result.positive');
     Route::get('pe/{code}/hasil/negatif', 'AdminController@negativeTestResult')->name('admin.pe.result.negative');
     Route::get('pe/{code}/hasil/hapus', 'AdminController@deleteTestResult')->name('admin.pe.result.delete');

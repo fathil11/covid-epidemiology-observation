@@ -30,8 +30,8 @@ class StatisticController extends Controller
             'menukung'
         ];
 
-        $people = Person::with(['tests', 'tests.result'])->whereNotNull('test_at')->get();
-        $tests = Test::with(['person', 'result'])->get();
+        $people = Person::with(['tests', 'tests.result'])->get();
+        $tests = Test::with(['person', 'result'])->whereNotNull('test_at')->get();
 
         //! TOTAL
         $statistics['tests_total'] = $tests->count();

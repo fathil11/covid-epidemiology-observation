@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/statistic', 'ApiController@statistic');
+
 Route::get('/location/provinces', 'ApiController@provinces');
 Route::get('/location/regencies', 'ApiController@allRegencies');
 Route::get('/location/{province}/regencies', 'ApiController@regencies');

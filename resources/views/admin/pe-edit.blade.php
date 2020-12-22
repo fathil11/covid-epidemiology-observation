@@ -4,7 +4,7 @@
     <h1 class="text-primary text-center mt-5">Ubah Informasi PE <br class="d-block d-md-none">E-SWAB</h1>
     <h5 class="text-primary text-center">Powered by Melawi Software Dev</h5>
 
-    <form action="{{ route('admin.pe.update', ['code' => $test->code]) }}" method="POST" enctype="multipart/form-data" autocomplete="off" id="person_update">
+    <form action="{{ route('admin.pe.update', ['code' => $test->code]) }}" method="POST" enctype="multipart/form-data" autocomplete="off" id="pe_edit">
 
     @csrf
     @method('POST')
@@ -165,16 +165,148 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label for="card_rt">RT</label>
-                            <input type="text" name="card_rt" class="form-control rounded-pill" placeholder="Nomor RT">
+                            <input type="text" name="card_rt" class="form-control rounded-pill" value="{{ $test->person->card_rt }}" placeholder="Nomor RT">
                         </div>
 
                         <div class="form-group col">
                             <label for="card_rw">RW</label>
-                            <input type="text" name="card_rw" class="form-control rounded-pill" placeholder="Nomor RW">
+                            <input type="text" name="card_rw" class="form-control rounded-pill" value="{{ $test->person->card_rw }}" placeholder="Nomor RW">
 
                         </div>
                     </div>
                 </div>
+
+                @include('components.form-section-end')
+                @include('components.form-header', ['title' => 'Alamat Tinggal'])
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="living_province">Provinsi</label>
+                        <select name="living_province" title="Pilih Provinsi" id="living_provinces" class="form-control"
+                            data-live-search="true" data-style="bg-white rounded-pill">
+                            <option value="{{ $test->living_province }}" selected>{{ Str::title($test->living_province) }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="living_regency">Kota/Kabupaten</label>
+                        <select name="living_regency" title="Pilih Kota/Kabupaten" id="living_regencies" class="form-control"
+                            data-live-search="true" data-style="bg-white rounded-pill">
+                            <option value="{{ $test->living_regency }}" selected>{{ Str::title($test->living_regency) }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="living_district">Kecamatan</label>
+                        <select name="living_district" title="Pilih Kecamatan" id="living_districts" class="form-control"
+                            data-live-search="true" data-style="bg-white rounded-pill">
+                            <option value="{{ $test->living_district }}" selected>{{ Str::title($test->living_district) }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="living_village">Desa/Dusun</label>
+                        <select name="living_village" title="Pilih Desa/Dusun" id="living_villages" class="form-control"
+                            data-live-search="true" data-style="bg-white rounded-pill">
+                            <option value="{{ $test->living_village }}" selected>{{ Str::title($test->living_village) }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="living_street">Alamat</label>
+                        <input type="text" name="living_street" class="form-control rounded-pill"
+                            placeholder="Masukan alamat Dusun/Jalan/Gang" value="{{ Str::title($test->living_street) }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="living_rt">RT</label>
+                            <input type="text" name="living_rt" class="form-control rounded-pill" value="{{ $test->living_rt }}" placeholder="Nomor RT">
+                        </div>
+
+                        <div class="form-group col">
+                            <label for="living_rw">RW</label>
+                            <input type="text" name="living_rw" class="form-control rounded-pill" value="{{ $test->living_rw }}" placeholder="Nomor RW">
+
+                        </div>
+                    </div>
+                </div>
+
+                @include('components.form-section-end')
+                @include('components.form-header', ['title' => 'Informasi SWAB'])
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group">
+                        <label for="swab_priority">Prioritas SWAB</label>
+                        <select name="swab_priority" class="form-control selectpicker" data-style="bg-white rounded-pill"
+                            title="Pilih prioritas SWAB" id="swab_priorities" data-live-search="true">
+                            <option value="Normal" {{ $test->cito ? "selected" : '' }}>Normal</option>
+                            <option value="Cito" {{ !$test->cito ? "selected" : '' }}>Cito</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group">
+                        <label for="swab_type">Jenis SWAB</label>
+                        <select name="swab_type" class="form-control selectpicker" data-style="bg-white rounded-pill"
+                            title="Pilih jenis SWAB" id="swab_types" data-live-search="true">
+                            <option value="nasofaring" {{ $test->type == 'Nasofaring' ? "selected" : '' }}>Nasofaring</option>
+                            <option value="orofaring" {{ $test->type == 'Orofaring' ? "selected" : '' }}>Orofaring</option>
+                            <option value="nasofaring-orofaring" {{ $test->type == 'Nasofaring-Orofaring' ? "selected" : '' }}>Nasofaring Orofaring</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group">
+                        <label for="swab_location">Lokasi Lab SWAB</label>
+                        <select name="swab_location" class="form-control selectpicker" data-style="bg-white rounded-pill"
+                            title="Pilih loaksi lab SWAB" id="swab_locations" data-live-search="true">
+                            <option value="internal" {{ $test->location == 'internal' ? "selected" : '' }}>Internal</option>
+                            <option value="sintang" {{ $test->location == 'sintang' ? "selected" : '' }}>Sintang</option>
+                            <option value="pontianak" {{ $test->location == 'pontianak' ? "selected" : '' }}>Pontianak</option>
+                            <option value="external" {{ $test->location == 'external' ? "selected" : '' }}>External</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="form-group">
+                        <label for="note">Catatan</label>
+                        <textarea type="text" name="note" class="form-control rounded-pill"
+                            placeholder="Masukan catatan (dapat dikosongkan)">{{ $test->note }}</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group">
+                        <label for="test_at">Tanggal Tes</label>
+                        <input type="text" name="test_at" class="form-control rounded-pill datedropper"
+                            placeholder="Masukan tanggal tes pasien" value="{{ $test->test_at != null ? $test->test_at->format('m/d/Y') : '' }}">
+                    </div>
+                </div>
+
+                @if ($test->result != null)
+                <div class="col-md-6 mt-3">
+                    <div class="form-group">
+                        <label for="test_at">Tanggal Hasil</label>
+                        <input type="text" name="test_at" class="form-control rounded-pill datedropper"
+                            placeholder="Masukan tanggal tes pasien" value="{{ $test->result->created_at != null ? $test->result->created_at->format('m/d/Y') : '' }}">
+                    </div>
+                </div>
+                @endif
+
 
                 <div class="col-md-12 mt-3 mb-5">
                     <button class="btn btn-primary rounded-pill btn-block">Edit</button>

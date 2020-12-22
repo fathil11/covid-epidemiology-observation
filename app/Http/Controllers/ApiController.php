@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
+    public function statistic()
+    {
+        $people = Person::with(['tests', 'tests.result'])->get();
+        $tests = Test::with(['person', 'result'])->whereNotNull('test_at')->get();
+
+        $statistics['positive_total'] = $this->getPeopleStatistic($people, null, null, 'positif');
+        $statistics['positive_isolation'] = $this->getPeopleStatistic($people, null, null, 'positif');
+
+    }
+
     public function provinces()
     {
         $provinces = Province::all();

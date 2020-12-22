@@ -60,16 +60,36 @@ class AdminTestDataTable extends DataTable
                     'timestamp' => $test->result != null ? $test->result->created_at->timestamp : '',
                 ];
             })
-            ->addColumn('action', function($test){
-                $positive_btn = '<a href="' . route('admin.pe.result.positive', $test->code) . '" class="btn btn-danger mr-2"><p class="mb-0">+</p></a>';
-                $negative_btn = '<a href="' . route('admin.pe.result.negative', $test->code) . '" class="btn btn-success mr-2"><p class="mb-0">-</p></a>';
+            ->addColumn('main_action', function($test){
+                $edit_btn = '<a href="' . route('admin.pe.edit', $test->code) . '" class="btn btn-warning mr-n4"><p class="mb-0">Edit</p></a>';
+                $delete_btn = '
+                <form action="'.route('admin.pe.delete', $test->code) .'" method="POST">
+                    '.csrf_field().'
+                    '.method_field('delete').'
+                    <button onClick="return false" class="btn btn-danger btn-delete"><p class="mb-0">Hapus</p></button>
+                </form>
+                ';
+
+                return "<div class='row'>
+                            <div class='col-md-6'>{$edit_btn}</div>
+                            <div class='col-md-6'>{$delete_btn}</div>
+                        </div>";
+            })
+            ->addColumn('result_action', function($test){
+                $positive_btn = '<a href="' . route('admin.pe.result.positive', $test->code) . '" class="btn btn-danger mr-n4"><p class="mb-0">+</p></a>';
+                $negative_btn = '<a href="' . route('admin.pe.result.negative', $test->code) . '" class="btn btn-success mr-n4"><p class="mb-0">-</p></a>';
                 $delete_btn = '';
                 if($test->result != null){
-                    $delete_btn = '<a href="' . route('admin.pe.result.delete', $test->code) . '" class="btn btn-secondary mr-2"><p class="mb-0">x</p></a>';
+                    $delete_btn = '<a href="' . route('admin.pe.result.delete', $test->code) . '" class="btn btn-secondary"><p class="mb-0">x</p></a>';
                 }
-                return $positive_btn . $negative_btn . $delete_btn;
+
+                return "<div class='row mx-2'>
+                            <div class='col-md-4'>{$positive_btn}</div>
+                            <div class='col-md-4'>{$negative_btn}</div>
+                            <div class='col-md-4'>{$delete_btn}</div>
+                        </div>";
             })
-            ->rawColumns(['action', 'person_display']);
+            ->rawColumns(['main_action', 'result_action', 'person_display']);
     }
 
     /**
@@ -150,8 +170,18 @@ class AdminTestDataTable extends DataTable
             Column::make('result_value')
                 ->title('Hasil')
                 ->name('result.value'),
-            Column::make('action')
+            Column::make('result_action')
+                ->title('Ubah Hasil')
+                ->addClass('text-center')
+                ->orderable(false)
+                ->searchable(false)
+                ->exportable(false)
+                ->printable(false),
+            Column::make('main_action')
                 ->title('Aksi')
+                ->addClass('text-center')
+                ->orderable(false)
+                ->searchable(false)
                 ->exportable(false)
                 ->printable(false)
         ];

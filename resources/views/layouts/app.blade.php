@@ -111,7 +111,7 @@
         </div>
     </nav>
     @yield('content')
-    @include('sweetalert::alert')
     @stack('scripts')
+    @include('sweetalert::alert')
 </body>
 </html>

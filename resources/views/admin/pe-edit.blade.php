@@ -22,7 +22,7 @@
                 <div class="col-md-6 col-sm-12 mt-3">
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" name="name" id="name" class="form-control rounded-pill" placeholder="Masukan nama lengkap" value="{{ $test->person->name }}">
+                        <input type="text" name="name" id="name" class="form-control rounded-pill" placeholder="Masukan nama lengkap" value="{{ Str::title($test->person->name) }}">
                     </div>
                 </div>
 

@@ -2,6 +2,7 @@ import * as ListFun from './script-select';
 import * as DateFun from './script-date';
 import * as ValidateFun from './script-validation';
 import * as PeFun from './script-pe';
+import * as Swal from 'sweetalert2';
 import Chart from 'chart.js';
 
 const works = require('../data/work-list.json');
@@ -98,10 +99,25 @@ $(function () {
         //--Full Location Init
         ListFun.fullLocationListInit('card')
         ListFun.fullLocationListInit('living')
+    }
 
-        //--Pe Info Init
-
-
+    //! Admin PE Section
+    if ($('#admintest-table').length) {
+        $(document).on('click', '.btn-delete', function (e) {
+            Swal.fire({
+                title: "Kalem bang JAGO !!!",
+                text: "Yakin mau hapus datanya ?",
+                icon: "warning",
+                confirmButtonColor: "#e3342f",
+                confirmButtonText: "Yoi",
+                cancelButtonText: "Ngga",
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parent().get(0).submit()
+                }
+            });
+        })
     }
 
     //! Result Script Section

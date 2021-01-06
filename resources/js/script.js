@@ -85,7 +85,32 @@ $(function () {
         PeFun.radioShowHideToggle("health_worker")
     }
 
-    //! PE Edit Script Section
+    //! Admin PE Store Script Section
+    if ($('#admin_pe_create').length) {
+        //--Validation Init
+        ValidateFun.createPeAdminValidationInit();
+
+        //--Datedroper Init
+        DateFun.dateDropperInit();
+
+        //--Birth Regencies Location Init
+        ListFun.regencyLocationListInit('#birth_regencies');
+
+        //--Works List Init
+        ListFun.listInit(works, '#works');
+
+        //--Full Location Init
+        ListFun.fullLocationListInit('card')
+        ListFun.fullLocationListInit('living')
+
+        //--SWAB Information Init
+        ListFun.listInit(['Nasofaring', 'Orofaring', 'Nasofaring-Orofaring'], '#swab_types');
+        ListFun.listInit(['Normal', 'Cito'], '#swab_priorities');
+        ListFun.listInit(['Internal', 'Sintang', 'Pontianak'], '#swab_locations');
+        ListFun.listInit(['Positif', 'Negatif'], '#swab_result');
+    }
+
+    //! Admin PE Edit Script Section
     if ($('#pe_edit').length) {
         //--Datedroper Init
         DateFun.dateDropperInit();

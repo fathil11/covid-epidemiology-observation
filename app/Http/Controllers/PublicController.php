@@ -21,6 +21,21 @@ class PublicController extends Controller
     {
         $test = Test::with(['person', 'result'])->where('code', $code)->firstOrFail();
 
+        $code_number_proc = Test::whereHas('result', function($q) use ($test) {
+            $q->whereDate('created_at', '>=', $test->result->created_at->startOfYear());
+            $q->whereDate('created_at', '<=', $test->result->created_at->endOfYear());
+        })
+        ->get()->sortBy('result.created_at');
+
+        $counter = 0;
+        foreach($code_number_proc as $proc){
+            $counter++;
+            if($proc->code == $code){
+                $mail_code = $counter;
+                break;
+            }
+        }
+
         if($test->result == null){
             return abort(404);
         }
@@ -35,6 +50,8 @@ class PublicController extends Controller
             $data['location'] = Str::title($test->location);
         }
 
+        $data['mail_code'] = $mail_code;
+        $data['mail_year'] = $test->result->created_at->isoFormat('Y');
         $data['result_at'] = $test->result->created_at->isoFormat('DD MMMM Y');
         $data['mail_at'] = Carbon::make($test->result->created_at)->addDay()->isoFormat('DD MMMM Y');
         $data['name'] = $test->person->name;

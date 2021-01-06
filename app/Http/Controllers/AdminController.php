@@ -21,13 +21,23 @@ class AdminController extends Controller
         return $dataTable->render('admin.results');
     }
 
-    public function peEdit($code)
+    public function createPe()
+    {
+        return view('admin.pe-create');
+    }
+
+    public function storePe(Request $request)
+    {
+        dd($request);
+    }
+
+    public function editPe($code)
     {
         $test = Test::with(['person'])->where('code', $code)->firstOrFail();
         return view('admin.pe-edit', compact('test'));
     }
 
-    public function peUpdate(AdminPeUpdateRequest $request, $code)
+    public function updatePe(AdminPeUpdateRequest $request, $code)
     {
         $test = Test::with(['person'])->where('code', $code)->firstOrFail();
         $request->validated();
@@ -89,7 +99,7 @@ class AdminController extends Controller
         return abort(501);
     }
 
-    public function peDelete($code)
+    public function deletePe($code)
     {
         $test = Test::where('code', $code)->firstOrFail();
         if($test->delete()){

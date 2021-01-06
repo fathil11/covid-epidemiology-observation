@@ -747,8 +747,235 @@ function createPeValidationInit() {
     })
 }
 
+function createPeAdminValidationInit() {
+    $('#admin_pe_create').validate({
+        debug: false,
+        rules: {
+            nik: {
+                required: false,
+                digits: true,
+                minlength: 16,
+                maxlength: 16
+            },
+            name: {
+                required: true,
+                letterswithbasicpunc: true,
+                minlength: 3,
+                maxlength: 70
+            },
+            phone: {
+                required: true,
+                digits: true,
+                minlength: 9,
+                maxlength: 13
+            },
+            gender: {
+                required: true
+            },
+            id_card_file: {
+                required: false,
+                accept: "image/*"
+            },
+            birth_regency: {
+                required: false
+            },
+            birth_at: {
+                required: false,
+            },
+            parent_name: {
+                required: false,
+                letterswithbasicpunc: true,
+                minlength: 3,
+                maxlength: 70
+            },
+            work: {
+                required: false
+            },
+            work_instance: {
+                required: false,
+            },
+            card_province: {
+                required: false
+            },
+            card_regency: {
+                required: false
+            },
+            card_district: {
+                required: false
+            },
+            card_village: {
+                required: false
+            },
+            card_street: {
+                required: false
+            },
+            card_rt: {
+                number: false
+            },
+            card_rw: {
+                number: false
+            }
+
+        },
+        messages: {
+            nik: {
+                required: "NIK/Nomor identitas tidak boleh kosong",
+                digits: "NIK/Nomor identitas hanya boleh berisikan angka",
+                minlength: "NIK/Nomor identitas harus berisikan 16 karakter",
+                maxlength: "NIK/Nomor identitas tidak boleh melebihi 16 karakter"
+            },
+            name: {
+                required: "Nama tidak boleh kosong",
+                letterswithbasicpunc: "Nama hanya boleh berisikan huruf",
+                minlength: "Nama tidak boleh kurang dari 3 karakter",
+                maxlength: "Nama tidak boleh melebihi 70 karakter"
+            },
+            phone: {
+                required: "Nomor HP tidak boleh kosong",
+                digits: "Nomor HP hanya boleh berisikan angka",
+                minlength: "Nomor HP tidak boleh kurang dari 9 digit",
+                maxlength: "Nomor HP tidak boleh melebihi 13 digit"
+            },
+            gender: {
+                required: "Jenis kelamin harus dipilih"
+            },
+            id_card_file: {
+                required: "Foto harus dimasukan",
+                accept: "Foto harus berbentuk gambar"
+            },
+            birth_regency: {
+                required: "Tempat lahir harus diisi"
+            },
+            birth_at: {
+                required: "Tanggal lahir harus diisi"
+            },
+            parent_name: {
+                required: "Nama orang tua tidak boleh kosong",
+                letterswithbasicpunc: "Nama orang tua hanya boleh berisikan huruf",
+                minlength: "Nama orang tua tidak boleh kurang dari 3 karakter",
+                maxlength: "Nama orang tua tidak boleh melebihi 70 karakter"
+            },
+            work: {
+                required: "Pekerjaan harus diisi"
+            },
+            work_instance: {
+                required: "Instansi pekerjaan harus diisi, apabila tidak ada maka isikan tidak ada",
+                minlength: "Instansi pekerjaan tidak boleh kurang dari 3 karakter",
+                maxlength: "Nama orang tua tidak boleh melebihi 70 karakter"
+            },
+            card_province: {
+                required: "Provinsi KTP harus diisi"
+            },
+            card_regency: {
+                required: "Kota/Kabupaten KTP harus diisi"
+            },
+            card_district: {
+                required: "Kecamatan KTP harus diisi"
+            },
+            card_village: {
+                required: "Desa KTP harus diisi"
+            },
+            card_street: {
+                required: "Alamat KTP harus diisi"
+            },
+            card_rt: {
+                number: "Nomor RT KTP harus dalam format angka"
+            },
+            card_rw: {
+                number: "Nomor RW KTP harus dalam format angka"
+            },
+            living_province: {
+                required: "Provinsi tinggal harus diisi"
+            },
+            living_regency: {
+                required: "Kota/Kabupaten tinggal harus diisi"
+            },
+            living_district: {
+                required: "Kecamatan tinggal harus diisi"
+            },
+            living_village: {
+                required: "Desa tinggal harus diisi"
+            },
+            living_street: {
+                required: "Jalan tinggal harus diisi"
+            },
+            living_rt: {
+                number: "Nomor RT tinggal harus dalam format angka"
+            },
+            living_rw: {
+                number: "Nomor RW tinggal harus dalam format angka"
+            },
+
+        },
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass("invalid-feedback");
+
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.next("label"));
+            } else if (element.prop("type") === "radio") {
+                error.insertAfter('#' + element.attr("name"));
+            } else if (element.prop("tagName") === "SELECT") {
+                error.insertAfter("button[data-id='" + plural(element.attr("name")) + "']");
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function (element, errorClass, validClass) {
+            if ($(element).prop("type") === "radio") {
+                $("label[for=" + $(element).attr('name') + "]").addClass('text-danger');
+            } else if ($(element).prop("tagName") === "SELECT") {
+                $("button[data-id='" + plural($(element).attr("name")) + "']").css('border-color', '#e3342f')
+            } else {
+                $(element).addClass("is-invalid").removeClass("is-valid");
+            }
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            if ($(element).prop("type") === "radio") {
+                $("label[for=" + $(element).attr('name') + "]").removeClass('text-danger');
+            } else if ($(element).prop("tagName") === "SELECT") {
+                $("button[data-id='" + plural($(element).attr("name")) + "']").css('border-color', '#42B168')
+            } else {
+                $(element).addClass("is-valid").removeClass("is-invalid");
+            }
+        }
+
+    });
+
+    $("input[name='nik']").on('keyup', function () {
+        var value = $(this).val();
+        if (value.length == 16) {
+            $.ajax({
+                url: '/api/person/nik/is-exists/' + value,
+                method: 'GET',
+                asyncy: true,
+                dataType: 'json',
+                success: function (data) {
+                    if (data !== 0) {
+                        Swal.fire({
+                            title: 'Ups, Identitas sudah terdaftar',
+                            html: '<b>Nama: ' + data.name + '<br>Nama orang tua: ' + data.parent_name + '<br>Nomor HP: ' + data.phone + '</b><br><br><span class="text-danger">*Apabila data tersebut tidak sesuai, silahkan hubungi tim data COVID-19 Melawi</span>',
+                            icon: 'error'
+                        })
+                    }
+                }
+            })
+        }
+    })
+
+    $('select.form-control').on('change', function () {
+        $(this).valid();
+    });
+
+    $('input.datedropper').on('change', function () {
+        $(this).valid();
+    });
+}
+
 export {
     createPersonValidationInit,
     createPeValidationInit,
-    updatePersonValidationInit
+    createPeAdminValidationInit,
+    updatePersonValidationInit,
 }

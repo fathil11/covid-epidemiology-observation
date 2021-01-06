@@ -42,7 +42,7 @@
     </div>
     <div style="padding-left: 5em; padding-right: 5em">
         <p class="text-center"><u><b>SURAT KETERANGAN</b></u></p>
-        <p class="text-center">No: 443/{{ $id }}/DINKES-C19-A/2020</p>
+        <p class="text-center">No: 443/{{ $mail_code }}/DINKES-C19-A/{{ $mail_year }}</p>
 
         <p class="text-justify"><span class="indent">Berdasarkan hasil pemeriksaan sampel swab Real Time Polymerase Chain Reaction (RT-PCR) yang dilaksanakan di {{ $location }}, tanggal {{ $result_at }}. Berikut ini kami menerangkan bahwa:</p>
 

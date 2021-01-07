@@ -55,7 +55,6 @@ class AdminPeUpdateRequest extends FormRequest
             "swab_location" => "required",
             "note" => "nullable",
 
-
         ];
     }
 }

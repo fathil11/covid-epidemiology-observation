@@ -300,8 +300,8 @@
                 @if ($test->result != null)
                 <div class="col-md-6 mt-3">
                     <div class="form-group">
-                        <label for="test_at">Tanggal Hasil</label>
-                        <input type="text" name="test_at" class="form-control rounded-pill datedropper"
+                        <label for="result_at">Tanggal Hasil</label>
+                        <input type="text" name="result_at" class="form-control rounded-pill datedropper"
                             placeholder="Masukan tanggal tes pasien" value="{{ $test->result->created_at != null ? $test->result->created_at->format('m/d/Y') : '' }}">
                     </div>
                 </div>

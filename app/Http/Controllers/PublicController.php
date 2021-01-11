@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\App;
 
 class PublicController extends Controller
 {
-    public function redirect()
-    {
-        return redirect(route('login'));
-    }
     public function showResult($code)
     {
         $test = Test::with(['person', 'result'])->where('code', $code)->firstOrFail();

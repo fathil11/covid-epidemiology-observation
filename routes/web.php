@@ -21,9 +21,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('trigger-status-log', 'TriggerController@triggerTestStatusLog');
 });
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', "PublicController@redirect");
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('hasil', 'AdminController@showAllResults')->name('admin.result.all');

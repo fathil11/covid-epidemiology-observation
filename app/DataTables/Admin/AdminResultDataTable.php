@@ -192,105 +192,105 @@ class AdminResultDataTable extends DataTable
                         Button::make('reload')->text('Reload'),
                         Button::make('reset')->text('Reset'),
                     ])
-                    ->initComplete("
-                    function () {
-                        this.api().columns([1,5,21]).every(function () {
-                            var column = this;
-                            var input = document.createElement(\"input\");
-                            $(input).appendTo($(column.footer()).empty())
-                            $(input).addClass('form-control')
-                            $(input).attr('placeholder', this.header().innerHTML)
-                            .on('keyup', function () {
-                                column.search($(this).val(), false, false, true).draw();
-                            });
-                        });
+                    // ->initComplete("
+                    // function () {
+                    //     this.api().columns([1,5,21]).every(function () {
+                    //         var column = this;
+                    //         var input = document.createElement(\"input\");
+                    //         $(input).appendTo($(column.footer()).empty())
+                    //         $(input).addClass('form-control')
+                    //         $(input).attr('placeholder', this.header().innerHTML)
+                    //         .on('keyup', function () {
+                    //             column.search($(this).val(), false, false, true).draw();
+                    //         });
+                    //     });
 
-                        this.api().columns([4]).every(function () {
-                            var column = this;
-                            var input = document.createElement(\"input\");
-                            $(input).appendTo($(column.footer()).empty())
-                            $(input).addClass('form-control')
-                            $(input).attr('placeholder', this.header().innerHTML)
-                            .on('keyup', function () {
-                                if($(this).val().length == 0){
-                                    this.api().clear();
-                                    this.api().reload();
-                                }
-                                column.search((2020-$(this).val()), false, false, true).draw();
-                            });
-                        });
+                    //     this.api().columns([4]).every(function () {
+                    //         var column = this;
+                    //         var input = document.createElement(\"input\");
+                    //         $(input).appendTo($(column.footer()).empty())
+                    //         $(input).addClass('form-control')
+                    //         $(input).attr('placeholder', this.header().innerHTML)
+                    //         .on('keyup', function () {
+                    //             if($(this).val().length == 0){
+                    //                 this.api().clear();
+                    //                 this.api().reload();
+                    //             }
+                    //             column.search((2020-$(this).val()), false, false, true).draw();
+                    //         });
+                    //     });
 
-                        this.api().columns([13,15]).every(function () {
-                            var column = this;
-                            var input = document.createElement(\"input\");
-                            $(input).appendTo($(column.footer()).empty())
-                            $(input).addClass('form-control')
-                            $(input).attr('placeholder', 'Th-Bln-Tg')
-                            .on('keyup', function () {
-                                if($(this).val().length >= 7){
-                                    column.search($(this).val(), false, false, true).draw();
-                                }
-                            });
-                        });
+                    //     this.api().columns([13,15]).every(function () {
+                    //         var column = this;
+                    //         var input = document.createElement(\"input\");
+                    //         $(input).appendTo($(column.footer()).empty())
+                    //         $(input).addClass('form-control')
+                    //         $(input).attr('placeholder', 'Th-Bln-Tg')
+                    //         .on('keyup', function () {
+                    //             if($(this).val().length >= 7){
+                    //                 column.search($(this).val(), false, false, true).draw();
+                    //             }
+                    //         });
+                    //     });
 
-                        this.api().column(3).every( function () {
-                            var column = this;
-                            var select = $('<select class=\"custom-select\"><option value=\"\">--Jenis Kelamin--</option></select>')
-                                .appendTo( $(column.footer()).empty() )
-                                .on( 'change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
+                    //     this.api().column(3).every( function () {
+                    //         var column = this;
+                    //         var select = $('<select class=\"custom-select\"><option value=\"\">--Jenis Kelamin--</option></select>')
+                    //             .appendTo( $(column.footer()).empty() )
+                    //             .on( 'change', function () {
+                    //                 var val = $.fn.dataTable.util.escapeRegex(
+                    //                     $(this).val()
+                    //                 );
 
-                                    column
-                                        .search( val ? '^'+val+'$' : '', true, false )
-                                        .draw();
-                                } );
+                    //                 column
+                    //                     .search( val ? '^'+val+'$' : '', true, false )
+                    //                     .draw();
+                    //             } );
 
-                            $.each([['Laki-laki','m'], ['Perempuan','f']] , function ( key, gender ) {
-                                select.append( '<option value=\"'+gender[1]+'\">'+gender[0]+'</option>' )
-                            } );
-                        } );
+                    //         $.each([['Laki-laki','m'], ['Perempuan','f']] , function ( key, gender ) {
+                    //             select.append( '<option value=\"'+gender[1]+'\">'+gender[0]+'</option>' )
+                    //         } );
+                    //     } );
 
-                        this.api().column(17).every( function () {
-                            var column = this;
-                            var select = $('<select class=\"custom-select\"><option value=\"\">--Hasil--</option></select>')
-                                .appendTo( $(column.footer()).empty() )
-                                .on( 'change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
+                    //     this.api().column(17).every( function () {
+                    //         var column = this;
+                    //         var select = $('<select class=\"custom-select\"><option value=\"\">--Hasil--</option></select>')
+                    //             .appendTo( $(column.footer()).empty() )
+                    //             .on( 'change', function () {
+                    //                 var val = $.fn.dataTable.util.escapeRegex(
+                    //                     $(this).val()
+                    //                 );
 
-                                    column
-                                        .search( val ? '^'+val+'$' : '', true, false )
-                                        .draw();
-                                } );
+                    //                 column
+                    //                     .search( val ? '^'+val+'$' : '', true, false )
+                    //                     .draw();
+                    //             } );
 
-                            $.each(['positif', 'negatif'] , function ( key, result ) {
-                                select.append( '<option style=\"text-transform:capitalize;\" value=\"'+result+'\">'+result+'</option>' )
-                            } );
-                        } );
+                    //         $.each(['positif', 'negatif'] , function ( key, result ) {
+                    //             select.append( '<option style=\"text-transform:capitalize;\" value=\"'+result+'\">'+result+'</option>' )
+                    //         } );
+                    //     } );
 
-                        this.api().column(20).every( function () {
-                            var column = this;
-                            var select = $('<select class=\"custom-select\"><option value=\"\">--Kecamatan--</option></select>')
-                                .appendTo( $(column.footer()).empty() )
-                                .on( 'change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
+                    //     this.api().column(20).every( function () {
+                    //         var column = this;
+                    //         var select = $('<select class=\"custom-select\"><option value=\"\">--Kecamatan--</option></select>')
+                    //             .appendTo( $(column.footer()).empty() )
+                    //             .on( 'change', function () {
+                    //                 var val = $.fn.dataTable.util.escapeRegex(
+                    //                     $(this).val()
+                    //                 );
 
-                                    column
-                                        .search( val ? '^'+val+'$' : '', true, false )
-                                        .draw();
-                                } );
-                            var districts = ['sokan', 'tanah pinoh', 'tanah pinoh barat', 'sayan', 'belimbing', 'belimbing hulu', 'nanga pinoh', 'pinoh selatan', 'pinoh utara', 'ella hilir', 'menukung'];
-                            $.each(districts , function ( key, district ) {
-                                select.append( '<option style=\"text-transform:capitalize;\" value=\"'+district+'\">'+district+'</option>' )
-                            } );
-                        } );
-                    }
-                    ")
+                    //                 column
+                    //                     .search( val ? '^'+val+'$' : '', true, false )
+                    //                     .draw();
+                    //             } );
+                    //         var districts = ['sokan', 'tanah pinoh', 'tanah pinoh barat', 'sayan', 'belimbing', 'belimbing hulu', 'nanga pinoh', 'pinoh selatan', 'pinoh utara', 'ella hilir', 'menukung'];
+                    //         $.each(districts , function ( key, district ) {
+                    //             select.append( '<option style=\"text-transform:capitalize;\" value=\"'+district+'\">'+district+'</option>' )
+                    //         } );
+                    //     } );
+                    // }
+                    // ")
                     ->orderBy(15, 'desc');
     }
 

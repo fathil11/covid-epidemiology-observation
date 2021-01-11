@@ -112,10 +112,11 @@ class AdminController extends Controller
 
     public function showAllResults(AdminResultDataTable $dataTable)
     {
-        return $dataTable->render('datatables.index', [
-            'title' => 'Daftar Hasil PE',
-            'sub_title' => 'Seluruh PE yang sudah ada hasil',
-        ]);
+        return $dataTable->render('admin.results');
+        // return $dataTable->render('datatables.index', [
+        //     'title' => 'Daftar Hasil PE',
+        //     'sub_title' => 'Seluruh PE yang sudah ada hasil',
+        // ]);
     }
 
     public function positiveTestResult($code)

@@ -109,9 +109,11 @@
  * SOFTWARE.
  */
 
+//! Admin PE Edit Script Section
+
 //! Admin PE Section
 
-//! PE Edit Script Section
+//! Admin PE Store Script Section
 
 //! PE Script Section
 

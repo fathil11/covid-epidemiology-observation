@@ -182,7 +182,7 @@ class TriggerController extends Controller
             "instance_place" => "Tiong Keranjik",
             "email" => "sudibyohari82@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -192,7 +192,7 @@ class TriggerController extends Controller
             "instance_place" => "Ella Hilir",
             "email" => "ariyafery@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -202,7 +202,7 @@ class TriggerController extends Controller
             "instance_place" => "Ulak Muid",
             "email" => "rimo150526@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -212,7 +212,7 @@ class TriggerController extends Controller
             "instance_place" => "Menukung",
             "email" => "faisalfasli7@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -222,7 +222,7 @@ class TriggerController extends Controller
             "instance_place" => "Manggala",
             "email" => "solapidi9889@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -232,7 +232,7 @@ class TriggerController extends Controller
             "instance_place" => "Sokan",
             "email" => "agengfullbuster@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -242,7 +242,7 @@ class TriggerController extends Controller
             "instance_place" => "Pemuar",
             "email" => "emisoni1984@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
         User::create([
@@ -252,7 +252,7 @@ class TriggerController extends Controller
             "instance_place" => "Nanga Pinoh",
             "email" => "agneserpiyanti@gmail.com",
             "password" => Hash::make("puskemascovid19"),
-            "role" => 3
+            "role" => "3"
         ]);
 
     }

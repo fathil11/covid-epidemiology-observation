@@ -88,7 +88,7 @@ class PeTestDataTable extends DataTable
         if($user->isPe() || $user->isAdmin()){
             $model = Test::with(['person', 'user']);
         }elseif($user->isSecondPe()){
-            $model = Test::where('user_id', Auth::user()->id)->with(['person', 'user']);
+            $model = Test::where('living_district', Auth::user()->instance_place)->with(['person', 'user']);
         }
 
         return $model->newQuery();

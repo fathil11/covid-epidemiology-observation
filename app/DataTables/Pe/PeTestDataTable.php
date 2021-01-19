@@ -85,10 +85,30 @@ class PeTestDataTable extends DataTable
     {
         /** @var App\User */
         $user = Auth::user();
-        if($user->isPe() || $user->isAdmin()){
+        if($user->isPe() || $user->isAdmin())
+        {
             $model = Test::with(['person', 'user']);
-        }elseif($user->isSecondPe()){
-            $model = Test::where('living_district', Auth::user()->instance_place)->with(['person', 'user']);
+        }
+        elseif($user->isSecondPe())
+        {
+            $map = [
+                "Ulak Muid" => "Tanah Pinoh Barat",
+                "Kota Baru" => "Tanah Pinoh",
+                "Pemuar" => "Belimbing",
+                "Tiong Keranjik" => "Belimbing Hulu",
+                "Manggala" => "Pinoh Selatan",
+                "Ella" => "Ella Hilir"
+            ];
+
+            $district = Auth::user()->instance_place;
+
+            foreach ($map as $key => $value) {
+                if(Auth::user()->instance_place == $key){
+                    $district = $value;
+                }
+            }
+
+            $model = Test::where('living_district', $district)->with(['person', 'user']);
         }
 
         return $model->newQuery();

@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 use Fathilarhm\GsheetsCollection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
 class TriggerController extends Controller
@@ -151,54 +152,111 @@ class TriggerController extends Controller
         dd('Success :)');
     }
 
-    // public function sandBox()
-    // {
-    //     $person = new Person();
+    public function asd()
+    {
 
-    //     $person->user_id = 1;
+        User::create([
+            "name" => "Asrin Akhiruddin, A.Md.Kep",
+            "phone" => "0822 5494 9149",
+            "instance" => "Puskesmas",
+            "instance_place" => "",
+            "email" => "woliomiana@yahoo.co.id",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
 
-    //     $person->nik = "1212090508900003";
-    //     $person->name = "Donny Sirait";
-    //     $person->phone = null;
-    //     $person->gender = "m";
+        User::create([
+            "name" => "Emi Setyani Soni,A.Md.Kep",
+            "email" => "emisoni1984@gmail.com",
+            "phone" => "081352196171",
+            "instance" => "Puskesmas",
+            "instance_place" => "Pemuar",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => "3"
+        ]);
 
-    //     $person->birth_regency = null;
-    //     $person->birth_at = Carbon\Carbon::create(1990, 8, 5);
-    //     $person->parent_name = null;
-    //     $person->work = null;
-    //     $person->work_instance = null;
-    //     $person->card_province = null;
-    //     $person->card_regency = null;
-    //     $person->card_district = null;
-    //     $person->card_village = null;
-    //     $person->card_street = null;
-    //     $person->card_rt = null;
-    //     $person->card_rw = null;
+        User::create([
+            "name" => "Bambang Hari Sudibyo, Amd.Kep",
+            "phone" => "081348853452",
+            "instance" => "Puskesmas",
+            "instance_place" => "Tiong Keranjik",
+            "email" => "sudibyohari82@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
 
-    //     $person->save();
+        User::create([
+            "name" => "Fery Ariyanto",
+            "phone" => "085386794479",
+            "instance" => "Puskesmas",
+            "instance_place" => "Ella Hilir",
+            "email" => "ariyafery@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
 
-    //     $test_content = [
-    //         "code" => Ramsey\Uuid\Uuid::uuid4(),
-    //         "user_id" => 1,
-    //         "location" => "sintang",
-    //         "living_province" => "kalimantan barat",
-    //         "living_regency" => "kabupaten melawi",
-    //         "living_district" => "nanga pinoh",
-    //         "living_village" => "tanjung niaga",
-    //         "living_street" => "DUSUN TANAH TINGGI",
-    //         "living_rt" => "001",
-    //         "living_rw" => "001",
-    //         "test_at" => Carbon\Carbon::create(2020, 12, 4)
-    //     ];
+        User::create([
+            "name" => "Monica Rani Saputri, Amd Kes",
+            "phone" => "085246522533",
+            "instance" => "Puskesmas",
+            "instance_place" => "Ulak Muid",
+            "email" => "rimo150526@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
 
-    //     $test = $person->tests()->create($test_content)
+        User::create([
+            "name" => "Faisal",
+            "phone" => "082213355965",
+            "instance" => "Puskesmas",
+            "instance_place" => "Menukung",
+            "email" => "faisalfasli7@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
 
-    //     $test->result()->create([
-    //         "value" => "positif",
-    //         "published_at" => Carbon\Carbon::create(2020, 12, 4)
-    //     ])
+        User::create([
+            "name" => "Solapidi",
+            "phone" => "081253440308",
+            "instance" => "Puskesmas",
+            "instance_place" => "Manggala",
+            "email" => "solapidi9889@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
 
-    // }
+        User::create([
+            "name" => "Ageng Buih, A. Md. Kep",
+            "phone" => "081251429124",
+            "instance" => "Puskesmas",
+            "instance_place" => "Sokan",
+            "email" => "agengfullbuster@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
+
+        User::create([
+            "name" => "Emi Setyani Soni,A.Md.Kep",
+            "phone" => "081352196171",
+            "instance" => "Puskesmas",
+            "instance_place" => "Pemuar",
+            "email" => "emisoni1984@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
+
+        User::create([
+            "name" => "Agnes Erpiyanti",
+            "phone" => "O81356770631",
+            "instance" => "Puskesmas",
+            "instance_place" => "Nanga Pinoh",
+            "email" => "agneserpiyanti@gmail.com",
+            "password" => Hash::make("puskemascovid19"),
+            "role" => 3
+        ]);
+
+    }
+
 }
 
 

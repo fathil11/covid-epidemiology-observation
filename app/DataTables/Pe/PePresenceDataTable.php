@@ -70,7 +70,24 @@ class PePresenceDataTable extends DataTable
         }
         elseif($user->isSecondPe())
         {
-            $model = Test::where('location', 'internal')->where('user_id', Auth::user()->id)->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
+            $map = [
+                "Ulak Muid" => "Tanah Pinoh Barat",
+                "Kota Baru" => "Tanah Pinoh",
+                "Pemuar" => "Belimbing",
+                "Tiong Keranjik" => "Belimbing Hulu",
+                "Manggala" => "Pinoh Selatan",
+                "Ella" => "Ella Hilir"
+            ];
+
+            $district = Auth::user()->instance_place;
+
+            foreach ($map as $key => $value) {
+                if(Auth::user()->instance_place == $key){
+                    $district = $value;
+                }
+            }
+
+            $model = Test::where('living_district', $district)->whereDate('created_at', '>=', Carbon::now()->subDays(6))->with(['person', 'user'])->select('tests.*');
         }
         return $model->newQuery();
     }

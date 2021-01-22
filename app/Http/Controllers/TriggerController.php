@@ -151,7 +151,6 @@ class TriggerController extends Controller
 
         dd('Success :)');
     }
-
 }
 
 

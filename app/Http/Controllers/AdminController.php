@@ -90,9 +90,12 @@ class AdminController extends Controller
             $test->location = Str::lower($request->swab_location);
             $test->note = Str::upper($request->note);
 
-            $test->result->created_at = Carbon::make($request->result_at);
+            if($test->result != null){
+                $test->result->created_at = Carbon::make($request->result_at);
+                $test->result->save();
+            }
 
-            if($test->save() && $test->result->save()){
+            if($test->save()){
                 Alert('Hore', 'Berhasil merubah data Pasien dan PE', 'success');
                 return redirect()->back();
             }

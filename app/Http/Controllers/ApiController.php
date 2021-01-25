@@ -16,9 +16,13 @@ class ApiController extends Controller
         $people = Person::with(['tests', 'tests.result'])->get();
         $tests = Test::with(['person', 'result'])->whereNotNull('test_at')->get();
 
-        $statistics['positive_total'] = $this->getPeopleStatistic($people, null, null, 'positif');
-        $statistics['positive_isolation'] = $this->getPeopleStatistic($people, null, null, 'positif');
+        $statistics['positive_total'] = (new StatisticController)->getPeopleStatistic($people, null, null, 'positif');
 
+        $test = $people->filter(function($people){
+            return $people->tests->first() == "kalimantan barat";
+        })->count();
+
+        dd($test);
     }
 
     public function provinces()
